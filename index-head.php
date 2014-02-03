@@ -17,7 +17,8 @@
  <link rel="stylesheet" href="css/sinister.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/animate.min.css">
- 
+   <script type="text/javascript" src="js/picbox.js"></script>
+   <link rel="stylesheet" href="css/picbox.css" type="text/css" media="screen" />
 </head>
 
        

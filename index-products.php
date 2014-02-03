@@ -19,7 +19,7 @@ foreach ($pro_details as $prod) {
                                 <img class="img-responsive" src="<?php echo $prod['prod_thumbimage'] ?>" alt="">
                                 <div class="ImageOverlayH"></div>
                                 <div class="Button StyleMg">
-                                    <span class="WhiteRounded"><a href=""><i class="fa fa-search"></i></a>
+                                    <span class="WhiteRounded"> <a href="<?php echo $prod['prod_thumbimage'] ?>" rel="lightbox" title="Double click for full size... (unless you have a large monitor)"><i class="fa fa-search"></i></a>
                                     </span>
                                     <span class="WhiteRounded"><a href=""><i class="fa fa-link"></i></a>
                                     </span>
