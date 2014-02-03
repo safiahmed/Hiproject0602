@@ -13,6 +13,7 @@ color: #555;
 
 }
 /*safi index start and end*/
+/*ganesh*/
     </style>
     <body>	
         <div id="share-wrapper">
