@@ -15,17 +15,16 @@ $product_details=$product->index_productcategory_name($cat_id_index);
                     ?>
     <div class="middle_box1">
         <div class="content">
-            <div class="element design development item view view-tenth" data-zlname="reverse-effect">
-                <img src="<?php echo $prod['prod_thumbimage']; ?>" alt="" />
-                <div class="mask">
-                    <a data-zl-popup="link" href="javascript:;">
-                        <i class="icon-link"></i>
-                    </a>
-                    <a data-zl-popup="link2" class="fancybox" rel="group" href="<?php echo $prod['prod_thumbimage']; ?>">
-                        <i class="icon-search"></i>
-                    </a>
-                </div>
-            </div>
+             <div class="ImageWrapper">
+                                <img class="img-responsive" src="<?php echo $prod['prod_thumbimage'] ?>" alt="">
+                                <div class="ImageOverlayH"></div>
+                                <div class="Button StyleMg">
+                                    <span class="WhiteRounded"> <a href="<?php echo $prod['prod_thumbimage'] ?>" rel="lightbox" title="Double click for full size... (unless you have a large monitor)"><i class="fa fa-search"></i></a>
+                                    </span>
+                                    <span class="WhiteRounded"><a href=""><i class="fa fa-link"></i></a>
+                                    </span>
+                                </div>
+                            </div>
                                                <!-- <img src="#" alt="">-->	
             <a href="#"><span><?php echo $prod['prod_name']; ?></span></a>
             <div class="gallery-price"><span class="WebRupee">Rs.</span> <?php echo $prod['prod_org_price']; ?>.00</div>

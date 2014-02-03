@@ -22,13 +22,17 @@ $pro_detail1 = $product->index_subcategory_name($cat_id_index);
             <script type="text/javascript" src="Js/myscript.js"></script>
         <link href="css/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="http://cdn.webrupee.com/font" />
-        <link href="css/zoom_image.css" rel="stylesheet">
-            <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-            <link href="assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />  
+        
+           
 
             <script src="Js/mrova-feedback-form.js" type="text/javascript"></script>
             <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
             <link rel="stylesheet" href="css/bootstrap.css" />
+            <link rel="stylesheet" href="css/sinister.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+   <script type="text/javascript" src="js/picbox.js"></script>
+   <link rel="stylesheet" href="css/picbox.css" type="text/css" media="screen" />
             <style>
                 #list-view{display: none;}
                 #view-as-product{float: left; width: 80%;font-size: 15px;margin-left: 11px;margin-top: 6px;}
