@@ -39,6 +39,7 @@ $pro_detail1 = $product->index_subcategory_name($cat_id_index);
                 #grid-list-view{float: left; width: 18%;margin-top: 6px;}
             </style>
     </head>
+    <!--ganesh-->
     <body>	
         <?php include 'feedback.php'; ?>
         <div id="share-wrapper">
