@@ -31,7 +31,6 @@ body{ margin:0; padding:0;}
 	top: 352px;
 }
 
-
 .skdslider .slide-navs li {
     float: left;
 	background: url("image/slide-bg.png") no-repeat scroll 0 0 transparent;
@@ -48,13 +47,13 @@ body{ margin:0; padding:0;}
 left: 0;
 padding: 6px 25px 10px 85px;
 position: absolute;
-top: 208px;
-width: 40%;
+top: 264px;
+width: 870px;
 }
 .skdslider .slide-desc > h2 {
     color: #CFDB0C;
     font-family: 'Oswald';
-    font-size: 25px;
+    font-size: 20px;
     margin-bottom: 10px;
     margin-top: 10px;
     text-transform: uppercase;
