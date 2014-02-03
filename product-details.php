@@ -1484,5 +1484,5 @@ if (isset($_SESSION['ids'])) {
 
                                                         </body>
                                                         </html>
->>>>>>> branch 'master' of https://github.com/safiahmed/HiProjects.git
+<!-->>>>>>> branch 'master' of https://github.com/safiahmed/HiProjects.git-->
 
