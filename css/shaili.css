@@ -1,0 +1,36 @@
+
+/*-------------Comman Classes------------------------------------*/
+.agala-1080{
+	width:980px;
+	margin: 0 auto;
+}
+.balakke-ele{
+	float: right;
+}
+.edakke-ele{
+	float: left;
+}
+
+/*----------------Custom---------------------------------*/
+.jaaruchitra-kavacha{
+height: 374px;
+margin-top: -58px;
+}
+.hanechitra-kavacha{
+	position:absolute;
+	z-index:9;
+	width: 960px;
+	top: 20px;
+	height: auto;
+	margin-top:300px;
+}
+.hanechitra{
+	width: 960px;
+	margin-left:20px;
+	height:300px;
+	background: url(../images/we.png) no-repeat !important;
+	margin-top:45px;
+}
+.vishaya-himbhaga{
+	background: url(../images/vishaya-himbhaga.png) repeat;
+}

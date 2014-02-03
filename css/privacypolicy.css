@@ -1,0 +1,52 @@
+
+.col1-layout .col-main {
+float: none;
+width: 923px;
+
+}
+.page-title {
+width: 100%;
+overflow: hidden;
+height:46px;
+margin: 0 0 5px;
+background-color: #dfe1e0;
+margin-top: -52px;
+}
+
+.page-title h1, .page-title h2 {
+color: rgb(32, 110, 172);
+margin: 0;
+
+}
+
+p {
+margin: 5px 0 5px;
+}
+
+.arrow {
+float: right;
+}
+
+.arrow img {
+width: 20px;
+height: 20px;
+}
+
+.scrollup {
+width: 40px;
+height: 40px;
+position: fixed;
+bottom: 40px;
+right: 10px;
+display: none;
+text-indent: -9999px;
+background: url('../images/icon_top.png') no-repeat;
+opacity: 0.7;
+cursor: pointer;
+}
+.scrollup:hover{
+text-decoration:none;
+}
+
+
+

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <!--regsitration/login-->
+    <Registration>
+        <addREG> insert into tbl_register(name,email,password,mobile) values (?,?,?,?); </addREG>
+        <validateemail>select email from tbl_register where email=?;</validateemail>
+        <editpasswordREG> update tbl_register set password=? where regid=?; </editpasswordREG>
+        <editallREG>update tbl_register set name=?,collage,branch=?,email=?,password=?,mobile=?,file,topic=?,expert_contact=? where regid=?; </editallREG>
+        <ArchiveREG>update tbl_register set status=0 where regid=?</ArchiveREG>
+        <ActiveREG>update tbl_register set status=1 where regid=?</ActiveREG>
+    </Registration>
+    <!--registration/login ends-->
+    <!--index.php code starts-->
+    <IndexPage>
+        <selectproducthome>select prod_thumbimage,prod_name,prod_org_price from tbl_product where prod_home=1 and prod_status=1 limit 9;</selectproducthome>
+        <selectpresentoffer>select prod_thumbimage,prod_name,prod_offer_price from tbl_presentoffer,tbl_product where prod_id_pk=prod_id_fk</selectpresentoffer>
+        <selectcategoryname>select * from tbl_category where cat_status=1</selectcategoryname>
+        <selectpricevalue>select * from tbl_product where prod_org_price between</selectpricevalue>
+        <selectjoinus>insert into tbl_subscribers(sub_email,date) values</selectjoinus>
+        <testjoinus>select * from tbl_subscribers where sub_email=</testjoinus>
+        <productoffer>SELECT * FROM `tbl_presentoffer` as tpo,`tbl_product` as tpr where tpo.prod_id_fk=tpr.prod_id_pk order by `preoff_id_pk` desc limit 1;</productoffer>
+    </IndexPage>
+    <!--index page code ends-->
+    <categorypage>
+        <subcategory_id>select * from tbl_category where cat_id_pk=</subcategory_id><!--changed-->
+        <subcategoryname>select * from tbl_subcategory where cat_id_fk=</subcategoryname><!--changed-->
+        <selectproductofcategory>select * from tbl_product where cat_id_fk=</selectproductofcategory><!--changed-->
+    </categorypage>
+    <accountinformation>
+        <memberdetails> select * from tbl_register where email=? and status=1; </memberdetails>
+        <groupInformation>insert into tbl_members(reg_id_fk,registrant_email,member_one_name,member_one_email,member_one_phone,member_two_name,member_two_email,member_two_phone,member_three_name,member_three_email,member_three_phone,member_four_name,member_four_email,member_four_phone) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);</groupInformation>
+        <groupstatus>update tbl_register set status=2 where reg_id=?</groupstatus>
+    </accountinformation>
+    <!--productdetails-view.php starts-->
+    <productdetails>
+        <productsubdetails> select * from tbl_product where prod_random=</productsubdetails>    <!--changed-->
+        <similarproduct>select prod_thumbimage,prod_name,prod_org_price from tbl_product where cat_id_fk=</similarproduct><!--changed-->
+        <reviewdetails>select * from tbl_productreview where r_status=1 and prod_id_fk=</reviewdetails><!--changed-->
+        <productkittype>select sp,gp,dp from tbl_productkittype where prod_id_fk=</productkittype><!--changed-->
+        <selectProductKitContent>select content_name,content_type,sp from tbl_productkit where prod_id_fk=</selectProductKitContent><!--changed-->
+        <selectProductKitContentsp>select sp,prod_id_fk from tbl_productkit where prod_id_fk=</selectProductKitContentsp><!--changed-->
+        <selectProductKitContentgp>select gp,prod_id_fk from tbl_productkit where prod_id_fk=</selectProductKitContentgp><!--changed-->
+        <selectProductKitContentdp>select dp,prod_id_fk from tbl_productkit where prod_id_fk=</selectProductKitContentdp><!--changed-->
+        <selectpeoplebought> SELECT prod_name, prod_thumbimage FROM  `tbl_orderdetails` , tbl_order, tbl_product WHERE order_id_pk = ord_id_fk AND prod_id_pk = prod_id_fk and  prod_id_fk!=</selectpeoplebought>
+        <insertshoppingcart>insert into tbl_cartdetails(session_id,prod_id_fk,unit_price) values (?,?,?); </insertshoppingcart><!--changed-->
+    </productdetails>
+    <subcategorypage>
+        <subcatiddetails>select * from tbl_subcategory where subcat_random=</subcatiddetails>
+        <subcategorydetails> select prod_thumbimage,prod_name,prod_org_price,prod_over_view from tbl_product where subcat_id_fk=</subcategorydetails>
+        <subcatname>select subcat_name,subcat_random from tbl_subcategory where cat_id_fk=</subcatname>
+        
+    </subcategorypage>
+    <!--productdetails.php ends-->
+    <contactus>
+        <conUS> insert into tbl_contactus(con_name,con_email,con_phone,con_comment) values (?,?,?,?); </conUS>
+    </contactus>	
+    <FAQ>
+        <FAQfetch>Select * from tbl_faq where faq_status=1</FAQfetch>
+        <TESTfetch>Select * from tbl_testimonials where test_status=1</TESTfetch>
+    </FAQ>	
+    <proceedpayment>
+        <shippingaddress>insert into tbl_shippingaddress(ship_company,ship_tel,ship_fax,ship_streetaddress,ship_city,ship_state,ship_country,ship_zip,reg_id_fk) values (?,?,?,?,?,?,?,?,?);</shippingaddress>
+        <shippingdetails>select name,email,mobile from tbl_register where reg_id=</shippingdetails>
+        <shippingaddressdetails> select ship_streetaddress from tbl_shippingaddress where reg_id_fk=</shippingaddressdetails>
+    </proceedpayment>
+    
+   
+    <projectkits>
+        <selectsinglecategory> select * from tbl_product where cat_id_fk=1 and prod_status=1 limit 9; </selectsinglecategory>
+        <addtocart>SELECT * FROM `tbl_product` as tp, `tbl_cartdetails` as tc where tp.prod_id_pk=tc.prod_id_fk and tc.session_id=</addtocart>
+        <removecart> delete FROM `tbl_cartdetails` WHERE cart_id_pk=</removecart>
+    </projectkits>
+    <!--code by Blessy starts here-->
+    <Login>
+        <authenticate>select count(*),reg_id,email,status from tbl_register where email=? and password=?</authenticate>
+    </Login>
+        
+    <Dashboard>
+        <selectpersonalinfo>
+            select reg_id,name,email,mobile from tbl_register where reg_id=?
+        </selectpersonalinfo>
+        <updatepersonalinfo>
+            update tbl_register set name=?,email=?,mobile=? where reg_id=?
+        </updatepersonalinfo>
+            
+        <selectgroupmember>
+            select member_one_name,member_one_email,member_one_phone,member_two_name,member_two_email,member_two_phone,
+            member_three_name,member_three_email,member_three_phone,member_four_name,member_four_email,member_four_phone from tbl_members where reg_id_fk=?
+        </selectgroupmember>
+            
+        <updategroupmember>
+            update tbl_members set member_one_name=?,member_one_email=?,member_one_phone=?,member_two_name=?,member_two_email=?,member_two_phone=?,
+            member_three_name=?,member_three_email=?,member_three_phone=?,member_four_name=?,member_four_email=?,member_four_phone=?
+            where reg_id_fk=?
+        </updategroupmember>
+        <updatepassword>
+            update tbl_register set password=? where reg_id=?
+        </updatepassword>
+        <checkoldpassword>
+            select password from tbl_register where reg_id=?
+        </checkoldpassword>
+        <vieworder>
+            select * from tbl_order as o,tbl_orderdetails as d,tbl_product as p
+            where o.order_id_pk=d.ord_id_fk 
+            and p.prod_id_pk=d.prod_id_fk
+            and o.reg_id_fk=?
+        </vieworder>
+        <ordersummary>
+            select order_no,order_date,order_status,prod_qty,d.prod_org_price,prod_tot_price,ship_company,ship_tel,
+            ship_fax,ship_streetaddress,ship_city,ship_state,ship_country,ship_zip,prod_name,name,email,mobile
+           
+            from tbl_order as o,tbl_orderdetails as d,tbl_shippingaddress as s,tbl_product as p,tbl_register as r
+            
+            where o.order_id_pk=d.ord_id_fk and o.reg_id_fk=s.reg_id_fk
+            and p.prod_id_pk=d.prod_id_fk
+            and r.reg_id=s.reg_id_fk
+            and o.order_id_pk=?
+            and o.reg_id_fk=?
+        </ordersummary>
+    </Dashboard>
+    <!--code by Blessy ends here-->
+</root>

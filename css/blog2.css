@@ -1,0 +1,124 @@
+.col-main {
+float: none;
+width: 923px;
+}
+
+.page-title {
+background-image: url('../images/blog.png');
+background-size: 90% 103%;
+width: 0%;
+overflow: hidden;
+padding: 27px 55px;
+margin: 0 0 53px;
+margin-top: -57px;
+}
+#blog-content{float:left;
+padding:10px;
+border:1px solid rgba(184, 182, 182, 0.87);
+width:700px;
+margin-top:-30px;
+height:auto;}
+#calender{float:left;
+padding:20px;
+margin-top:-20px;}
+#content{margin:23px;
+font-size:21px;
+color:gray;}
+#main-blog{
+color:gray;
+font-size: 13px;}
+#blog-right{margin-left: 735px;
+margin-top: -28px;
+width:220px;
+border: 1px solid rgba(75, 69, 69, 0.37);
+padding:10px;
+line-height:1.5;
+font-size:12px;
+color:gray;}
+#blog-right ul li a{margin-top:10px;
+color:gray;
+text-decoration:none;}
+#blog-right1 ul li a{margin-top:10px;
+color:gray;
+text-decoration:none;
+padding-left:60px;}
+
+#blog-right2 ul li a{margin-top:10px;
+color:gray;
+text-decoration:none;}
+
+.patch{background-image: url('../images/recent.png');
+margin-top: -22px;
+margin-left:-10px;
+color: white;
+background-size: 105% 137%;
+padding: 5px;}
+#blog-right ul li a:hover{margin-top:10px;
+color:gray;
+}
+#blog-right1 ul li a:hover{margin-top:10px;
+color:gray;
+}
+
+#blog-right2 ul li a:hover{margin-top:10px;
+color:gray;
+}
+
+#blog-right ul li {list-style:none;
+}
+#blog-right1 ul li {list-style:none;
+}
+#blog-right2 ul li {list-style:none;
+}
+#blog-right1{margin-left: 735px;font-size:12px;
+line-height:1.5;
+width:220px;
+padding:10px;
+border: 1px solid rgba(75, 69, 69, 0.37);
+margin-top:15px;}
+#blog-right2{margin-left: 735px;font-size:12px;
+line-height:1.5;
+width:220px;
+padding:10px;
+border: 1px solid rgba(75, 69, 69, 0.37);
+margin-top:15px;}
+.page-title h1, .page-title h2 {
+color: #3A3A3A;
+margin: 0;
+text-transform: uppercase;
+font: normal 23px/39px "Century Regular";
+}
+span{font-size:16px;
+margin-left:60px;}
+
+.mater-black
+{
+font-size: 12px;
+font-family: verdana;
+line-height: 190%;
+}
+
+.arrow {
+float: right;
+}
+
+.arrow img {
+width: 20px;
+height: 20px;
+}
+
+.scrollup {
+width: 40px;
+height: 40px;
+position: fixed;
+bottom: 40px;
+right: 10px;
+display: none;
+text-indent: -9999px;
+background: url('../images/icon_top.png') no-repeat;
+opacity: 0.7;
+cursor: pointer;
+}
+.scrollup:hover{
+text-decoration:none;
+}
