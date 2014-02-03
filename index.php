@@ -12,8 +12,6 @@ text-decoration:none;
 color: #555;
 
 }
-/*safi index start and end*/
-/*ganesh*/
     </style>
     <body>	
         <div id="share-wrapper">
@@ -225,4 +223,4 @@ color: #555;
                         });
                 </script>
                 </body>
-                </html>
+                </html>                                 
