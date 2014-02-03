@@ -109,17 +109,21 @@
                         </div>
                         <div class="middle_box3_content1">
                             <div class="content">
-                                <div class="element design development item view view-tenth" data-zlname="reverse-effect">
-                                    <img src="<?php echo $productoffer['prod_thumbimage'] ?>" alt="" />
-                                    <div class="mask">
-                                        <a data-zl-popup="link" href="javascript:;">
-                                            <i class="icon-link"></i>
-                                        </a>
-                                        <a data-zl-popup="link2" class="fancybox" rel="group" href="<?php echo $productoffer['prod_thumbimage'] ?>">
-                                            <i class="icon-search"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                               <div class="col-md-3 col-sm-6 col-xs-6">
+                                   <div class="blog-post">
+                                       <div class="ImageWrapper">
+                                           <img class="img-responsive" src="<?php echo $productoffer['prod_thumbimage'] ?>" alt="">
+                                               <div class="ImageOverlayH"></div>
+                                               <div class="Button StyleMg">
+                                                   <span class="WhiteRounded"><a href=""><i class="fa fa-search"></i></a>
+                                                   </span>
+                                                   <span class="WhiteRounded"><a href=""><i class="fa fa-link"></i></a>
+                                                   </span>
+                                               </div>
+                                       </div>
+
+                                   </div>
+                               </div>
                                 <!--<div class="borderimage">
                                     <img src="#" alt="">
                                 </div>-->

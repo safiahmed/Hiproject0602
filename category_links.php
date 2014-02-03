@@ -3,12 +3,12 @@ require_once './assets/my-controller.php';
 $product = new Users();
 $data = array();
 //$pro_details=array();
-$pro_details = $product->index_subcategory_name($category_random);
-foreach ($pro_details as $prod) {
-    $cat_id = $prod['cat_id_pk'];
+//$pro_details = $product->index_subcategory_name($cat_id_index);
+//foreach ($pro_details as $prod) {
+    //$cat_id = $prod['cat_id_pk'];
     //print_r($cat_id);
-}
-$cat_details = $product->index_subcategory_subname($cat_id);
+//}
+$cat_details = $product->index_subcategory_subname($cat_id_index);
 //print_r($cat_details);
 $category_details = $product->index_category_name($data);
 ?>
