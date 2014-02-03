@@ -6,6 +6,12 @@
     <style>
         #amount1{width: 35px;float: left;}
         #amount2{width: 35px;margin-left: 3%;}
+        .content a
+{
+text-decoration:none;
+color: #555;
+
+}
     </style>
     <body>	
         <div id="share-wrapper">
