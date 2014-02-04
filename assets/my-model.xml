@@ -19,6 +19,7 @@
         <selectpricevalue>select * from tbl_product where prod_org_price between</selectpricevalue>
         <selectjoinus>insert into tbl_subscribers(sub_email,date) values</selectjoinus>
         <testjoinus>select * from tbl_subscribers where sub_email=</testjoinus>
+        <testemail>select * from tbl_register where email=</testemail>
         <productoffer>SELECT * FROM `tbl_presentoffer` as tpo,`tbl_product` as tpr where tpo.prod_id_fk=tpr.prod_id_pk order by `preoff_id_pk` desc limit 1;</productoffer>
     </IndexPage>
     <!--index page code ends-->

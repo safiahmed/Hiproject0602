@@ -1,7 +1,8 @@
 <?php
 require_once './assets/auth.php';
-if (isset($_SESSION['email'])) {
-    $member_email = $_SESSION['email'];
+if (isset($_SESSION['email']) || isset($_SESSION['reg_id'])) {
+    echo $member_email = $_SESSION['email'];
+    echo $regid = $_SESSION['reg_id'];
 }
 ?>
 
@@ -185,12 +186,12 @@ if (isset($_SESSION['email'])) {
                             require_once './assets/my-controller.php';
                             $category = new Users();
                             $data = array();
-                            $pro_details = $category->account_info_details($member_email);
+                            $pro_details[] = $category->view_personalinfo();
                             foreach ($pro_details as $prod) {
                                 $cat_id = $prod['name'];
                                 $email = $prod['email'];
                                 $mobile = $prod['mobile'];
-                                $reg = $prod['reg_id'];
+                                $reg = $prod['id'];
                                 //print_r($cat_id);
                             }
                             ?>

@@ -2,13 +2,13 @@
 
 class Users {
 
-//    private
-//            $database, $connection, $mysqli, $xml,
-//            $host = "localhost", $name = "magnum_hiprojects", $user = "root", $pass = "safipassword";
-
     private
-            $database, $connection, $mysqli, $xml_select, $xml_insert,
-            $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
+            $database, $connection, $mysqli, $xml,
+            $host = "localhost", $name = "magnum_hiprojects", $user = "root", $pass = "safipassword";
+
+//    private
+//            $database, $connection, $mysqli, $xml_select, $xml_insert,
+//            $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
 
     public function __construct() {
 //        include_once 'auth.php';
@@ -118,10 +118,9 @@ class Users {
             if (!mysqli_execute($stmt)) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
+            return $this->mysqli->insert_id;
         }
         $stmt->close();
-        $_SESSION['email'] = $email;
-        header("Location: ../member-information.php");
     }
 
     function insert_members_values($reg, $email, $name1, $email1, $mobile1, $name2, $email2, $mobile2, $name3, $email3, $mobile3, $name4, $email4, $mobile4) {
@@ -142,9 +141,24 @@ class Users {
             if (!$stmt->execute()) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
+            $row = $this->mysqli->affected_rows;
+            $stmt->close();
+            header("Location: ../account-information.php");
         }
-        $stmt->close();
-        header("Location: ../account-information.php");
+    }
+
+    function check_email_exist($aval) {
+        $query = "";
+        $values = "";
+        $query .= $this->xml_insert->IndexPage->testemail;
+        $values .= "'" . $aval . "'";
+        $squery = $query . $values;
+        $result = $this->mysqli->query($squery);
+        if ($result->num_rows > 0) {
+            echo 0;
+        } else {
+            echo 1;
+        }
     }
 
     function account_info_details($member_email) {
@@ -418,7 +432,7 @@ class Users {
     /*     * **********************proceed to payment  Code starts here******************************* */
     /*     * **************************************************************************** */
 
-     function shipping_details($uid) {
+    function shipping_details($uid) {
         $query = $this->xml_select->proceedpayment->shippingdetails;
         $values = "$uid";
         $squery = $query . "'" . $values . "'";
@@ -432,8 +446,7 @@ class Users {
         return 0;
     }
 
-
-   function shippingaddress_details($uid) {
+    function shippingaddress_details($uid) {
         $query = $this->xml_select->proceedpayment->shippingaddressdetails;
         $values = "$uid";
         $squery = $query . "'" . $values . "'";
@@ -447,7 +460,7 @@ class Users {
         echo 0;
     }
 
-     function payment_session_login($paymentlogin) {
+    function payment_session_login($paymentlogin) {
         $login = $this->xml_insert->Login->authenticate;
         $result = array();
         $email = $paymentlogin['pay_email'];
@@ -469,7 +482,6 @@ class Users {
         return $result;
     }
 
-    
 //    proceed to payment ends here
 
 
@@ -501,9 +513,9 @@ class Users {
         return 0;
     }
 
-   function insert_shipping_values($name, $tel, $mobile, $address, $city, $state, $country, $pincode,$reg) {
-       $register = $this->xml_insert->proceedpayment->shippingaddress;
-       if ($stmt = $this->mysqli->prepare($register)) {
+    function insert_shipping_values($name, $tel, $mobile, $address, $city, $state, $country, $pincode, $reg) {
+        $register = $this->xml_insert->proceedpayment->shippingaddress;
+        if ($stmt = $this->mysqli->prepare($register)) {
             $stmt->bind_param("sssssssss", $name, $tel, $mobile, $address, $city, $state, $country, $pincode, $reg);
             if (!mysqli_execute($stmt)) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
@@ -527,9 +539,9 @@ class Users {
     /*     * **********************supriya Code ends here******************************* */
     /*     * **************************************************************************** */
 
-    
 
-     /*     * **************************************************************************** */
+
+    /*     * **************************************************************************** */
     /*     * **********************people bought Code start here******************************* */
     /*     * **************************************************************************** */
 
@@ -593,10 +605,11 @@ class Users {
         $squery = $query . $values;
         if ($this->mysqli->query($squery)) {
             echo 1;
-            } else {
+        } else {
             echo 0;
         }
     }
+
     function productkit_details($data) {
         $query = $this->xml_select->projectkits->selectsinglecategory;
         //$values = $cat_id;
@@ -611,11 +624,10 @@ class Users {
         }
         return 0;
     }
-    
 
-/*     * **********************addtocart Code end here******************************* */
+    /*     * **********************addtocart Code end here******************************* */
     /*     * **************************************************************************** */
-    
+
     /*     * **********************Blessy Code starts here******************************* */
 
     function check_login($logindata) { //checking with db and login into dashboard
@@ -629,7 +641,7 @@ class Users {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
         }
-        mysqli_stmt_bind_result($stmt, $count, $id, $email1,$status);
+        mysqli_stmt_bind_result($stmt, $count, $id, $email1, $status);
 
         while (mysqli_stmt_fetch($stmt)) {
             $result = array(
@@ -676,7 +688,8 @@ class Users {
 
     //end of the function
     function view_personalinfo() { // view of personal info in dashboard
-        $info = $this->xml_insert->Dashboard->selectpersonalinfo;
+        $info = $this->xml_select->Dashboard->selectpersonalinfo;
+//        var_dump($_SESSION);
         $rid = $_SESSION['reg_id'];
         $result = array();
         if ($stmt = $this->mysqli->prepare($info)) {
@@ -684,18 +697,18 @@ class Users {
             if (!$stmt->execute()) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
+            mysqli_stmt_bind_result($stmt, $id, $name, $email, $mobile);
+            while (mysqli_stmt_fetch($stmt)) {
+                $result = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'email' => $email,
+                    'mobile' => $mobile
+                );
+            }
+            $stmt->close();
+            return $result;
         }
-        mysqli_stmt_bind_result($stmt, $id, $name, $email, $mobile);
-        while (mysqli_stmt_fetch($stmt)) {
-            $result = array(
-                'id' => $id,
-                'name' => $name,
-                'email' => $email,
-                'mobile' => $mobile
-            );
-        }
-        $stmt->close();
-        return $result;
     }
 
     // end of the function
@@ -797,7 +810,7 @@ class Users {
 
         $order = $this->xml_insert->Dashboard->vieworder;
 
-        $id =$_SESSION['reg_id'] ;
+        $id = $_SESSION['reg_id'];
         $result = array();
         if ($stmt = $this->mysqli->prepare($order)) {
             $stmt->bind_param('i', $id);
@@ -840,6 +853,4 @@ class Users {
     /*     * **************************************************************************** */
     /*     * **********************Blessy  Code ends here******************************* */
     /*     * **************************************************************************** */
- 
-    
 }

@@ -15,11 +15,11 @@ if (isset($_POST['register'])) {
     $mobile = mysql_escape_string($_POST['mobile']);
 
     $user = new Users;
-    $user->insert_registration_values($username, $email, $password, $mobile);
-    $field_name = $_POST['name'];
-    $from_email = $_POST['email'];
-
-    $contact = $_POST['mobile'];
+    $reg1 = $user->insert_registration_values($username, $email, $password, $mobile);
+    $field_name = $username;
+    $from_email = $email;
+    $contact = $mobile;
+    
     $subject = 'Welcome To Hiproject ' . $field_name;
     $from = 'Hiproject';
 
@@ -77,36 +77,41 @@ if (isset($_POST['register'])) {
             ?>
             <script language="javascript" type="text/javascript">
                 alert('Thank You for registration with us');
-                window.location = '../member-information.php';
             </script>
-
             <?php
-
+            $_SESSION['email'] = $email;
+            $_SESSION['reg_id'] = $reg1;
+            header("Location: ../member-information.php");
         }
     }
 }
 
 
+if(isset($_POST['ab_val'])){
+    $aval = $_POST['ab_val'];
+    $user = new Users;
+    $user->check_email_exist($aval);
+}
+
 if (isset($_POST['register2'])) {
-    $username1 = mysql_real_escape_string($_POST['name1']);
-    $email1 = mysql_real_escape_string($_POST['email1']);
-    $mobile1 = mysql_real_escape_string($_POST['tel1']);
+    $username1 = $_POST['name1'];
+    $email1 = $_POST['email1'];
+    $mobile1 = $_POST['tel1'];
 
-    $username2 = mysql_real_escape_string($_POST['name2']);
-    $email2 = mysql_real_escape_string($_POST['email2']);
-    $mobile2 = mysql_real_escape_string($_POST['tel2']);
+    $username2 = $_POST['name2'];
+    $email2 = $_POST['email2'];
+    $mobile2 = $_POST['tel2'];
 
-    $username3 = mysql_real_escape_string($_POST['name3']);
-    $email3 = mysql_real_escape_string($_POST['email3']);
-    $mobile3 = mysql_real_escape_string($_POST['tel3']);
+    $username3 = $_POST['name3'];
+    $email3 = $_POST['email3'];
+    $mobile3 = $_POST['tel3'];
 
-    $username4 = mysql_real_escape_string($_POST['name4']);
-    $email4 = mysql_real_escape_string($_POST['email4']);
-    $mobile4 = mysql_real_escape_string($_POST['tel4']);
+    $username4 = $_POST['name4'];
+    $email4 = $_POST['email4'];
+    $mobile4 = $_POST['tel4'];
 
-    $email = mysql_real_escape_string($_POST['email']);
-    $reg = mysql_real_escape_string($_POST['reg']);
-
+    $email = $_POST['email'];
+    $reg = $_POST['reg'];
     $user = new Users;
     $user->insert_members_values($reg, $email, $username1, $email1, $mobile1, $username2, $email2, $mobile2, $username3, $email3, $mobile3, $username4, $email4, $mobile4);
     $user->update_status_value($reg);
@@ -289,7 +294,21 @@ if (isset($_POST['newshipmentdata'])) {
     $sessval = $data[8]['value'];
     $reg = $data[9]['value'];
     $user = new Users;
-    $user->insert_shipping_values($name, $tel, $mobile, $address, $city, $state, $country, $pincode,$reg);
+    $user->insert_shipping_values($name, $tel, $mobile, $address, $city, $state, $country, $pincode, $reg);
     $successdata = $user->addingcart_details($sessval);
     include '../showcartdetails.php';
+}
+
+
+if (isset($_POST['emaillogin']) && isset($_POST['passwordlogin'])) {
+
+    $email = mysql_real_escape_string($_POST['emaillogin']);
+    $password = mysql_real_escape_string($_POST['passwordlogin']);
+
+    // $date1 = date('m/d/Y h:i:s a', time());
+    //  $logindata=array('' );
+    $logindata = array('email' => $email,
+        'password' => $password);
+    $user = new Users;
+    $user->check_login($logindata);
 }
