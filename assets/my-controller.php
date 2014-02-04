@@ -2,13 +2,13 @@
 
 class Users {
 
-    private
-            $database, $connection, $mysqli, $xml,
-            $host = "localhost", $name = "magnum_hiprojects", $user = "root", $pass = "safipassword";
-
 //    private
-//            $database, $connection, $mysqli, $xml_select, $xml_insert,
-//            $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
+//            $database, $connection, $mysqli, $xml,
+//            $host = "localhost", $name = "magnum_hiprojects", $user = "root", $pass = "safipassword";
+
+    private
+            $database, $connection, $mysqli, $xml_select, $xml_insert,
+            $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
 
     public function __construct() {
 //        include_once 'auth.php';
@@ -633,8 +633,8 @@ class Users {
     function check_login($logindata) { //checking with db and login into dashboard
         $login = $this->xml_insert->Login->authenticate;
         $result = array();
-        $email = $logindata['email'];
-        $password = $logindata['password'];
+        $email = mysqli_real_escape_string($this->mysqli,$logindata['email']);
+        $password = mysqli_real_escape_string($this->mysqli,$logindata['password']);
         if ($stmt = $this->mysqli->prepare($login)) {
             $stmt->bind_param("ss", $email, $password);
             if (!$stmt->execute()) {
@@ -658,10 +658,10 @@ class Users {
 
     //end of the function
     function login_with_session($logindata) { //setting session after login
-        $login = $this->xml_select->Login->authenticate;
+        $login = $this->xml_insert->Login->authenticate;
         $result = array();
-        $email = $logindata['email'];
-        $password = $logindata['password'];
+        $email = mysqli_real_escape_string($this->mysqli,$logindata['email']);
+        $password = mysqli_real_escape_string($this->mysqli,$logindata['password']);
         if ($stmt = $this->mysqli->prepare($login)) {
             $stmt->bind_param("ss", $email, $password);
             if (!$stmt->execute()) {

@@ -60,9 +60,10 @@
             e.preventDefault();
             var email = $('input[name=email_login]').val();
             var password = $('input[name=password_login]').val();
-            action='assets/controller-links.php';
+            var action="assets/controller-links.php";
             $.post(action,{emaillogin:email,passwordlogin:password},function(data){
                if(data==0){
+                   
                    $('.loginerror').text('The email or password you entered is incorrect!!').css('color','red');
                }
                else{

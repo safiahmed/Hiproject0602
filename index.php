@@ -12,6 +12,7 @@ text-decoration:none;
 color: #555;
 
 }
+/*safi index start and end*/
     </style>
     <body>	
         <div id="share-wrapper">

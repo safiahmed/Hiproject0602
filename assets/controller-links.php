@@ -19,7 +19,7 @@ if (isset($_POST['register'])) {
     $field_name = $username;
     $from_email = $email;
     $contact = $mobile;
-    
+
     $subject = 'Welcome To Hiproject ' . $field_name;
     $from = 'Hiproject';
 
@@ -79,6 +79,7 @@ if (isset($_POST['register'])) {
                 alert('Thank You for registration with us');
             </script>
             <?php
+
             $_SESSION['email'] = $email;
             $_SESSION['reg_id'] = $reg1;
             header("Location: ../member-information.php");
@@ -87,7 +88,7 @@ if (isset($_POST['register'])) {
 }
 
 
-if(isset($_POST['ab_val'])){
+if (isset($_POST['ab_val'])) {
     $aval = $_POST['ab_val'];
     $user = new Users;
     $user->check_email_exist($aval);
@@ -302,13 +303,20 @@ if (isset($_POST['newshipmentdata'])) {
 
 if (isset($_POST['emaillogin']) && isset($_POST['passwordlogin'])) {
 
-    $email = mysql_real_escape_string($_POST['emaillogin']);
-    $password = mysql_real_escape_string($_POST['passwordlogin']);
-
-    // $date1 = date('m/d/Y h:i:s a', time());
-    //  $logindata=array('' );
+    $email = $_POST['emaillogin'];
+    $password = $_POST['passwordlogin'];
     $logindata = array('email' => $email,
-        'password' => $password);
+                       'password' => $password);
     $user = new Users;
     $user->check_login($logindata);
+}
+
+if (isset($_POST['email_login']) && isset($_POST['password_login'])) {
+
+    $email = $_POST['email_login'];
+    $password = $_POST['password_login'];
+    $user = new Users;
+    $logindata = array('email' => $email,
+        'password' => $password);
+    $user->login_with_session($logindata);
 }
