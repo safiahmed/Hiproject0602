@@ -9,7 +9,7 @@ class Users {
     private
             $database, $connection, $mysqli, $xml_select, $xml_insert,
             $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
-
+//changed
     public function __construct() {
 //        include_once 'auth.php';
         $this->mysqli = mysqli_connect("$this->host", "$this->user", "$this->pass", "$this->name");
