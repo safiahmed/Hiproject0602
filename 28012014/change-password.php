@@ -10,8 +10,8 @@
         <link href="css/bootstrap-cerulean1.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="css/bootstrap-cerulean2.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="css/bootstrap-cerulean22.css" rel="stylesheet" type="text/css" media="screen" />
-		
-		
+
+
         <link rel="stylesheet" href="css/shaili.css" /> 
         <link href="css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
             <script type="text/javascript" src="Js/jquery-1.10.2.min.js"></script>
@@ -20,8 +20,8 @@
                     <link href="css/zoom_image.css" rel="stylesheet">
                         <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
                         <link href="assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />    
-<script src="Js/mrova-feedback-form.js" type="text/javascript"></script>
-                <link rel="stylesheet" href="css/mrova-feedback-form.css" type="text/css"/>						
+                        <script src="Js/mrova-feedback-form.js" type="text/javascript"></script>
+                        <link rel="stylesheet" href="css/mrova-feedback-form.css" type="text/css"/>						
                         <script type="text/javascript">
                             $(document).ready(function() {
                                 var pageTitle = document.title; //HTML page title
@@ -119,7 +119,7 @@
                         </script>
                         </head>
                         <body>	
-                            
+
                             <div id="share-wrapper">
                                 <ul class="share-inner-wrp">
                                     <!-- Facebook -->
@@ -128,11 +128,11 @@
                                     <!-- Twitter -->
                                     <li class="twitter button-wrap"><a href="#">Tweet</a></li>
 
-                                    
+
                                 </ul>
                             </div>
 
-                             <?php include'feedback.php '; ?>
+                            <?php include'feedback.php '; ?>
                             <div id="wrapper">
 
                                 <?php include('header-dashboard.php'); ?>
@@ -141,195 +141,195 @@
                                         <div class="main_home">
 
                                             <div id="breadcrumb">
-                                                
+
                                             </div>
 
                                         </div>
                                     </div>	
-								</div>	
+                                </div>	
 
 
-                                 <div class="inner_account_page">
-								 
-								   <!--  <div class="side_account_information">
-                                         <ul>
-										    <li style="background-color:black;color:white;margin-top:-15px;"><p style="padding-left:25px;padding-top:10px;">Account Information</p></li>
-										    <li style=background-color:#E0E0E0;"><p style="padding-left:25px;padding-top:10px;"><a href="#" style="text-decoration:none;">My Orders</a></p></li>
-										    <li class="ccccc"><p style="padding-left:25px;padding-top:10px;"><a href="change_password.php" style="text-decoration:none;">Change Password</a></p></li>
-										   
-										  </ul>
-                                     </div>	-->
-									 
+                                <div class="inner_account_page">
+
+                                    <!--  <div class="side_account_information">
+          <ul>
+                                                     <li style="background-color:black;color:white;margin-top:-15px;"><p style="padding-left:25px;padding-top:10px;">Account Information</p></li>
+                                                     <li style=background-color:#E0E0E0;"><p style="padding-left:25px;padding-top:10px;"><a href="#" style="text-decoration:none;">My Orders</a></p></li>
+                                                     <li class="ccccc"><p style="padding-left:25px;padding-top:10px;"><a href="change_password.php" style="text-decoration:none;">Change Password</a></p></li>
+                                                    
+                                                   </ul>
+      </div>	-->
+
                                     <div class="content_account_information">
-                                         
-										  <ul class="nav nav-pills">
-												<li>
-												<a href="account-information.php" style="color:#939391;">Account</a>
-														</li>
-															<li ><a href="my-orders.php" style="color:#939391;">Orders</a></li>
-														
-															<li ><a href="my-wishlist.php" style="color:#939391;">My Wishlist</a></li>
-															<li  class="active"><a href="change-password" >Change Password</a></li>
-											</ul>	
-										
-										 
-										 <div class="inner_account_content1234">
-										     <h3 style="padding-left:10px;color:#939391;">Change Password</h3>
-										     <form role="form">
-                                              <div class="form-group">
-                                              <p style="padding-left:51px;color:#939391;">Current Password
-                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></p>
-													</div>
-													<div class="form-group">
-                                              <p style="padding-left:69px;color:#939391;">New Password 
-                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></p>
-													</div>
-													<div class="form-group">
-                                              <p style="padding-left:46px;color:#939391;">Retype Password
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></p>
-													</div>
-															
-													<button type="submit" class="btnsavechanges1">Save Changes</button>
-															</form> 
-										 </div>
-										
-										 
-                                     </div>	
-                                 </div>
-								 
-								 
 
-<?php include('footer.php'); ?>
+                                        <ul class="nav nav-pills">
+                                            <li>
+                                                <a href="account-information.php" style="color:#939391;">Account</a>
+                                            </li>
+                                            <li ><a href="my-orders.php" style="color:#939391;">Orders</a></li>
 
-                            <span>
-                                <a href="#" title="Scroll to Top" class="scrollup" style="display: inline;"></a>
+                                            <li ><a href="my-wishlist.php" style="color:#939391;">My Wishlist</a></li>
+                                            <li  class="active"><a href="change-password" >Change Password</a></li>
+                                        </ul>	
+
+
+                                        <div class="inner_account_content1234">
+                                            <h3 style="padding-left:10px;color:#939391;">Change Password</h3>
+                                            <form role="form">
+                                                <div class="form-group">
+                                                    <p style="padding-left:51px;color:#939391;">Current Password
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p style="padding-left:69px;color:#939391;">New Password 
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p style="padding-left:46px;color:#939391;">Retype Password
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></p>
+                                                </div>
+
+                                                <button type="submit" class="btnsavechanges1">Save Changes</button>
+                                            </form> 
+                                        </div>
+
+
+                                    </div>	
+                                </div>
+
+
+
+                                <?php include('footer.php'); ?>
+
                                 <span>
-
-                                   
-                                    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-                                    <script src="Js/bootstrap.js"></script>
-                                    <script type="text/javascript">
-                                        $(document).ready(function() { // Ready Function Start
-                                            $("#myCarousel").carousel({interval: 2000});
-
-                                        });//Ready Function End
-                                    </script>
-                                    <!-- Placed at the end of the document so the pages load faster -->
-
-                                   
-                                    <!-- transition / effect library -->
-                                    <script src="js/bootstrap-transition.js"></script>
-                                    <!-- alert enhancer library -->
-                                    <script src="js/bootstrap-alert.js"></script>
-                                    <!-- modal / dialog library -->
-                                    <script src="js/bootstrap-modal.js"></script>
-                                    <!-- custom dropdown library -->
-                                    <script src="js/bootstrap-dropdown.js"></script>
-                                    <!-- scrolspy library -->
-                                    <script src="js/bootstrap-scrollspy.js"></script>
-                                    <!-- library for creating tabs -->
-                                    <script src="js/bootstrap-tab.js"></script>
-                                    <!-- library for advanced tooltip -->
-                                    <script src="js/bootstrap-tooltip.js"></script>
-                                    <!-- popover effect library -->
-                                    <script src="js/bootstrap-tour.js"></script>
-                                    <!-- library for cookie management -->
-                                    <script src="js/jquery.cookie.js"></script>
-                                    <!-- calander plugin -->
-                                    <script src='js/fullcalendar.min.js'></script>
-                                    <!-- data table plugin -->
-                                    <script src='js/jquery.dataTables.min.js'></script>
+                                    <a href="#" title="Scroll to Top" class="scrollup" style="display: inline;"></a>
+                                    <span>
 
 
+                                        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+                                        <script src="Js/bootstrap.js"></script>
+                                        <script type="text/javascript">
+                                $(document).ready(function() { // Ready Function Start
+                                    $("#myCarousel").carousel({interval: 2000});
 
-                                    <!-- select or dropdown enhancer -->
-                                    <script src="js/jquery.chosen.min.js"></script>
-                                    <!-- checkbox, radio, and file input styler -->
-                                    <script src="js/jquery.uniform.min.js"></script>
-                                    <!-- plugin for gallery image view -->
-                                    <script src="js/jquery.colorbox.min.js"></script>
-                                    <!-- rich text editor library -->
-                                    <script src="js/jquery.cleditor.min.js"></script>
-                                    <!-- notification plugin -->
-                                    <script src="js/jquery.noty.js"></script>
-                                    <!-- file manager library -->
-                                    <script src="js/jquery.elfinder.min.js"></script>
-                                    <!-- star rating plugin -->
-                                    <script src="js/jquery.raty.min.js"></script>
-                                    <!-- for iOS style toggle switch -->
-                                    <script src="js/jquery.iphone.toggle.js"></script>
-                                    <!-- autogrowing textarea plugin -->
-                                    <script src="js/jquery.autogrow-textarea.js"></script>
-                                    <!-- multiple file upload plugin -->
-                                    <script src="js/jquery.uploadify-3.1.min.js"></script>
-                                    <!-- history.js for cross-browser state change on ajax -->
-                                    <script src="js/jquery.history.js"></script>
-                                    <!-- application script for Charisma demo -->
-                                    <script src="js/charisma.js"></script>
-                                    <script defer src="js/jquery.flexslider.js"></script>
-                                    <script type="text/javascript" src="assets/bxslider/jquery.bxslider.js"></script>
+                                });//Ready Function End
+                                        </script>
+                                        <!-- Placed at the end of the document so the pages load faster -->
 
 
-                                    <script src="js/jquery.easing.min.js"></script>
-                                    <script src="js/link-hover.js"></script>
-
-                                    <script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
-
-
-                                    <!--common script for all pages-->
-                                    <script src="js/common-scripts.js"></script>
-
-
-                                    <!--common script for all pages-->
-                                    <script>
-
-
-                                        $(window).load(function() {
-                                            $('[data-zlname = reverse-effect]').mateHover({
-                                                position: 'y-reverse',
-                                                overlayStyle: 'rolling',
-                                                overlayBg: '#fff',
-                                                overlayOpacity: 0.7,
-                                                overlayEasing: 'easeOutCirc',
-                                                rollingPosition: 'top',
-                                                popupEasing: 'easeOutBack',
-                                                popup2Easing: 'easeOutBack'
-                                            });
-                                        });
-
-                                        $(window).load(function() {
-                                            $('.flexslider').flexslider({
-                                                animation: "slide",
-                                                start: function(slider) {
-                                                    $('body').removeClass('loading');
-                                                }
-                                            });
-                                        });
-
-                                        //    fancybox
-                                        jQuery(".fancybox").fancybox();
-
-                                        $(function() {
-                                            var $container = $('#gallery');
-                                            $container.isotope({
-                                                itemSelector: '.item',
-                                                animationOptions: {
-                                                    duration: 750,
-                                                    easing: 'linear',
-                                                    queue: false
-                                                }
-                                            });
-
-                                            // filter items when filter link is clicked
-                                            $('#filters a').click(function() {
-                                                var selector = $(this).attr('data-filter');
-                                                $container.isotope({filter: selector});
-                                                return false;
-                                            });
-                                        });
+                                        <!-- transition / effect library -->
+                                        <script src="js/bootstrap-transition.js"></script>
+                                        <!-- alert enhancer library -->
+                                        <script src="js/bootstrap-alert.js"></script>
+                                        <!-- modal / dialog library -->
+                                        <script src="js/bootstrap-modal.js"></script>
+                                        <!-- custom dropdown library -->
+                                        <script src="js/bootstrap-dropdown.js"></script>
+                                        <!-- scrolspy library -->
+                                        <script src="js/bootstrap-scrollspy.js"></script>
+                                        <!-- library for creating tabs -->
+                                        <script src="js/bootstrap-tab.js"></script>
+                                        <!-- library for advanced tooltip -->
+                                        <script src="js/bootstrap-tooltip.js"></script>
+                                        <!-- popover effect library -->
+                                        <script src="js/bootstrap-tour.js"></script>
+                                        <!-- library for cookie management -->
+                                        <script src="js/jquery.cookie.js"></script>
+                                        <!-- calander plugin -->
+                                        <script src='js/fullcalendar.min.js'></script>
+                                        <!-- data table plugin -->
+                                        <script src='js/jquery.dataTables.min.js'></script>
 
 
 
-                                    </script>
-                                    </body>
-                                    </html>
+                                        <!-- select or dropdown enhancer -->
+                                        <script src="js/jquery.chosen.min.js"></script>
+                                        <!-- checkbox, radio, and file input styler -->
+                                        <script src="js/jquery.uniform.min.js"></script>
+                                        <!-- plugin for gallery image view -->
+                                        <script src="js/jquery.colorbox.min.js"></script>
+                                        <!-- rich text editor library -->
+                                        <script src="js/jquery.cleditor.min.js"></script>
+                                        <!-- notification plugin -->
+                                        <script src="js/jquery.noty.js"></script>
+                                        <!-- file manager library -->
+                                        <script src="js/jquery.elfinder.min.js"></script>
+                                        <!-- star rating plugin -->
+                                        <script src="js/jquery.raty.min.js"></script>
+                                        <!-- for iOS style toggle switch -->
+                                        <script src="js/jquery.iphone.toggle.js"></script>
+                                        <!-- autogrowing textarea plugin -->
+                                        <script src="js/jquery.autogrow-textarea.js"></script>
+                                        <!-- multiple file upload plugin -->
+                                        <script src="js/jquery.uploadify-3.1.min.js"></script>
+                                        <!-- history.js for cross-browser state change on ajax -->
+                                        <script src="js/jquery.history.js"></script>
+                                        <!-- application script for Charisma demo -->
+                                        <script src="js/charisma.js"></script>
+                                        <script defer src="js/jquery.flexslider.js"></script>
+                                        <script type="text/javascript" src="assets/bxslider/jquery.bxslider.js"></script>
+
+
+                                        <script src="js/jquery.easing.min.js"></script>
+                                        <script src="js/link-hover.js"></script>
+
+                                        <script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+                                        <!--common script for all pages-->
+                                        <script src="js/common-scripts.js"></script>
+
+
+                                        <!--common script for all pages-->
+                                        <script>
+
+
+                                $(window).load(function() {
+                                    $('[data-zlname = reverse-effect]').mateHover({
+                                        position: 'y-reverse',
+                                        overlayStyle: 'rolling',
+                                        overlayBg: '#fff',
+                                        overlayOpacity: 0.7,
+                                        overlayEasing: 'easeOutCirc',
+                                        rollingPosition: 'top',
+                                        popupEasing: 'easeOutBack',
+                                        popup2Easing: 'easeOutBack'
+                                    });
+                                });
+
+                                $(window).load(function() {
+                                    $('.flexslider').flexslider({
+                                        animation: "slide",
+                                        start: function(slider) {
+                                            $('body').removeClass('loading');
+                                        }
+                                    });
+                                });
+
+                                //    fancybox
+                                jQuery(".fancybox").fancybox();
+
+                                $(function() {
+                                    var $container = $('#gallery');
+                                    $container.isotope({
+                                        itemSelector: '.item',
+                                        animationOptions: {
+                                            duration: 750,
+                                            easing: 'linear',
+                                            queue: false
+                                        }
+                                    });
+
+                                    // filter items when filter link is clicked
+                                    $('#filters a').click(function() {
+                                        var selector = $(this).attr('data-filter');
+                                        $container.isotope({filter: selector});
+                                        return false;
+                                    });
+                                });
+
+
+
+                                        </script>
+                                        </body>
+                                        </html>

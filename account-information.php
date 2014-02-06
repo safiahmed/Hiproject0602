@@ -1,7 +1,11 @@
-<?php include './assets/auth.php'; 
- var_dump($_SESSION);
+<?php
+include './assets/auth.php';
+if(!isset($_SESSION['reg_id'])){
+    header("Location: index.php");
+}
+var_dump($_SESSION);
 ?>
-<!--<?php //include './assets/sessionlogin.php'; ?>-->
+<!--<?php //include './assets/sessionlogin.php';   ?>-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <?php include 'meta.php'; ?>
@@ -27,9 +31,12 @@
                         </script>
                         <script src="Js/mrova-feedback-form.js" type="text/javascript"></script>
                         <link rel="stylesheet" href="css/mrova-feedback-form.css" type="text/css"/>
+                        <style>
+                            .active >a{color: #ffffff !important;background-color: #369bd7; border-radius: 4px;}
+                        </style>
                         <script type="text/javascript">
                             $(document).ready(function() {
-                              var pageTitle = document.title; //HTML page title
+                                var pageTitle = document.title; //HTML page title
                                 var pageUrl = location.href; //Location of the page	
                                 //user hovers on the share button	
                                 $('#share-wrapper li').hover(function() {
@@ -105,25 +112,29 @@
                                 });
 
 
-////edited by blessy///
-//$('.nav-pills').hover(function (){
-//     $(this).addClass('active');
-//
-//});                           //edited by blessy starts here //
+                         //edited by blessy starts here //
                                 //start of loading order/pwd page
                                 $('.account,.orders,.wishlist,.password').on('click', function() {
                                     var getclass = $(this).attr('class');
                                     if (getclass === 'orders') {
+                                        $('.account,.orders,.wishlist,.password').closest("li").removeClass("active");
+                                        $(".orders").closest("li").attr("class", "active").css("color", "white");
                                         var path = 'my-order-details.php';
                                     }
                                     else if (getclass === 'wishlist') {
+                                        $('.account,.orders,.wishlist,.password').closest("li").removeClass("active");
+                                        $(".wishlist").closest("li").attr("class", "active").css("color", "white");
                                         var path = 'my-wishlist.php .inner_account_content123456789';
 
                                     }
                                     else if (getclass === 'password') {
+                                        $('.account,.orders,.wishlist,.password').closest("li").removeClass("active");
+                                        $(".password").closest("li").attr("class", "active").css("color", "white");
                                         var path = 'change-password.php .inner_account_content1234';
                                     }
                                     else {
+                                        $('.account,.orders,.wishlist,.password').closest("li").removeClass("active");
+                                        $(".account").closest("li").attr("class", "active").css("color", "white");
                                         var path = 'account-information.php .inner_account_content1234';
                                     }
                                     $('.inner_account_content1234').load(path);
@@ -150,24 +161,28 @@
                                 });
                                 //account info ends here
                                 //pwd matching/updates starts here
-                                $('input[name=oldpassword]').blur(function(){
-                                    var oldpassword=$(this).val();
-                                     action = './assets/controller-links.php';
-                                       $.post(action, {oldpassword: oldpassword}, function() {
-
-                                        });
-                                     });
+                                $('body').on('blur', '.cur_pwd', function() {
+                                    var oldpassword = $(this).val();
+                                    action = 'assets/controller-links.php';
+                                    $.post(action, {oldpassword: oldpassword}, function(response) {
+                                        if (response == 0) {
+                                            $(".cur_pwd").focus().val("");
+                                            $(".error_cur").text("Please Enter Correct Password");
+                                        } else if (response == 1) {
+                                            $(".error_cur").text("");
+                                        }
+                                    });
+                                });
                                 $('body').on('click', '.savepassword', function(e) {
                                     var newpassword = $('input[name=newpassword]').val();
                                     var repassword = $('input[name=repassword]').val();
                                     console.log();
                                     e.preventDefault();
-
-                                    action = './assets/controller-links.php';
+                                    action = 'assets/controller-links.php';
                                     if (newpassword == repassword) {
-
                                         $.post(action, {repassword: repassword}, function(data) {
-                                                alert(data);
+                                            $(".succss_msg").text("Password updated successfully");
+                                            $(".cur_pwd,input[name=repassword],input[name=newpassword]").val("");
                                         });
                                     }
                                     else {
@@ -232,17 +247,7 @@
                                         </div>
                                     </div>	
                                 </div>	
-<div class="inner_account_page">
-
-                                    <!--  <div class="side_account_information">
-          <ul>
-                                                     <li style="background-color:black;color:white;margin-top:-15px;"><p style="padding-left:25px;padding-top:10px;">Account Information</p></li>
-                                                     <li style=background-color:#E0E0E0;"><p style="padding-left:25px;padding-top:10px;"><a href="#" style="text-decoration:none;">My Orders</a></p></li>
-                                                     <li class="ccccc"><p style="padding-left:25px;padding-top:10px;"><a href="change_password.php" style="text-decoration:none;">Change Password</a></p></li>
-                                                    
-                                                   </ul>
-      </div>	-->
-
+                                <div class="inner_account_page">
                                     <div class="content_account_information">
 
                                         <ul class="nav nav-pills">
@@ -254,16 +259,12 @@
                                             <li ><a href="" class="wishlist" style="color:#939391;">My Wishlist</a></li>
                                             <li ><a href="" class="password" style="color:#939391;">Change Password</a></li>
                                         </ul>
-                                        <span>welcome  <?php 
-                                  if(isset($_SESSION['reg_id']))
-                                  {    echo $_SESSION['reg_id'];}
-                              
-                                ?></span>
+                                        <span>welcome <strong> <?php echo $personalinfo['name']; ?></strong></span>
 
                                         <div class="inner_account_content1234" >
                                             <form id="accountform" role="form" action="./assets/controller-links.php" method="post">
                                                 <div id="account-info" class="middle_box1">
-                                               
+
                                                     <h2 style="padding-left:10px;padding-top:10px;">Presonal Information</h2>
 
                                                     <div class="form-group">
@@ -413,7 +414,7 @@
 
 
 
-<?php include('footer.php'); ?>
+                                <?php include('footer.php'); ?>
 
                                 <span>
                                     <a href="#" title="Scroll to Top" class="scrollup" style="display: inline;"></a>
@@ -423,10 +424,10 @@
                                         <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
                                         <script src="Js/bootstrap.js"></script>
                                         <script type="text/javascript">
-                                            $(document).ready(function() { // Ready Function Start
-                                                $("#myCarousel").carousel({interval: 2000});
+                            $(document).ready(function() { // Ready Function Start
+                                $("#myCarousel").carousel({interval: 2000});
 
-                                            });//Ready Function End
+                            });//Ready Function End
                                         </script>
                                         <!-- Placed at the end of the document so the pages load faster -->
 
@@ -499,49 +500,49 @@
                                         <script>
 
 
-                                            $(window).load(function() {
-                                                $('[data-zlname = reverse-effect]').mateHover({
-                                                    position: 'y-reverse',
-                                                    overlayStyle: 'rolling',
-                                                    overlayBg: '#fff',
-                                                    overlayOpacity: 0.7,
-                                                    overlayEasing: 'easeOutCirc',
-                                                    rollingPosition: 'top',
-                                                    popupEasing: 'easeOutBack',
-                                                    popup2Easing: 'easeOutBack'
-                                                });
-                                            });
+                            $(window).load(function() {
+                                $('[data-zlname = reverse-effect]').mateHover({
+                                    position: 'y-reverse',
+                                    overlayStyle: 'rolling',
+                                    overlayBg: '#fff',
+                                    overlayOpacity: 0.7,
+                                    overlayEasing: 'easeOutCirc',
+                                    rollingPosition: 'top',
+                                    popupEasing: 'easeOutBack',
+                                    popup2Easing: 'easeOutBack'
+                                });
+                            });
 
-                                            $(window).load(function() {
-                                                $('.flexslider').flexslider({
-                                                    animation: "slide",
-                                                    start: function(slider) {
-                                                        $('body').removeClass('loading');
-                                                    }
-                                                });
-                                            });
+                            $(window).load(function() {
+                                $('.flexslider').flexslider({
+                                    animation: "slide",
+                                    start: function(slider) {
+                                        $('body').removeClass('loading');
+                                    }
+                                });
+                            });
 
-                                            //    fancybox
-                                            jQuery(".fancybox").fancybox();
+                            //    fancybox
+                            jQuery(".fancybox").fancybox();
 
-                                            $(function() {
-                                                var $container = $('#gallery');
-                                                $container.isotope({
-                                                    itemSelector: '.item',
-                                                    animationOptions: {
-                                                        duration: 750,
-                                                        easing: 'linear',
-                                                        queue: false
-                                                    }
-                                                });
+                            $(function() {
+                                var $container = $('#gallery');
+                                $container.isotope({
+                                    itemSelector: '.item',
+                                    animationOptions: {
+                                        duration: 750,
+                                        easing: 'linear',
+                                        queue: false
+                                    }
+                                });
 
-                                                // filter items when filter link is clicked
-                                                $('#filters a').click(function() {
-                                                    var selector = $(this).attr('data-filter');
-                                                    $container.isotope({filter: selector});
-                                                    return false;
-                                                });
-                                            });
+                                // filter items when filter link is clicked
+                                $('#filters a').click(function() {
+                                    var selector = $(this).attr('data-filter');
+                                    $container.isotope({filter: selector});
+                                    return false;
+                                });
+                            });
 
 
 

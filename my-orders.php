@@ -99,24 +99,6 @@
                                 }
                             });
                         });
-
-
-
-                        $(".order-row tr").on('click', function() {
-                            var data = "safi";
-
-                            $.ajax({
-                                url: "order-row-details.php",
-                                type: "POST",
-                                data: {data: data},
-                                success: function(result) {
-                                    //alert(result);
-                                    $("#order-row").html(result);
-                                }
-                            });
-                        });
-
-                    });
                 </script>
 
                 <script>

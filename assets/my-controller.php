@@ -633,8 +633,8 @@ class Users {
     function check_login($logindata) { //checking with db and login into dashboard
         $login = $this->xml_insert->Login->authenticate;
         $result = array();
-        $email = mysqli_real_escape_string($this->mysqli,$logindata['email']);
-        $password = mysqli_real_escape_string($this->mysqli,$logindata['password']);
+        $email = mysqli_real_escape_string($this->mysqli, $logindata['email']);
+        $password = mysqli_real_escape_string($this->mysqli, $logindata['password']);
         if ($stmt = $this->mysqli->prepare($login)) {
             $stmt->bind_param("ss", $email, $password);
             if (!$stmt->execute()) {
@@ -660,8 +660,8 @@ class Users {
     function login_with_session($logindata) { //setting session after login
         $login = $this->xml_insert->Login->authenticate;
         $result = array();
-        $email = mysqli_real_escape_string($this->mysqli,$logindata['email']);
-        $password = mysqli_real_escape_string($this->mysqli,$logindata['password']);
+        $email = mysqli_real_escape_string($this->mysqli, $logindata['email']);
+        $password = mysqli_real_escape_string($this->mysqli, $logindata['password']);
         if ($stmt = $this->mysqli->prepare($login)) {
             $stmt->bind_param("ss", $email, $password);
             if (!$stmt->execute()) {
@@ -712,20 +712,7 @@ class Users {
     }
 
     // end of the function
-    function update_personal_info($personalinfo) {  //update personal info
-        $updateinfo = $this->xml_select->Dashboard->updatepersonalinfo;
-        $id = $_SESSION['reg_id'];
-        $result = array();
-        if ($stmt = $this->mysqli->prepare($updateinfo)) {
-            $stmt->bind_param("ssii", $personalinfo['name'], $personalinfo['email'], $personalinfo['phone'], $id);
-            if (!$stmt->execute()) {
-                die('stmt error' . mysqli_error($stmt));
-            }
-        }
-        header("Location: ../account-information.php");
-    }
 
-// end of the function
     function view_memberinfo() { // view of members in dashboard
         $memberinfo = $this->xml_select->Dashboard->selectgroupmember;
         $id = $_SESSION['reg_id']; //session_id
@@ -761,8 +748,6 @@ class Users {
     function update_member_info($memberinfo) { // update member info in db
         $updateinfo = $this->xml_insert->Dashboard->updategroupmember;
         $id = $_SESSION['reg_id'];
-        print_r($memberinfo);
-        print_r($updateinfo);
         $result = array();
         if ($stmt = $this->mysqli->prepare($updateinfo)) {
             $stmt->bind_param("ssissississii", $memberinfo['fname'], $memberinfo['femail'], $memberinfo['fphone'], $memberinfo['sname'], $memberinfo['semail'], $memberinfo['sphone'], $memberinfo['tname'], $memberinfo['temail'], $memberinfo['tphone'], $memberinfo['frname'], $memberinfo['fremail'], $memberinfo['frphone'], $id);
@@ -770,6 +755,20 @@ class Users {
                 die('stmt error' . mysqli_error($stmt));
             }
         }
+    }
+
+// end of the function
+    function update_personal_info($personalinfo) {  //update personal info
+        $updateinfo = $this->xml_insert->Dashboard->updatepersonalinfo;
+        $id = $_SESSION['reg_id'];
+        $result = array();
+        if ($stmt = $this->mysqli->prepare($updateinfo)) {
+            $stmt->bind_param("ssii", $personalinfo['name'], $personalinfo['email'], $personalinfo['phone'], $id);
+            if (!$stmt->execute()) {
+                die('stmt error' . mysqli_error($stmt));
+            }
+        }
+        header("Location: ../account-information.php");
     }
 
 // end of the function
@@ -781,73 +780,49 @@ class Users {
             if (!$stmt->execute()) {
                 die('stmt error' . mysqli_error($stmt));
             }
+            echo $this->mysqli->affected_rows;
             $stmt->close();
         }
     }
 
 // end of the function
+
     function checkoldpassword($oldpassword) { // check with old password
-        $checkoldpassword = $this->xml_select->Dashboard->checkoldpassword;
+        $checkoldpassword = $this->xml_insert->Dashboard->checkoldpassword;
         $id = $_SESSION['reg_id'];
-        if ($stmt === $this->mysqli->prepare($checkoldpassword)) {
-            $stmt->bind_param('i', $id);
-            if (!$stmt->execute()) {
-                die('stmt error' . mysqli_error($stmt));
-            }
+        $squery = $checkoldpassword . $id . " AND password=" . "'" . $oldpassword . "'";
+        if ($result = $this->mysqli->query($squery)) {
+            echo $row = $result->num_rows;
+        } else {
+            echo 0;
         }
-        mysqli_stmt_bind_result($stmt, $id);
-        while (mysqli_stmt_fetch($stmt)) {
-            $result = array(
-                'password' => password
-            );
-        }
-        $stmt->close();
-        return $result;
     }
 
 // end of the  function
     function view_my_orders() {
-
-        $order = $this->xml_insert->Dashboard->vieworder;
-
+        $order = $this->xml_select->Dashboard->vieworder;
         $id = $_SESSION['reg_id'];
-        $result = array();
-        if ($stmt = $this->mysqli->prepare($order)) {
-            $stmt->bind_param('i', $id);
+        $squery = $order . $id;
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
+                $result[] = $row;
+            }
+            return $result;
         }
-        if (!$stmt->execute()) {
-            die('stmt error: ' . mysqli_stmt_error($order));
-        }
-        $res = $stmt->get_result();
-        while ($row = $res->fetch_assoc()) {
-            $result = $row;
-        }
-        print_r($result);
-        return $result;
     }
 
     function view_ordersummary($orderid) {
-        $summary = $this->xml_insert->Dashboard->ordersummary;
-        $regid = $_SESSION['reg_id'];
-        $result = array();
-        if ($stmt = $this->mysqli->prepare($summary)) {
-            $stmt->bind_param('ii', $orderid, $regid);
-
-            if (!$stmt->execute()) {
-                die('stmt error: ' . mysqli_stmt_error($summary));
+        $summary = $this->xml_select->Dashboard->ordersummary;
+        $value = $orderid;
+        $squery = $summary.$value;
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
+                $result = $row;
             }
+            return $result;
         }
-        mysqli_stmt_bind_result($stmt, $order_no, $order_date, $order_status, $prod_qty, $prod_org_price, $prod_tot_price, $ship_company, $ship_tel, $ship_fax, $ship_streetaddress, $ship_city, $ship_state, $ship_country, $ship_zip, $prod_name, $name, $email, $mobile);
-        while (mysqli_stmt_fetch($stmt)) {
-            $result = array(
-                'orderno' => $order_no, 'orderdate' => $order_date, 'orderstatus' => $order_status,
-                'qty' => $prod_qty, 'org_price' => $prod_org_price, 'total' => $prod_tot_price,
-                'company' => $ship_company, 'shipphone' => $ship_tel, 'fax' => $ship_fax, 'address' => $ship_streetaddress, 'city' => $ship_city, 'state' => $ship_state, 'country' => $ship_country, 'zip' => $ship_zip,
-                'name' => $name, 'email' => $email, 'mobile' => $mobile
-            );
-        }
-        $stmt->close();
-        return $result;
     }
 
     /*     * **************************************************************************** */

@@ -99,25 +99,25 @@
             update tbl_register set password=? where reg_id=?
         </updatepassword>
         <checkoldpassword>
-            select password from tbl_register where reg_id=?
+            select password from tbl_register where reg_id=
         </checkoldpassword>
         <vieworder>
-            select * from tbl_order as o,tbl_orderdetails as d,tbl_product as p
+            select distinct o.order_id_pk,o.order_no,o.order_date,o.order_worth,o.order_status,
+            d.prod_qty,d.prod_org_price,d.prod_tot_price,d.ord_details_id_pk,
+            p.prod_name ,p.prod_org_price,p.model_no
+            from tbl_order as o,tbl_orderdetails as d,tbl_product as p
             where o.order_id_pk=d.ord_id_fk 
             and p.prod_id_pk=d.prod_id_fk
-            and o.reg_id_fk=?
+            and o.reg_id_fk=
         </vieworder>
         <ordersummary>
-            select order_no,order_date,order_status,prod_qty,d.prod_org_price,prod_tot_price,ship_company,ship_tel,
-            ship_fax,ship_streetaddress,ship_city,ship_state,ship_country,ship_zip,prod_name,name,email,mobile
-           
-            from tbl_order as o,tbl_orderdetails as d,tbl_shippingaddress as s,tbl_product as p,tbl_register as r
-            
-            where o.order_id_pk=d.ord_id_fk and o.reg_id_fk=s.reg_id_fk
-            and p.prod_id_pk=d.prod_id_fk
-            and r.reg_id=s.reg_id_fk
-            and o.order_id_pk=?
-            and o.reg_id_fk=?
+            SELECT order_no, order_date, order_status, prod_qty, d.prod_org_price, prod_tot_price, ship_company, ship_tel, ship_fax, ship_streetaddress, ship_city, ship_state, ship_country, ship_zip, prod_name, name, email, mobile
+            FROM tbl_orderdetails AS d
+            INNER JOIN tbl_order AS o ON o.order_id_pk = d.ord_id_fk
+            INNER JOIN tbl_product AS p ON p.prod_id_pk = d.prod_id_fk
+            LEFT JOIN tbl_register AS r ON r.reg_id = o.reg_id_fk
+            LEFT JOIN tbl_shippingaddress AS s ON s.reg_id_fk = o.reg_id_fk
+            WHERE d.ord_details_id_pk =
         </ordersummary>
     </Dashboard>
     <!--code by Blessy ends here-->

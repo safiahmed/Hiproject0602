@@ -320,3 +320,38 @@ if (isset($_POST['email_login']) && isset($_POST['password_login'])) {
         'password' => $password);
     $user->login_with_session($logindata);
 }
+
+if (isset($_POST['btnsavechanges'])) {
+    $personalinfo = array(
+        'name' => $_POST['name'],
+        'email' => $_POST['email'],
+        'phone' => $_POST['mobile']);
+
+    $memberinfo = array(
+        'fname' => $_POST['fname'],
+        'femail' => $_POST['femail'],
+        'fphone' => $_POST['fphone'],
+        'sname' => $_POST['sname'],
+        'semail' => $_POST['semail'],
+        'sphone' => $_POST['sphone'],
+        'tname' => $_POST['tname'],
+        'temail' => $_POST['temail'],
+        'tphone' => $_POST['tphone'],
+        'frname' => $_POST['frname'],
+        'fremail' => $_POST['fremail'],
+        'frphone' => $_POST['frphone']);
+    $user = new Users;
+    $user->update_member_info($memberinfo);
+    $user->update_personal_info($personalinfo);
+}
+
+if (isset($_POST['repassword'])) { //checking of password equality-pwd reset
+    $newpassword = $_POST['repassword'];
+    $user = new Users;
+    $user->update_password($newpassword);
+}
+if (isset($_POST['oldpassword'])) {// checking whether pwd exist in db-pwd reset
+    $oldpassword = $_POST['oldpassword'];
+    $user = new Users;
+    $user->checkoldpassword($oldpassword);
+}

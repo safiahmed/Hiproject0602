@@ -1,12 +1,13 @@
+<?php include_once './assets/auth.php'; ?>
 <style>
-    .order-details{ width: 71%;}
+    .order-details{ width: 100%;}
     .lastUnit{overflow:hidden;_overflow:visible;_zoom:1; }
     .lastUnit{float:none;_position:relative;_left:-3px;_margin-right:-3px;width:auto}
     .padding5{padding:5px}
     .summary-section {border: solid 1px #ccc;-moz-box-shadow: 0 -2px 5px -1px #CCC;-webkit-box-shadow: 0 -2px 5px -1px #CCC;box-shadow: 0 -2px 5px -1px #CCC;}
     .line, .lastUnit {overflow: hidden;_overflow: visible;_zoom: 1;}
     .summary-section .unit, .summary-section .lastUnit {padding: 10px 0;}
-    .size3of5 {width: 60%;}
+    .size3of5 {width: 35%;}
     .unit {float: left;_zoom: 1;}
     .summary-section .unit .summary-inner {border-right: dotted 1px #ccc;min-height: 180px;height: auto!important;}
     .summary-section .summary-inner {padding: 0 13px;}
@@ -31,50 +32,47 @@
     .order-row tbody .order-details-row:hover{list-style: none;}
     .order-row tbody tr{cursor: pointer;}
 </style>
-
-<table class="table table-striped table-bordered table-hover order-row">
-    <thead>
-        <tr>
-            <th>Order no</th>
-            <th>Date</th>
-            <th>Product Name</th>
-            <th>Status</th>
+<?php
+include './assets/my-controller.php';
+$dash = new Users();
+$order = $dash->view_my_orders();
+$o_size = sizeof($order);
+//print_r($order);
+?>
+<?php if (!empty($o_size)) { ?>
+    <table class="table table-striped table-bordered table-hover order-row" id="tab1">
+        <thead>
+            <tr>
+                <th>Order no</th>
+                <th>Date</th>
+                <th>Product Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($order as $data) { ?>
+                <tr  class="view1">
+                    <td><?php echo $data['order_no']; ?>
+                        <input type="hidden" id="<?php echo $data['ord_details_id_pk']; ?>"  value="<?php echo $data['ord_details_id_pk']; ?>"/></td>
+                    <td><?php echo $data['order_date']; ?></td>
+                    <td><?php echo $data['prod_name']; ?></td>
+                    <td><color style="color:green;"><?php
+                if ($data['order_status'] == 1) {
+                    echo 'Delivered';
+                } else {
+                    echo 'Pending';
+                }
+                ?></color></td>
         </tr>
-    </thead>
-    <tbody>
-        <tr  class="view1">
-            <td>1896545</td>
-            <td>02/12/12</td>
-            <td>Mobile Computing Billing</td>
-            <td><color style="color:green;">Delivered</color></td>
-</tr>
-<tr>
-    <td  class="table-view" id="details123243"><strong>02/12/12</strong>
-    </td>
-</tr>
-<tr>
-    <td  class="table-view" id="details344354" style=""><strong>sgfnn</strong>
-    </td>
-</tr>
-<tr>
-    <td>11354654</td>
-    <td>22/12/12</td>
-    <td>Iprob an Android Application</td>
-    <td><color style="color:green;">Delivered</color></td>
-</tr>
+    <?php }
+    ?>
+    </tbody>
+    </table>
+<?php
+} else {
+    echo "Orders Empty";
+}
+?>
+<hr>
 
-<tr>
-    <td>3534134567</td>
-    <td>02/01/12</td>
-    <td>Data Variation in Transaction</td>
-    <td><color style="color:green;">Delivered</color></td>
-</tr>
-<tr>
-    <td>3534134567</td>
-    <td>02/01/12</td>
-    <td>Data Variation in Transaction</td>
-    <td><color style="color:green;">Delivered</color></td>
-</tr>
-</tbody>
-</table> 
 <div id="order-row"></div>
