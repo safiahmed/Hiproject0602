@@ -1,9 +1,9 @@
 
 <?php
-require_once './assets/my-controller.php';
-$product = new Users();
-$data = array();
-$product_details=$product->index_productcategory_name($cat_id_index);
+//require_once './assets/my-controller.php';
+//$product = new Users();
+//$data = array();
+//$product_details=$product->index_productcategory_name($cat_id_index);
 ?>
 
 

@@ -828,4 +828,64 @@ class Users {
     /*     * **************************************************************************** */
     /*     * **********************Blessy  Code ends here******************************* */
     /*     * **************************************************************************** */
+    
+    
+    
+    function index_productcategory_sortname($cat_id_index) {
+        $register = $this->xml_select->categorypage->selectproductbyname;
+       // print_r($register);
+        if ($stmt = $this->mysqli->prepare($register)) {
+            $stmt->bind_param("s", $cat_id_index);
+            if (!$stmt->execute()) {
+                die('stmt error: ' . mysqli_stmt_error($stmt));
+            }
+          
+            $res = $stmt->get_result();
+            while ($row = $res->fetch_assoc()) {
+                $result[] = $row;
+            }
+        }
+        $stmt->close();
+        return $result;
+    }
+     
+    function index_productcategory_sortprice($cat_id_index) {
+        $register = $this->xml_select->categorypage->selectproductbyprice;
+        //print_r($register);
+        if ($stmt = $this->mysqli->prepare($register)) {
+            $stmt->bind_param("s", $cat_id_index);
+            if (!$stmt->execute()) {
+                die('stmt error: ' . mysqli_stmt_error($stmt));
+            }
+          
+            $res = $stmt->get_result();
+            while ($row = $res->fetch_assoc()) {
+                $result[] = $row;
+            }
+        }
+        $stmt->close();
+        return $result;
+        
+ }
+ 
+ 
+      
+    function index_productcategory_price($cat_id_index,$min,$max) {
+        $register = $this->xml_select->categorypage->selectproductbyrange;
+        //print_r($register);
+        if ($stmt = $this->mysqli->prepare($register)) {
+            $stmt->bind_param("sss", $cat_id_index,$min,$max);
+            if (!$stmt->execute()) {
+                die('stmt error: ' . mysqli_stmt_error($stmt));
+            }
+          
+            $res = $stmt->get_result();
+            while ($row = $res->fetch_assoc()) {
+                $result[] = $row;
+            }
+        }
+        $stmt->close();
+        return $result;
+        
+ }
 }

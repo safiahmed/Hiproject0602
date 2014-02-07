@@ -1,14 +1,40 @@
 <?php
 include_once './assets/auth.php';
+require_once './assets/my-controller.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
-if(isset($_REQUEST['id'])){
+$product = new Users();
+$data = array();
+if(isset($_REQUEST['id']) && isset($_REQUEST['sortn'])){
+echo"category name";
 $cat_id_index = $_REQUEST['id'];
+$product_details=$product->index_productcategory_sortname($cat_id_index);
+//print_r($product_details);
+
+}
+elseif (isset($_REQUEST['id']) && isset($_REQUEST['sortp'])) {
+echo"category price";
+$cat_id_index = $_REQUEST['id'];
+$product_details=$product->index_productcategory_sortprice($cat_id_index);
+}
+elseif (isset($_REQUEST['price'])){
+   $explo=explode(",", $_REQUEST['price']);
+    $min = $explo[0];
+    $max = $explo[1];
+    $cat_id_index = 1;//this has to change when u change category id in database
+  $product_details=$product->index_productcategory_price($cat_id_index,$min,$max);
+ // print_r($product_details);
+  //exit();
+}
+elseif(isset($_REQUEST['id'])){
+$cat_id_index = $_REQUEST['id'];
+$product_details=$product->index_productcategory_name($cat_id_index);
 }else{
     $cat_id_index = 1;//this has to change when u change category id in database
+$product_details=$product->index_productcategory_name($cat_id_index);
 }
-echo $_REQUEST['price'];
 ?>
 <?php
 require_once './assets/my-controller.php';
@@ -92,8 +118,8 @@ $pro_detail1 = $product->index_subcategory_name($cat_id_index);
                             <div id="view-as-product">
                                 <p class="view-mode">
                                     <label>Sort By:-</label>
-                                    <a href="#">Name </a>
-                                    <a href="#" title="List" class="list1">|| Price</a>&nbsp;
+                                    <a href="category-view.php?id=<?php echo $cat_id_index; ?> && sortn=name">Name </a>
+                                    <a href="category-view.php?id=<?php echo $cat_id_index; ?> && sortp=price" title="List" class="list1">|| Price</a>&nbsp;
                                 </p>    
                             </div>
                             <div id="grid-list-view">

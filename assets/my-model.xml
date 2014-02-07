@@ -27,6 +27,9 @@
         <subcategory_id>select * from tbl_category where cat_id_pk=</subcategory_id><!--changed-->
         <subcategoryname>select * from tbl_subcategory where cat_id_fk=</subcategoryname><!--changed-->
         <selectproductofcategory>select * from tbl_product where cat_id_fk=</selectproductofcategory><!--changed-->
+        <selectproductbyname>select * from tbl_product where cat_id_fk=? order by prod_name ASC</selectproductbyname>
+        <selectproductbyprice>select * from tbl_product where cat_id_fk=? order by prod_org_price ASC</selectproductbyprice>
+        <selectproductbyrange>select * from tbl_product where cat_id_fk=? and  prod_org_price between ? and ?  </selectproductbyrange>
     </categorypage>
     <accountinformation>
         <memberdetails> select * from tbl_register where email=? and status=1; </memberdetails>
