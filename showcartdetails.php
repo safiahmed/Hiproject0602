@@ -1,4 +1,3 @@
- 
 <div id="order_review">
     <h2>Order Review</h2>
 </div>
@@ -22,11 +21,13 @@
                                             </thead>
 
                                             <tbody>
-                                                <?php 
+                                                <?php //print_r($successdata);
                                              if(!empty($successdata)){
-                                             foreach ($successdata as $details){?>
+                                             foreach ($successdata as $details){
+                                                 ?>
                                                 <tr class="first last odd">
-                                                    <td><?php echo $details['prod_thumbimage']; ?></td>
+                                                    <td>
+                                                        <img src="<?php echo $details['prod_thumbimage']; ?>" width="150" height="100" /></td>
                                                     <td>
                                                         <h2 class="product-name">
                                                             <p><?php echo $details['prod_name'];?></p>
@@ -39,7 +40,7 @@
 <a href="#" title="Edit item parameters">Edit</a>
 </td>-->
                                                     <td class="a-right">
-                   <?php echo $details['prod_org_price'];?>
+                   <?php echo $details['unit_price'];?>
                                                           </td>
                                                     <td class="a-center ">
                                                         <select id="pdtqty">

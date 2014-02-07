@@ -63,7 +63,7 @@
     <proceedpayment>
         <shippingaddress>insert into tbl_shippingaddress(ship_company,ship_tel,ship_fax,ship_streetaddress,ship_city,ship_state,ship_country,ship_zip,reg_id_fk) values (?,?,?,?,?,?,?,?,?);</shippingaddress>
         <shippingdetails>select name,email,mobile from tbl_register where reg_id=</shippingdetails>
-        <shippingaddressdetails> select ship_streetaddress from tbl_shippingaddress where reg_id_fk=</shippingaddressdetails>
+        <shippingaddressdetails> select * from tbl_shippingaddress where reg_id_fk=</shippingaddressdetails>
     </proceedpayment>
     
    

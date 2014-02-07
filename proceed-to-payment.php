@@ -1,6 +1,7 @@
 <?php
 require_once './assets/auth.php';
 require_once './assets/my-controller.php';
+include './meta.php';
 
 echo $cart_session_id = $_SESSION['cart_session_id'];
 echo '<br>';
@@ -121,8 +122,8 @@ if (isset($_SESSION['reg_id'])) {
 
                 <script>
                     $(document).ready(function() {
-                        $('body').on('click', '#shopping-cart-table tbody tr', function() {
-                            var qty = $('#pdtqty').val();
+                        $('body').on('change', '#shopping-cart-table tbody tr td select', function() {
+                            var qty = $(this).val();
                             var price = $('#shopping-cart-table tbody tr').children('td:nth-child(3)').text();
                             var amount = qty * price;
                             $('#shopping-cart-table tbody tr').children('td:nth-child(5)').text(amount);
@@ -230,44 +231,7 @@ if (isset($_SESSION['reg_id'])) {
 
                     <?php include'feedback.php'; ?>
                     <div id="wrapper">
-                        <div id="header_image">
-                            <div id="container">
-                                <div id="Header_wrapper"> 
-                                    <div class="hanechitra2">
-                                    </div>
-
-
-                                    <div class="hanechitra3">
-                                        <div id="innerlogo">
-                                            <ul>        
-                                                <li><a href="#"><img src="images/flike.png"></a></li>
-
-                                                <li><a href="#"><img src="images/inshare.png"></a></li>
-                                            </ul>
-
-
-                                        </div>
-                                    </div>
-
-                                    <?php include 'main-login.php'; ?>
-
-
-                                    <div id="menu">
-                                        <ul id="main">        
-                                            <li  id="home_leftline"><a href="index.php">Home</a></li>
-                                            <li><a href="ourexpertisee.php">Our Expertise</a></li>
-                                            <li ><a href="project-kits.php">Project Kits</a></li>
-                                            <li><a href="LearningMaterial.php">Learning Material</a></li>
-
-                                            <li><a href="dealers.php">Dealers Network</a></li>
-                                            <li><a href="">Support</a></li>
-                                            <li><a href="Contactus.php">Contact </a></li>
-                                            <li><input type="search" placeholder="Enter Search terms"></li>
-                                        </ul>
-                                    </div>
-                                </div>	
-                            </div>
-                        </div>
+                        <?php include 'header.php'; ?>
                         <div id="page">
 
                             <div class="col2-left-layout1">
@@ -340,7 +304,8 @@ if (isset($_SESSION['reg_id'])) {
                                         }
                                         ?> </br></br></br></br>
                                         <div id="shipping-tab2" >
-                                            <?php if (isset($_SESSION['reg_id']) && $shippindaddress != 0) { ?>
+                                            <?php
+                                            if (isset($_SESSION['reg_id']) && $shippindaddress != 0) { ?>
                                                 <h3 style="float:left;padding-top: 10px;">Address:</h3>
                                                 <div id="recent">
 
@@ -352,7 +317,7 @@ if (isset($_SESSION['reg_id'])) {
                                                         Ph: <strong><?php echo $telephone; ?> </strong>
                                                     </address>
 
-                                                    <a href="#" class="shiptoaddress"><img src="images/ship to this address.png"/></a>
+                                                    <a href="javascript:void(0);" class="shiptoaddress"><img src="images/ship to this address.png"/></a>
 
                                                 </div>
                                             <?php } ?>

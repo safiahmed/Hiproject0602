@@ -297,6 +297,7 @@ if (isset($_POST['newshipmentdata'])) {
     $user = new Users;
     $user->insert_shipping_values($name, $tel, $mobile, $address, $city, $state, $country, $pincode, $reg);
     $successdata = $user->addingcart_details($sessval);
+//    print_r($successdata);
     include '../showcartdetails.php';
 }
 

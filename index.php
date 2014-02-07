@@ -84,8 +84,7 @@ color: #555;
                             $(".gobutton img").on('click', function() {
                                 var val1 = $("#amount1").val();
                                 var val2 = $("#amount2").val();
-                                alert(val1 + val2);
-                                $.post( "category-view.php", { name: "John", time: "2pm" } );
+                                window.location.href = "category-view.php?price="+val1+","+val2
                             });
 
                         });

@@ -30,7 +30,7 @@ if (!isset($_SESSION['reg_id'])) {
     <div class="hanechitra4">
         <div id="upperlogo">
             <ul>    
-                <li><a href="#"><img src="images/mycart (1).png" style="margin-top:-3px"></a></li>
+                <li><a href="account-information.php"><img src="images/mycart (1).png" style="margin-top:-3px"></a></li>
             </ul>
         </div>
     </div>

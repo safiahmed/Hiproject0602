@@ -2,13 +2,13 @@
 
 class Users {
 
-//    private
-//            $database, $connection, $mysqli, $xml,
-//            $host = "localhost", $name = "magnum_hiprojects", $user = "root", $pass = "safipassword";
-
     private
-            $database, $connection, $mysqli, $xml_select, $xml_insert,
-            $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
+            $database, $connection, $mysqli, $xml,
+            $host = "localhost", $name = "magnum_hiprojects", $user = "root", $pass = "";
+
+//    private
+//            $database, $connection, $mysqli, $xml_select, $xml_insert,
+//            $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
 //changed
     public function __construct() {
 //        include_once 'auth.php';
@@ -449,7 +449,7 @@ class Users {
     function shippingaddress_details($uid) {
         $query = $this->xml_select->proceedpayment->shippingaddressdetails;
         $values = "$uid";
-        $squery = $query . "'" . $values . "'";
+        $squery = $query . "'" . $values . "'"."ORDER BY shipadd_id_pk DESC LIMIT 0,1";
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -802,7 +802,7 @@ class Users {
     function view_my_orders() {
         $order = $this->xml_select->Dashboard->vieworder;
         $id = $_SESSION['reg_id'];
-        $squery = $order . $id;
+        echo $squery = $order . $id;
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -812,7 +812,7 @@ class Users {
         }
     }
 
-    function view_ordersummary($orderid) {
+    function view_ordersummary($orderid) {//is to track order details
         $summary = $this->xml_select->Dashboard->ordersummary;
         $value = $orderid;
         $squery = $summary.$value;

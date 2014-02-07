@@ -4,10 +4,10 @@ require_once 'assets/auth.php';
 $product = new Users();
 $data = array();
 var_dump($_SESSION);
-$sessval=$_SESSION['cart_session_id'];
-$addtocart=$product->addingcart_details($sessval);
+$sessval = $_SESSION['cart_session_id'];
+$addtocart = $product->addingcart_details($sessval);
 echo $_POST['price'];
-if(isset($_POST['price']) && isset($_POST['prod_val'])){
+if (isset($_POST['price']) && isset($_POST['prod_val'])) {
     echo $_POST['price'];
     echo $_POST['prod_val'];
 }
@@ -88,9 +88,9 @@ echo $_SESSION['cart_session_id'];
 
                                         </td>
 
-            <!--<td class="a-center">
-                    <a href="#" title="Edit item parameters">Edit</a>
-                </td>-->
+                <!--<td class="a-center">
+                        <a href="#" title="Edit item parameters">Edit</a>
+                    </td>-->
                                         <td class="a-right">
                                             <span class="cart-price">
 
@@ -140,7 +140,18 @@ echo $_SESSION['cart_session_id'];
 
                                 </tr>
                             </table></div>
-                        <div id="checkout-cart" class="cart-payment-outer" style="background-color:#fff"><div class="payment-button-outer"><div class="proceed-button"><span><a href="Proceed-to-payment.php">Proceed to Payment</a></span></div><div class="continue-button" onclick=""><span><a href="category-view.php">Add more item(s) to cart</a></span></div></div></div>
+                        <div id="checkout-cart" class="cart-payment-outer" style="background-color:#fff">
+                            <div class="payment-button-outer"><div class="proceed-button">
+                                    <span>
+                                        <a href="Proceed-to-payment.php">Proceed to Payment</a>
+                                    </span>
+                                </div>
+                                <div class="continue-button" onclick="">
+                                    <span>
+                                        <a href="category-view.php">Add more item(s) to cart</a>
+                                    </span></div>
+                            </div>
+                        </div>
                     </fieldset>
                 </form>
                 <div class="cart-collaterals">
