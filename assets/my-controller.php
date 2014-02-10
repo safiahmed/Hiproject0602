@@ -832,60 +832,57 @@ class Users {
     
     
     function index_productcategory_sortname($cat_id_index) {
-        $register = $this->xml_select->categorypage->selectproductbyname;
-       // print_r($register);
-        if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("s", $cat_id_index);
-            if (!$stmt->execute()) {
-                die('stmt error: ' . mysqli_stmt_error($stmt));
-            }
-          
-            $res = $stmt->get_result();
-            while ($row = $res->fetch_assoc()) {
+        $query = $this->xml_select->categorypage->selectproductbyname;
+        $values = "$cat_id_index";
+        $squery = $query . "'" . $values . "'"."order by prod_name ASC";
+       // print_r($squery);
+       
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
                 $result[] = $row;
             }
+            return $result;
         }
-        $stmt->close();
-        return $result;
+       // echo 0;
     }
      
     function index_productcategory_sortprice($cat_id_index) {
-        $register = $this->xml_select->categorypage->selectproductbyprice;
+        $query = $this->xml_select->categorypage->selectproductbyprice;
         //print_r($register);
-        if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("s", $cat_id_index);
-            if (!$stmt->execute()) {
-                die('stmt error: ' . mysqli_stmt_error($stmt));
-            }
-          
-            $res = $stmt->get_result();
-            while ($row = $res->fetch_assoc()) {
+        $values = "$cat_id_index";
+        $squery = $query . "'" . $values . "'"."order by prod_org_price ASC";
+      // print_r($squery);
+       //exit();
+       
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
                 $result[] = $row;
             }
+            return $result;
         }
-        $stmt->close();
-        return $result;
-        
  }
  
  
       
     function index_productcategory_price($cat_id_index,$min,$max) {
-        $register = $this->xml_select->categorypage->selectproductbyrange;
+       $query = $this->xml_select->categorypage->selectproductbyrange;
         //print_r($register);
-        if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("sss", $cat_id_index,$min,$max);
-            if (!$stmt->execute()) {
-                die('stmt error: ' . mysqli_stmt_error($stmt));
-            }
-          
-            $res = $stmt->get_result();
-            while ($row = $res->fetch_assoc()) {
+        $values = "$cat_id_index";
+        $values1="$min";
+        $values2="$max";
+        $squery = $query . "'" . $values . "'"."and  prod_org_price between"." ".$values1." "."and"." ". $values2;
+      // print_r($squery);
+       //exit();
+       
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
                 $result[] = $row;
             }
+            return $result;
         }
-        $stmt->close();
-        return $result;
         
  }
 }
