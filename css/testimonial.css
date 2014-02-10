@@ -222,7 +222,7 @@ border-right:1px solid #dedfdf;
 	
 
 }
-#menu  li+li+li+li+li+li+li+li
+#menu  li+li+li+li+li+li+li
 {
 
 	border-right:0px solid #bcbbbb;
@@ -741,7 +741,7 @@ float: left;
 width: 723px;
 margin-top: 16px;
 }
-}
+
 .toolbar .pager {
 float: left;
 width: 295px;
@@ -1147,17 +1147,18 @@ height: 129px;
 .testi_page
 {
 width: 960px;
-height: 640px;
 background-color: #f0f0f0;
 margin-top: 15px;
 margin-left: 0px;
+padding-top: 1px;
+padding-bottom: 22px;
 }
 .testimonial_1
 {
 width: 911px;
 height: 100px;
 background-color: white;
-margin-top: -617px;
+margin-top: 20px;
 margin-left: 22px;
 font-size:14px;
 color:grey;
@@ -1183,7 +1184,7 @@ padding-right: 6px;
 width: 911px;
 height: 100px;
 background-color: white;
-margin-top: 21px;
+margin-top: 20px;
 margin-left: 22px;
 font-size:14px;
 color:grey;

@@ -508,7 +508,8 @@ class Users {
             while ($row = $query->fetch_assoc()) {
                 $result[] = $row;
             }
-            print_r($result);
+            //print_r($result);
+               return $result;
         }
         return 0;
     }
