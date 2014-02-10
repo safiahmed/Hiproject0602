@@ -247,7 +247,7 @@ if (isset($_POST['p_val']) && isset($_POST['s_val']) && isset($_POST['price'])) 
     $val2 = $_POST['s_val'];
     $val3 = $_POST['price'];
     $user = new Users;
-    $user->addshoppingcart_details($val1, $val2, $val3);
+    $user->addshoppingcart_details($val1, $val2, $val3,$val3);
     $addtocart = $user->addingcart_details($val2);
     include '../addtocart1.php';
 }
@@ -355,4 +355,8 @@ if (isset($_POST['oldpassword'])) {// checking whether pwd exist in db-pwd reset
     $oldpassword = $_POST['oldpassword'];
     $user = new Users;
     $user->checkoldpassword($oldpassword);
+}
+
+if(isset($_POST['ajax_price'])){
+    echo $price = $_POST['ajax_price'];
 }

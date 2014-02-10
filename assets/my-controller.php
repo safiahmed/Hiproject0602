@@ -575,11 +575,10 @@ class Users {
     function addshoppingcart_details($val1, $val2, $val3) {
         $register = $this->xml_insert->productdetails->insertshoppingcart;
         if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("sss", $val2, $val1, $val3);
+            $stmt->bind_param("ssss", $val2, $val1, $val3,$val3);
             if (!mysqli_execute($stmt)) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
-            // echo 1;
         }
         $stmt->close();
     }

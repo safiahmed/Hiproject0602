@@ -21,18 +21,43 @@ echo $_SESSION['cart_session_id'];
             $.post("assets/controller-links.php", {removecart_val: cart_id_pk}, function(data) {
                 if (data == 1) {
                     delrow.remove();
+                    var sub_total = add();
                     return false;
                 }
             });
         });
-        
-        $(".sel_prod_qty").on("change",function(){
-            var t = $(this);
-            var aa = t.parent().prev().attr("class");
-            var u_val = $("."+aa).children().find(".WebRupee").text();
-            alert(u_val);
+
+        $("body").on("change", ".sel_prod_qty", function() {
+            var u_val = $(this).parent().prev().children().find("input").val();
+            var pval = u_val * $(this).val();
+            $(this).parent().next().children().find(".prod_val").text(pval);
+            var sub_total = add();
+
+            return false;
+
+            var action = "assets/controller-links.php";
+            $.ajax({
+                url: action,
+                type: "POST",
+                data: {ajax_price: u_val},
+                beforeSend: function() {
+                    $(".ajax_remove").html("<img src='images/ajax_remove.gif' />");
+                },
+                success: function(response) {
+                    alert(response);
+                    $(".ajax_remove").html("");
+                }
+            });
         });
     });
+    function add() {
+        var total_val = 0;
+        $("a-right .prod_val input").each(function() {
+            total_val += +$(this).val();
+        });
+        $(".sub_total").text(total_val);
+        return total_val;
+    }
 </script>
 
 <a href="#close" title="Close" class="close1">X</a>
@@ -79,9 +104,9 @@ echo $_SESSION['cart_session_id'];
 
                                         </td>
                                         <td class="a-right">
-                                            <span class="cart-price">asd
+                                            <span class="cart-price">
                                                 <span class="price">
-                                                    <span class="WebRupee"> Rs.</span><span><?php echo $prod['unit_price']; ?></span>
+                                                    <span class="WebRupee aaa"> Rs.</span><span><?php echo $prod['unit_price']; ?></span>
                                                     <input type="hidden" class="unit_price" value="<?php echo $prod['unit_price']; ?>" />
                                                 </span>            
                                             </span>
@@ -93,11 +118,14 @@ echo $_SESSION['cart_session_id'];
                                                 <option>3</option>
                                                 <option>4</option>
                                             </select>
+                                            <div class="ajax_remove"></div>
                                         </td>
                                         <td class="a-right last">
                                             <span class="cart-price">
-
-                                                <span class="price"><span class="WebRupee"> Rs. </span><?php echo $prod['unit_price']; ?></span>            
+                                                <span class="price">
+                                                    <span class="WebRupee"> Rs. </span>
+                                                    <span class="prod_val"><?php echo $prod['unit_price']; ?></span>
+                                                </span>
                                             </span>
                                         </td>
                                     </tr>
@@ -105,16 +133,33 @@ echo $_SESSION['cart_session_id'];
                             </tbody>
                         </table>
 
-                        <div class="cart-total-outer"><div class="cart-total-summary">Cart Summary (<span class="cart-text">1 Item(s)</span>)<br><span class="promo-text">(You can use your Promo Codes during Payment)</span></div><div class="cart-total-payment-text" align="right"><span class="fnt14">Shipping Charges: <span class="total-text">Rs 0</span></span><br>Payable Amount: <span class="total-text">Rs 7974</span></div>
+                        <div class="cart-total-outer">
+                            <div class="cart-total-summary">Cart Summary (<span class="cart-text">1 Item(s)</span>)<br>
+                                <span class="promo-text">(You can use your Promo Codes during Payment)</span>
+                            </div>
+                            <div class="cart-total-payment-text" align="right">
+                                <span class="fnt14">Sub Total: 
+                                    <span class="sub_total_price"></span></span><br>
+                                <span class="fnt14">Shipping Charges: 
+                                    <span class="total-text">Rs 0</span>
+                                </span><br>Payable Amount: 
+                                <span class="total-text">Rs 7974</span>
+                            </div>
                             <table style="margin-top:6px;padding-left: 8px;" width="300" height="50" >
                                 <tr class="first last">
                                     <td colspan="50" width="">
                                         <table id="shop">
-                                            <tr><td style="padding-right: 29px;" >Delivery country</td><td><select><option selected="selected">India</option>
-                                                        <option>Srilanka</option>
-                                                        <option>canada</option>
+                                            <tr>
+                                                <td style="padding-right: 29px;" >Delivery country</td>
+                                                <td>
+                                                    <select>
+                                                        <option selected="selected" value="0">India</option>
+                                                        <option>Sri Lanka</option>
+                                                        <option>China</option>
                                                         <option>Pakistan</option>
-                                                    </select></tr>
+                                                    </select>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>
@@ -149,5 +194,36 @@ echo $_SESSION['cart_session_id'];
         </div>
     </div>
 </div>
+<!--$("body").on("change", ".sel_prod_qty", function() {
+            var u_val = $(this).parent().prev().children().find("input").val();
+            var pval = u_val * $(this).val();
+            $(this).parent().next().children().find(".prod_val").text(pval);
+            var sub_total = add();
+
+            return false;
+
+            var action = "assets/controller-links.php";
+            $.ajax({
+                url: action,
+                type: "POST",
+                data: {ajax_price: u_val},
+                beforeSend: function() {
+                    $(".ajax_remove").html("<img src='images/ajax_remove.gif' />");
+                },
+                success: function(response) {
+                    alert(response);
+                    $(".ajax_remove").html("");
+                }
+            });
+        });
+    });
+    function add() {
+        var total_val = 0;
+        $("a-right .prod_val input").each(function() {
+            total_val += +$(this).val();
+        });
+        $(".sub_total").text(total_val);
+        return total_val;
+    }-->
 
 

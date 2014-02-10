@@ -47,7 +47,7 @@
         <selectProductKitContentgp>select gp,prod_id_fk from tbl_productkit where prod_id_fk=</selectProductKitContentgp><!--changed-->
         <selectProductKitContentdp>select dp,prod_id_fk from tbl_productkit where prod_id_fk=</selectProductKitContentdp><!--changed-->
         <selectpeoplebought> SELECT prod_name, prod_thumbimage FROM  `tbl_orderdetails` , tbl_order, tbl_product WHERE order_id_pk = ord_id_fk AND prod_id_pk = prod_id_fk and  prod_id_fk!=</selectpeoplebought>
-        <insertshoppingcart>insert into tbl_cartdetails(session_id,prod_id_fk,unit_price) values (?,?,?); </insertshoppingcart><!--changed-->
+        <insertshoppingcart>insert into tbl_cartdetails(session_id,prod_id_fk,unit_price,prod_price) values (?,?,?,?); </insertshoppingcart><!--changed-->
     </productdetails>
     <subcategorypage>
         <subcatiddetails>select * from tbl_subcategory where subcat_random=</subcatiddetails>
