@@ -15,7 +15,6 @@ echo $_SESSION['cart_session_id'];
 ?>	
 <script type="text/javascript">
     $(document).ready(function() {
-
         $(".remove-click").click(function() {
             var cart_id_pk = $(this).attr('id');
             var delrow = $(this).parent().closest("tr");
@@ -25,40 +24,36 @@ echo $_SESSION['cart_session_id'];
                     return false;
                 }
             });
-
-
         });
-
+        
+        $(".sel_prod_qty").on("change",function(){
+            var t = $(this);
+            var aa = t.parent().prev().attr("class");
+            var u_val = $("."+aa).children().find(".WebRupee").text();
+            alert(u_val);
+        });
     });
 </script>
 
 <a href="#close" title="Close" class="close1">X</a>
-
 <div class="main-container1 col1-layout1">
     <div class="main1">
         <div class="col-main1">
             <div class="cart1">
-
                 <div class="page-title1 title-buttons1">
                     <h1>Shopping Cart</h1> 
                 </div>
-
-
                 <form action="#" method="post">
                     <fieldset>
                         <table id="shopping-cart-table1" class="data-table cart-table1">
                             <colgroup><col width="1">
                                 <col width="1">
-                                <col>
-
                                 <col width="1">
                                 <col width="1">
                                 <col width="1">
                                 <col width="1">
-
                             </colgroup><thead>
                                 <tr class="newheader1">
-
                                     <th rowspan="1" width="100">Item Description</th>
                                     <th rowspan="1" width="100"><span class="nobr">Product Name</span></th>
 
@@ -66,13 +61,9 @@ echo $_SESSION['cart_session_id'];
                                     <th class="a-center" colspan="1" width="90"><span class="nobr">Unit Price</span></th>
                                     <th rowspan="1" class="a-center">Qty</th>
                                     <th class="a-center last" colspan="1">Subtotal</th>
-
                                 </tr>
-
                             </thead>
-
                             <tbody>
-
                                 <?php
                                 foreach ($addtocart as $prod) {
                                     $cart_id_pk = $prod['cart_id_pk'];
@@ -87,20 +78,21 @@ echo $_SESSION['cart_session_id'];
                                             </h2>
 
                                         </td>
-
-                <!--<td class="a-center">
-                        <a href="#" title="Edit item parameters">Edit</a>
-                    </td>-->
                                         <td class="a-right">
-                                            <span class="cart-price">
-
-                                                <span class="price"><span class="WebRupee"> Rs.</span><?php echo $prod['unit_price']; ?></span>            
+                                            <span class="cart-price">asd
+                                                <span class="price">
+                                                    <span class="WebRupee"> Rs.</span><span><?php echo $prod['unit_price']; ?></span>
+                                                    <input type="hidden" class="unit_price" value="<?php echo $prod['unit_price']; ?>" />
+                                                </span>            
                                             </span>
-
-
                                         </td>
                                         <td class="a-center">
-                                            <input name="cart[14699][qty]" value="1" size="4" title="Qty" class="input-text qty" maxlength="12">
+                                            <select class="sel_prod_qty">
+                                                <option selected="selected">1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
                                         </td>
                                         <td class="a-right last">
                                             <span class="cart-price">
@@ -108,11 +100,8 @@ echo $_SESSION['cart_session_id'];
                                                 <span class="price"><span class="WebRupee"> Rs. </span><?php echo $prod['unit_price']; ?></span>            
                                             </span>
                                         </td>
-
                                     </tr>
                                 <?php } ?>
-
-
                             </tbody>
                         </table>
 
@@ -121,23 +110,13 @@ echo $_SESSION['cart_session_id'];
                                 <tr class="first last">
                                     <td colspan="50" width="">
                                         <table id="shop">
-
-
-
                                             <tr><td style="padding-right: 29px;" >Delivery country</td><td><select><option selected="selected">India</option>
                                                         <option>Srilanka</option>
                                                         <option>canada</option>
                                                         <option>Pakistan</option>
                                                     </select></tr>
-
-
-
-                                        </table></p>
-
-
+                                        </table>
                                     </td>
-
-
                                 </tr>
                             </table></div>
                         <div id="checkout-cart" class="cart-payment-outer" style="background-color:#fff">
@@ -160,20 +139,14 @@ echo $_SESSION['cart_session_id'];
                         </div>
                         <div class="col-2">
                             <form id="discount-coupon-form" action="#" method="post">
-
                             </form>
-
-
-
                             <form action="#" method="post" id="shipping-zip-form">
-
                             </form>
-
                         </div>
-                    </div></div>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 </div>
 

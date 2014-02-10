@@ -9,7 +9,7 @@ class Users {
 //    private
 //            $database, $connection, $mysqli, $xml_select, $xml_insert,
 //            $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
-//changed
+
     public function __construct() {
 //        include_once 'auth.php';
         $this->mysqli = mysqli_connect("$this->host", "$this->user", "$this->pass", "$this->name");
@@ -449,7 +449,7 @@ class Users {
     function shippingaddress_details($uid) {
         $query = $this->xml_select->proceedpayment->shippingaddressdetails;
         $values = "$uid";
-        $squery = $query . "'" . $values . "'"."ORDER BY shipadd_id_pk DESC LIMIT 0,1";
+        $squery = $query . "'" . $values . "'" . "ORDER BY shipadd_id_pk DESC LIMIT 0,1";
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -815,7 +815,7 @@ class Users {
     function view_ordersummary($orderid) {//is to track order details
         $summary = $this->xml_select->Dashboard->ordersummary;
         $value = $orderid;
-        $squery = $summary.$value;
+        $squery = $summary . $value;
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -828,18 +828,16 @@ class Users {
     /*     * **************************************************************************** */
     /*     * **********************Blessy  Code ends here******************************* */
     /*     * **************************************************************************** */
-    
-    
-    
+
     function index_productcategory_sortname($cat_id_index) {
         $register = $this->xml_select->categorypage->selectproductbyname;
-       // print_r($register);
+        // print_r($register);
         if ($stmt = $this->mysqli->prepare($register)) {
             $stmt->bind_param("s", $cat_id_index);
             if (!$stmt->execute()) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
-          
+
             $res = $stmt->get_result();
             while ($row = $res->fetch_assoc()) {
                 $result[] = $row;
@@ -848,7 +846,7 @@ class Users {
         $stmt->close();
         return $result;
     }
-     
+
     function index_productcategory_sortprice($cat_id_index) {
         $register = $this->xml_select->categorypage->selectproductbyprice;
         //print_r($register);
@@ -857,7 +855,7 @@ class Users {
             if (!$stmt->execute()) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
-          
+
             $res = $stmt->get_result();
             while ($row = $res->fetch_assoc()) {
                 $result[] = $row;
@@ -865,27 +863,24 @@ class Users {
         }
         $stmt->close();
         return $result;
-        
- }
- 
- 
-      
-    function index_productcategory_price($cat_id_index,$min,$max) {
+    }
+
+    function index_productcategory_price($cat_id_index, $min, $max) {
         $register = $this->xml_select->categorypage->selectproductbyrange;
-        //print_r($register);
+        print_r($register);
         if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("sss", $cat_id_index,$min,$max);
+            $stmt->bind_param("sss", $cat_id_index, $min, $max);
             if (!$stmt->execute()) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
-          
+
             $res = $stmt->get_result();
             while ($row = $res->fetch_assoc()) {
                 $result[] = $row;
             }
+            return $result;
+            $stmt->close();
         }
-        $stmt->close();
-        return $result;
-        
- }
+    }
+
 }

@@ -4,7 +4,7 @@ class Users {
 
     private
             $database, $connection, $mysqli, $xml,
-            $host = "localhost", $name = "magnum_hiprojects", $user = "root", $pass = "safipassword";
+            $host = "localhost", $name = "magnum_hiprojects", $user = "root", $pass = "";
 
 //    private
 //            $database, $connection, $mysqli, $xml_select, $xml_insert,
@@ -118,10 +118,9 @@ class Users {
             if (!mysqli_execute($stmt)) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
+            return $this->mysqli->insert_id;
         }
         $stmt->close();
-        $_SESSION['email'] = $email;
-        header("Location: ../member-information.php");
     }
 
     function insert_members_values($reg, $email, $name1, $email1, $mobile1, $name2, $email2, $mobile2, $name3, $email3, $mobile3, $name4, $email4, $mobile4) {
@@ -142,9 +141,24 @@ class Users {
             if (!$stmt->execute()) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
+            $row = $this->mysqli->affected_rows;
+            $stmt->close();
+            header("Location: ../account-information.php");
         }
-        $stmt->close();
-        header("Location: ../account-information.php");
+    }
+
+    function check_email_exist($aval) {
+        $query = "";
+        $values = "";
+        $query .= $this->xml_insert->IndexPage->testemail;
+        $values .= "'" . $aval . "'";
+        $squery = $query . $values;
+        $result = $this->mysqli->query($squery);
+        if ($result->num_rows > 0) {
+            echo 0;
+        } else {
+            echo 1;
+        }
     }
 
     function account_info_details($member_email) {
@@ -418,10 +432,8 @@ class Users {
     /*     * **********************proceed to payment  Code starts here******************************* */
     /*     * **************************************************************************** */
 
-     function shipping_details($uid) {
-        $query = $this->xml->proceedpayment->shippingdetails;
-        //print_r($query);
-
+    function shipping_details($uid) {
+        $query = $this->xml_select->proceedpayment->shippingdetails;
         $values = "$uid";
         $squery = $query . "'" . $values . "'";
         $query = $this->mysqli->query($squery);
@@ -434,13 +446,10 @@ class Users {
         return 0;
     }
 
-
-   function shippingaddress_details($uid) {
-        $query = $this->xml->proceedpayment->shippingaddressdetails;
-        //print_r($query);
-
+    function shippingaddress_details($uid) {
+        $query = $this->xml_select->proceedpayment->shippingaddressdetails;
         $values = "$uid";
-        $squery = $query . "'" . $values . "'";
+        $squery = $query . "'" . $values . "'" . "ORDER BY shipadd_id_pk DESC LIMIT 0,1";
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -448,11 +457,11 @@ class Users {
             }
             return $result;
         }
-        return 0;
+        echo 0;
     }
 
-     function payment_session_login($paymentlogin) {
-        $login = $this->xml->Login->authenticate;
+    function payment_session_login($paymentlogin) {
+        $login = $this->xml_insert->Login->authenticate;
         $result = array();
         $email = $paymentlogin['pay_email'];
         $password = $paymentlogin['pay_password'];
@@ -470,12 +479,9 @@ class Users {
                 'emailid' => $emailid
             );
         }
-        $_SESSION['reg_id'] = $result['regid'];
-        $_SESSION['email'] = $result['emailid'];
-        header('Location: ../Proceed-to-payment.php');
+        return $result;
     }
 
-    
 //    proceed to payment ends here
 
 
@@ -507,10 +513,10 @@ class Users {
         return 0;
     }
 
-   function insert_shipping_values($name, $tel, $mobile, $address, $city, $state, $country, $pincode) {
-        $register = $this->xml->proceedpayment->shippingaddress;
+    function insert_shipping_values($name, $tel, $mobile, $address, $city, $state, $country, $pincode, $reg) {
+        $register = $this->xml_insert->proceedpayment->shippingaddress;
         if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("ssssssss", $name, $tel, $mobile, $address, $city, $state, $country, $pincode);
+            $stmt->bind_param("sssssssss", $name, $tel, $mobile, $address, $city, $state, $country, $pincode, $reg);
             if (!mysqli_execute($stmt)) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
@@ -533,9 +539,9 @@ class Users {
     /*     * **********************supriya Code ends here******************************* */
     /*     * **************************************************************************** */
 
-    
 
-     /*     * **************************************************************************** */
+
+    /*     * **************************************************************************** */
     /*     * **********************people bought Code start here******************************* */
     /*     * **************************************************************************** */
 
@@ -582,18 +588,15 @@ class Users {
         $query = $this->xml_insert->projectkits->addtocart;
         $values = $sessval;
         $squery = $query . $values;
-        //echo $squery;
         $result = $this->mysqli->query($squery);
         if ($result->num_rows > 0) {
             while ($rows = $result->fetch_assoc()) {
                 $prod_cat[] = $rows;
             }
             return $prod_cat;
-            // print_r($prod_cat);
-            // exit();
             $result->close();
         }
-        return 0;
+        echo 0;
     }
 
     function removeshoppingcart_details($remove_val) {
@@ -602,10 +605,11 @@ class Users {
         $squery = $query . $values;
         if ($this->mysqli->query($squery)) {
             echo 1;
-            } else {
+        } else {
             echo 0;
         }
     }
+
     function productkit_details($data) {
         $query = $this->xml_select->projectkits->selectsinglecategory;
         //$values = $cat_id;
@@ -620,25 +624,24 @@ class Users {
         }
         return 0;
     }
-    
 
-/*     * **********************addtocart Code end here******************************* */
+    /*     * **********************addtocart Code end here******************************* */
     /*     * **************************************************************************** */
-    
+
     /*     * **********************Blessy Code starts here******************************* */
 
     function check_login($logindata) { //checking with db and login into dashboard
-        $login = $this->xml->Login->authenticate;
+        $login = $this->xml_insert->Login->authenticate;
         $result = array();
-        $email = $logindata['email'];
-        $password = $logindata['password'];
+        $email = mysqli_real_escape_string($this->mysqli, $logindata['email']);
+        $password = mysqli_real_escape_string($this->mysqli, $logindata['password']);
         if ($stmt = $this->mysqli->prepare($login)) {
             $stmt->bind_param("ss", $email, $password);
             if (!$stmt->execute()) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
         }
-        mysqli_stmt_bind_result($stmt, $count, $id);
+        mysqli_stmt_bind_result($stmt, $count, $id, $email1, $status);
 
         while (mysqli_stmt_fetch($stmt)) {
             $result = array(
@@ -655,10 +658,10 @@ class Users {
 
     //end of the function
     function login_with_session($logindata) { //setting session after login
-        $login = $this->xml->Login->authenticate;
+        $login = $this->xml_insert->Login->authenticate;
         $result = array();
-        $email = $logindata['email'];
-        $password = $logindata['password'];
+        $email = mysqli_real_escape_string($this->mysqli, $logindata['email']);
+        $password = mysqli_real_escape_string($this->mysqli, $logindata['password']);
         if ($stmt = $this->mysqli->prepare($login)) {
             $stmt->bind_param("ss", $email, $password);
             if (!$stmt->execute()) {
@@ -685,7 +688,8 @@ class Users {
 
     //end of the function
     function view_personalinfo() { // view of personal info in dashboard
-        $info = $this->xml->Dashboard->selectpersonalinfo;
+        $info = $this->xml_select->Dashboard->selectpersonalinfo;
+//        var_dump($_SESSION);
         $rid = $_SESSION['reg_id'];
         $result = array();
         if ($stmt = $this->mysqli->prepare($info)) {
@@ -693,37 +697,24 @@ class Users {
             if (!$stmt->execute()) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
+            mysqli_stmt_bind_result($stmt, $id, $name, $email, $mobile);
+            while (mysqli_stmt_fetch($stmt)) {
+                $result = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'email' => $email,
+                    'mobile' => $mobile
+                );
+            }
+            $stmt->close();
+            return $result;
         }
-        mysqli_stmt_bind_result($stmt, $id, $name, $email, $mobile);
-        while (mysqli_stmt_fetch($stmt)) {
-            $result = array(
-                'id' => $id,
-                'name' => $name,
-                'email' => $email,
-                'mobile' => $mobile
-            );
-        }
-        $stmt->close();
-        return $result;
     }
 
     // end of the function
-    function update_personal_info($personalinfo) {  //update personal info
-        $updateinfo = $this->xml->Dashboard->updatepersonalinfo;
-        $id = $_SESSION['reg_id'];
-        $result = array();
-        if ($stmt = $this->mysqli->prepare($updateinfo)) {
-            $stmt->bind_param("ssii", $personalinfo['name'], $personalinfo['email'], $personalinfo['phone'], $id);
-            if (!$stmt->execute()) {
-                die('stmt error' . mysqli_error($stmt));
-            }
-        }
-        header("Location: ../account-information.php");
-    }
 
-// end of the function
     function view_memberinfo() { // view of members in dashboard
-        $memberinfo = $this->xml->Dashboard->selectgroupmember;
+        $memberinfo = $this->xml_select->Dashboard->selectgroupmember;
         $id = $_SESSION['reg_id']; //session_id
         $result = array();
         if ($stmt = $this->mysqli->prepare($memberinfo)) {
@@ -755,10 +746,8 @@ class Users {
 
     // end of  the function
     function update_member_info($memberinfo) { // update member info in db
-        $updateinfo = $this->xml->Dashboard->updategroupmember;
+        $updateinfo = $this->xml_insert->Dashboard->updategroupmember;
         $id = $_SESSION['reg_id'];
-        print_r($memberinfo);
-        print_r($updateinfo);
         $result = array();
         if ($stmt = $this->mysqli->prepare($updateinfo)) {
             $stmt->bind_param("ssissississii", $memberinfo['fname'], $memberinfo['femail'], $memberinfo['fphone'], $memberinfo['sname'], $memberinfo['semail'], $memberinfo['sphone'], $memberinfo['tname'], $memberinfo['temail'], $memberinfo['tphone'], $memberinfo['frname'], $memberinfo['fremail'], $memberinfo['frphone'], $id);
@@ -769,86 +758,129 @@ class Users {
     }
 
 // end of the function
+    function update_personal_info($personalinfo) {  //update personal info
+        $updateinfo = $this->xml_insert->Dashboard->updatepersonalinfo;
+        $id = $_SESSION['reg_id'];
+        $result = array();
+        if ($stmt = $this->mysqli->prepare($updateinfo)) {
+            $stmt->bind_param("ssii", $personalinfo['name'], $personalinfo['email'], $personalinfo['phone'], $id);
+            if (!$stmt->execute()) {
+                die('stmt error' . mysqli_error($stmt));
+            }
+        }
+        header("Location: ../account-information.php");
+    }
+
+// end of the function
     function update_password($newpassword) { // update new password
         $id = $_SESSION['reg_id']; //session_id
-        $changepwd = $this->xml->Dashboard->updatepassword;
+        $changepwd = $this->xml_insert->Dashboard->updatepassword;
         if ($stmt = $this->mysqli->prepare($changepwd)) {
             $stmt->bind_param('si', $newpassword, $id);
             if (!$stmt->execute()) {
                 die('stmt error' . mysqli_error($stmt));
             }
+            echo $this->mysqli->affected_rows;
             $stmt->close();
         }
     }
 
 // end of the function
+
     function checkoldpassword($oldpassword) { // check with old password
-        $checkoldpassword = $this->xml->Dashboard->checkoldpassword;
+        $checkoldpassword = $this->xml_insert->Dashboard->checkoldpassword;
         $id = $_SESSION['reg_id'];
-        if ($stmt === $this->mysqli->prepare($checkoldpassword)) {
-            $stmt->bind_param('i', $id);
-            if (!$stmt->execute()) {
-                die('stmt error' . mysqli_error($stmt));
-            }
+        $squery = $checkoldpassword . $id . " AND password=" . "'" . $oldpassword . "'";
+        if ($result = $this->mysqli->query($squery)) {
+            echo $row = $result->num_rows;
+        } else {
+            echo 0;
         }
-        mysqli_stmt_bind_result($stmt, $id);
-        while (mysqli_stmt_fetch($stmt)) {
-            $result = array(
-                'password' => password
-            );
-        }
-        $stmt->close();
-        return $result;
     }
 
 // end of the  function
     function view_my_orders() {
-
-        $order = $this->xml->Dashboard->vieworder;
-
-        $id =$_SESSION['reg_id'] ;
-        $result = array();
-        if ($stmt = $this->mysqli->prepare($order)) {
-            $stmt->bind_param('i', $id);
+        $order = $this->xml_select->Dashboard->vieworder;
+        $id = $_SESSION['reg_id'];
+        echo $squery = $order . $id;
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
+                $result[] = $row;
+            }
+            return $result;
         }
-        if (!$stmt->execute()) {
-            die('stmt error: ' . mysqli_stmt_error($order));
-        }
-        $res = $stmt->get_result();
-        while ($row = $res->fetch_assoc()) {
-            $result = $row;
-        }
-        print_r($result);
-        return $result;
     }
 
-    function view_ordersummary($orderid) {
-        $summary = $this->xml->Dashboard->ordersummary;
-        $regid = $_SESSION['reg_id'];
-        $result = array();
-        if ($stmt = $this->mysqli->prepare($summary)) {
-            $stmt->bind_param('ii', $orderid, $regid);
-
-            if (!$stmt->execute()) {
-                die('stmt error: ' . mysqli_stmt_error($summary));
+    function view_ordersummary($orderid) {//is to track order details
+        $summary = $this->xml_select->Dashboard->ordersummary;
+        $value = $orderid;
+        $squery = $summary . $value;
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
+                $result = $row;
             }
+            return $result;
         }
-        mysqli_stmt_bind_result($stmt, $order_no, $order_date, $order_status, $prod_qty, $prod_org_price, $prod_tot_price, $ship_company, $ship_tel, $ship_fax, $ship_streetaddress, $ship_city, $ship_state, $ship_country, $ship_zip, $prod_name, $name, $email, $mobile);
-        while (mysqli_stmt_fetch($stmt)) {
-            $result = array(
-                'orderno' => $order_no, 'orderdate' => $order_date, 'orderstatus' => $order_status,
-                'qty' => $prod_qty, 'org_price' => $prod_org_price, 'total' => $prod_tot_price,
-                'company' => $ship_company, 'shipphone' => $ship_tel, 'fax' => $ship_fax, 'address' => $ship_streetaddress, 'city' => $ship_city, 'state' => $ship_state, 'country' => $ship_country, 'zip' => $ship_zip,
-                'name' => $name, 'email' => $email, 'mobile' => $mobile
-            );
-        }
-        $stmt->close();
-        return $result;
     }
 
     /*     * **************************************************************************** */
     /*     * **********************Blessy  Code ends here******************************* */
     /*     * **************************************************************************** */
- 
-    
+
+    function index_productcategory_sortname($cat_id_index) {
+        $register = $this->xml_select->categorypage->selectproductbyname;
+        // print_r($register);
+        if ($stmt = $this->mysqli->prepare($register)) {
+            $stmt->bind_param("s", $cat_id_index);
+            if (!$stmt->execute()) {
+                die('stmt error: ' . mysqli_stmt_error($stmt));
+            }
+
+            $res = $stmt->get_result();
+            while ($row = $res->fetch_assoc()) {
+                $result[] = $row;
+            }
+        }
+        $stmt->close();
+        return $result;
+    }
+
+    function index_productcategory_sortprice($cat_id_index) {
+        $register = $this->xml_select->categorypage->selectproductbyprice;
+        //print_r($register);
+        if ($stmt = $this->mysqli->prepare($register)) {
+            $stmt->bind_param("s", $cat_id_index);
+            if (!$stmt->execute()) {
+                die('stmt error: ' . mysqli_stmt_error($stmt));
+            }
+
+            $res = $stmt->get_result();
+            while ($row = $res->fetch_assoc()) {
+                $result[] = $row;
+            }
+        }
+        $stmt->close();
+        return $result;
+    }
+
+    function index_productcategory_price($cat_id_index, $min, $max) {
+        $register = $this->xml_select->categorypage->selectproductbyrange;
+        print_r($register);
+        if ($stmt = $this->mysqli->prepare($register)) {
+            $stmt->bind_param("sss", $cat_id_index, $min, $max);
+            if (!$stmt->execute()) {
+                die('stmt error: ' . mysqli_stmt_error($stmt));
+            }
+
+            $res = $stmt->get_result();
+            while ($row = $res->fetch_assoc()) {
+                $result[] = $row;
+            }
+            return $result;
+            $stmt->close();
+        }
+    }
+
 }
