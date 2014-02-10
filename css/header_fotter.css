@@ -193,12 +193,12 @@ float: left;
 display: inline;	
 }
 #menu {
-	width: 99%;
-   margin: 13px auto 0px 5px;
+	width: 100%;
+   margin: 13px auto 0px 0px;
 
 	padding: 0;
 	height: 54px;
-	background-image:url(../images/menuplain.png);
+	background-image:url(../images/menu_plain.png);
 
 	
 	
@@ -221,7 +221,7 @@ border-right:1px solid #dedfdf;
 	
 
 }
-#menu  li+li+li+li+li+li+li+li
+#menu  li+li+li+li+li+li+li
 {
 
 	border-right:0px solid #bcbbbb;

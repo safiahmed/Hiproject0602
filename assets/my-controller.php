@@ -9,7 +9,7 @@ class Users {
 //    private
 //            $database, $connection, $mysqli, $xml_select, $xml_insert,
 //            $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
-
+//changed
     public function __construct() {
 //        include_once 'auth.php';
         $this->mysqli = mysqli_connect("$this->host", "$this->user", "$this->pass", "$this->name");
@@ -449,7 +449,7 @@ class Users {
     function shippingaddress_details($uid) {
         $query = $this->xml_select->proceedpayment->shippingaddressdetails;
         $values = "$uid";
-        $squery = $query . "'" . $values . "'" . "ORDER BY shipadd_id_pk DESC LIMIT 0,1";
+        $squery = $query . "'" . $values . "'"."ORDER BY shipadd_id_pk DESC LIMIT 0,1";
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -508,7 +508,8 @@ class Users {
             while ($row = $query->fetch_assoc()) {
                 $result[] = $row;
             }
-            print_r($result);
+            //print_r($result);
+               return $result;
         }
         return 0;
     }
@@ -575,10 +576,11 @@ class Users {
     function addshoppingcart_details($val1, $val2, $val3) {
         $register = $this->xml_insert->productdetails->insertshoppingcart;
         if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("ssss", $val2, $val1, $val3,$val3);
+            $stmt->bind_param("sss", $val2, $val1, $val3);
             if (!mysqli_execute($stmt)) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
+            // echo 1;
         }
         $stmt->close();
     }
@@ -814,7 +816,7 @@ class Users {
     function view_ordersummary($orderid) {//is to track order details
         $summary = $this->xml_select->Dashboard->ordersummary;
         $value = $orderid;
-        $squery = $summary . $value;
+        $squery = $summary.$value;
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -827,7 +829,9 @@ class Users {
     /*     * **************************************************************************** */
     /*     * **********************Blessy  Code ends here******************************* */
     /*     * **************************************************************************** */
-
+    
+    
+    
     function index_productcategory_sortname($cat_id_index) {
         $query = $this->xml_select->categorypage->selectproductbyname;
         $values = "$cat_id_index";
@@ -843,7 +847,7 @@ class Users {
         }
        // echo 0;
     }
-
+     
     function index_productcategory_sortprice($cat_id_index) {
         $query = $this->xml_select->categorypage->selectproductbyprice;
         //print_r($register);

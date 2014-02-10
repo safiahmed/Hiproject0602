@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <?php include('meta.php'); ?>
 <title>Hiprojects| Privacy & Policy</title>
 <link href="css/privacypolicy.css" rel="stylesheet" type="text/css" media="screen" />
 <link rel="stylesheet" href="css/header_fotter.css" />

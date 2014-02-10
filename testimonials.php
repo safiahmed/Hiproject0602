@@ -8,6 +8,7 @@ $test_details = $test->Testimonial_details($data);
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php include('meta.php'); ?>
         <title>Hiprojects| Home</title>
         <link href="css/testimonial.css" rel="stylesheet" type="text/css" media="screen" />
         <link rel="stylesheet" href="css/shaili.css" /> 
@@ -16,9 +17,9 @@ $test_details = $test->Testimonial_details($data);
             <script type="text/javascript" src="Js/jquery-1.10.2.min.js"></script>
             <link href="css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
                 <link rel="stylesheet" type="text/css" href="http://cdn.webrupee.com/font">
-                    <script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
-                    <script src="Js/mrova-feedback-form.js" type="text/javascript"></script>
-                    <link rel="stylesheet" href="css/mrova-feedback-form.css" type="text/css"/>
+                <script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
+                <script src="Js/mrova-feedback-form.js" type="text/javascript"></script>
+                <link rel="stylesheet" href="css/mrova-feedback-form.css" type="text/css"/>
                     <script type="text/javascript">
                         $(document).ready(function() {
                             var pageTitle = document.title; //HTML page title
@@ -116,7 +117,7 @@ $test_details = $test->Testimonial_details($data);
                     </script>
                     </head>
                     <body>	
-                        <?php include'feedback.php '; ?>
+                       <?php include'feedback.php '; ?>
                         <div id="share-wrapper">
                             <ul class="share-inner-wrp">
                                 <!-- Facebook -->
@@ -129,7 +130,6 @@ $test_details = $test->Testimonial_details($data);
                             </ul>
                         </div>
 
-                        <div id="mrova-img-control" style="margin-top: -84px; top: 50%;"></div>
                         <div id="wrapper">
 
                             <?php include('header.php'); ?>
@@ -149,62 +149,60 @@ $test_details = $test->Testimonial_details($data);
 
                                     </div>
                                 </div>	
-                            </div>	
-                            <h1 class="only_for" style="margin-left:200px;">TESTIMONIALS</h1>
+                                <h1 class="only_for" >TESTIMONIALS</h1>
 
-                            <div class="col2-left-layout">
-
+                                <div class="col2-left-layout">
 
 
 
-                                <div class="testi_page"><!--Background-->      
+
+                                    <div class="testi_page"><!--Background-->      
 
 
-                                    <?php
-                                    $i = 0;
-                                    $tsize = sizeof($test_details);
-                                    if($tsize !=0){
-                                    foreach ($test_details as $prod) {
+                                        <?php
+                                        $i = 0;
+                                        foreach ($test_details as $prod) {
 
-                                        $mod = ($i % 2);
-                                        if ($mod == 0) {
-                                            $liclass = "testimonial_1";
-                                            $unit = "left_address";
-                                            $test = "right_testimonial1";
-                                        } else if ($mod == 1) {
-                                            $liclass = "testimonial_2";
-                                            $unit = "left_address2";
-                                            $test = "right_testimonial";
-                                        }
-                                        ?>
+                                            $mod = ($i % 2);
+                                            if ($mod == 0) {
+                                                $liclass = "testimonial_1";
+                                                $unit = "left_address";
+                                                $test = "right_testimonial1";
+                                            } else if ($mod == 1) {
+                                                $liclass = "testimonial_2";
+                                                $unit = "left_address2";
+                                                $test = "right_testimonial";
+                                            }
+                                            ?>
 
-                                        <div class="<?php echo $liclass; ?>"> <!--1st testimonial--> 
+                                            <div class="<?php echo $liclass; ?>"> <!--1st testimonial--> 
 
-                                            <div class="<?php echo $unit; ?>">	
-                                                <h4 style="color:#D02627;"><?php echo $prod['test_by']; ?></h4>
+                                                <div class="<?php echo $unit; ?>">	
+                                                    <h4 style="color:#D02627;"><?php echo $prod['test_by']; ?></h4>
 
-                                            </div>	
-                                            <div class="<?php echo $test; ?>">
+                                                </div>	
+                                                <div class="<?php echo $test; ?>">
 
-                                                <p><?php echo $prod['test_matter']; ?></p>
+                                                    <p><?php echo $prod['test_matter']; ?></p>
+                                                </div> 
+
                                             </div> 
 
-                                        </div> 
+
+
+
+                                            <?php $i++;
+                                        } ?>	
 
 
 
 
-                                        <?php $i++;
-                                    } 
-                                    }else{
-                                        echo "No data found";
-                                    }
-                                    ?>	
+                                    </div> </div>			
 
 
+                            </div>	
 
 
-                                </div> </div>
 
                             <?php include('footer.php'); ?>
 
@@ -216,10 +214,10 @@ $test_details = $test->Testimonial_details($data);
                                     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
                                     <script src="Js/bootstrap.js"></script>
                                     <script type="text/javascript">
-                        $(document).ready(function() { // Ready Function Start
-                            $("#myCarousel").carousel({interval: 2000});
+                                        $(document).ready(function() { // Ready Function Start
+                                            $("#myCarousel").carousel({interval: 2000});
 
-                        });//Ready Function End
+                                        });//Ready Function End
                                     </script>
                                     <!-- Placed at the end of the document so the pages load faster -->
 
@@ -237,49 +235,49 @@ $test_details = $test->Testimonial_details($data);
                                     <script>
 
 
-                        $(window).load(function() {
-                            $('[data-zlname = reverse-effect]').mateHover({
-                                position: 'y-reverse',
-                                overlayStyle: 'rolling',
-                                overlayBg: '#fff',
-                                overlayOpacity: 0.7,
-                                overlayEasing: 'easeOutCirc',
-                                rollingPosition: 'top',
-                                popupEasing: 'easeOutBack',
-                                popup2Easing: 'easeOutBack'
-                            });
-                        });
+                                        $(window).load(function() {
+                                            $('[data-zlname = reverse-effect]').mateHover({
+                                                position: 'y-reverse',
+                                                overlayStyle: 'rolling',
+                                                overlayBg: '#fff',
+                                                overlayOpacity: 0.7,
+                                                overlayEasing: 'easeOutCirc',
+                                                rollingPosition: 'top',
+                                                popupEasing: 'easeOutBack',
+                                                popup2Easing: 'easeOutBack'
+                                            });
+                                        });
 
-                        $(window).load(function() {
-                            $('.flexslider').flexslider({
-                                animation: "slide",
-                                start: function(slider) {
-                                    $('body').removeClass('loading');
-                                }
-                            });
-                        });
+                                        $(window).load(function() {
+                                            $('.flexslider').flexslider({
+                                                animation: "slide",
+                                                start: function(slider) {
+                                                    $('body').removeClass('loading');
+                                                }
+                                            });
+                                        });
 
-                        //    fancybox
-                        jQuery(".fancybox").fancybox();
+                                        //    fancybox
+                                        jQuery(".fancybox").fancybox();
 
-                        $(function() {
-                            var $container = $('#gallery');
-                            $container.isotope({
-                                itemSelector: '.item',
-                                animationOptions: {
-                                    duration: 750,
-                                    easing: 'linear',
-                                    queue: false
-                                }
-                            });
+                                        $(function() {
+                                            var $container = $('#gallery');
+                                            $container.isotope({
+                                                itemSelector: '.item',
+                                                animationOptions: {
+                                                    duration: 750,
+                                                    easing: 'linear',
+                                                    queue: false
+                                                }
+                                            });
 
-                            // filter items when filter link is clicked
-                            $('#filters a').click(function() {
-                                var selector = $(this).attr('data-filter');
-                                $container.isotope({filter: selector});
-                                return false;
-                            });
-                        });
+                                            // filter items when filter link is clicked
+                                            $('#filters a').click(function() {
+                                                var selector = $(this).attr('data-filter');
+                                                $container.isotope({filter: selector});
+                                                return false;
+                                            });
+                                        });
 
 
 

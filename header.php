@@ -19,7 +19,7 @@ if (!isset($_SESSION['reg_id'])) {
         <div id="upperlogo">
             <ul>    
                 <li><a href="#openModal"><img src="images/login register.png"></a></li>
-                <li><a href="#"><img src="images/mycart (1).png" style="margin-top:-3px"></a></li>
+                <li><a href="#"><img src="images/my cart copy.png" style="margin-top:-3px"></a></li>
             </ul>
         </div>
     </div>
