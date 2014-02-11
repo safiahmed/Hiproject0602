@@ -106,12 +106,17 @@
             select password from tbl_register where reg_id=
         </checkoldpassword>
         <vieworder>
-            select distinct o.order_id_pk,o.order_no,o.order_date,o.order_worth,o.order_status,
-            d.prod_qty,d.prod_org_price,d.prod_tot_price,d.ord_details_id_pk,
-            p.prod_name ,p.prod_org_price,p.model_no
-            from tbl_order as o,tbl_orderdetails as d,tbl_product as p
-            where o.order_id_pk=d.ord_id_fk 
+            select
+            o.order_id_pk,o.order_no,o.order_date,o.order_worth,o.order_status, d.prod_qty,d.prod_org_price,d.prod_tot_price,d.ord_details_id_pk, p.prod_name ,p.prod_org_price,p.model_no
+            from 
+            tbl_order as o,
+            tbl_orderdetails as d,
+            tbl_product as p,
+            tbl_productkittype as pt
+            where
+            o.order_id_pk=d.ord_id_fk
             and p.prod_id_pk=d.prod_id_fk
+            and p.prod_id_pk=pt.prod_id_fk
             and o.reg_id_fk=
         </vieworder>
         <ordersummary>

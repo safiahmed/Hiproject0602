@@ -803,7 +803,7 @@ class Users {
     function view_my_orders() {
         $order = $this->xml_select->Dashboard->vieworder;
         $id = $_SESSION['reg_id'];
-        echo $squery = $order . $id;
+        $squery = $order . $id;
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {

@@ -10,6 +10,6 @@ if(!isset($_SESSION))
   unset($_SESSION['userName']);
   session_destroy();
   //}
-  header("Location:hilogin.php");
+  header("Location:index.php");
   exit;
 ?>
