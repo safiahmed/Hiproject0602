@@ -27,9 +27,9 @@
         <subcategory_id>select * from tbl_category where cat_id_pk=</subcategory_id><!--changed-->
         <subcategoryname>select * from tbl_subcategory where cat_id_fk=</subcategoryname><!--changed-->
         <selectproductofcategory>select * from tbl_product where cat_id_fk=</selectproductofcategory><!--changed-->
-        <selectproductbyname>select * from tbl_product where cat_id_fk=? order by prod_name ASC</selectproductbyname>
-        <selectproductbyprice>select * from tbl_product where cat_id_fk=? order by prod_org_price ASC</selectproductbyprice>
-        <selectproductbyrange>select * from tbl_product where cat_id_fk=? and  prod_org_price between ? and ?  </selectproductbyrange>
+        <selectproductbyname>select * from tbl_product where cat_id_fk=</selectproductbyname>
+        <selectproductbyprice>select * from tbl_product where cat_id_fk=</selectproductbyprice>
+        <selectproductbyrange>select * from tbl_product where cat_id_fk=</selectproductbyrange>
     </categorypage>
     <accountinformation>
         <memberdetails> select * from tbl_register where email=? and status=1; </memberdetails>
@@ -47,7 +47,8 @@
         <selectProductKitContentgp>select gp,prod_id_fk from tbl_productkit where prod_id_fk=</selectProductKitContentgp><!--changed-->
         <selectProductKitContentdp>select dp,prod_id_fk from tbl_productkit where prod_id_fk=</selectProductKitContentdp><!--changed-->
         <selectpeoplebought> SELECT prod_name, prod_thumbimage FROM  `tbl_orderdetails` , tbl_order, tbl_product WHERE order_id_pk = ord_id_fk AND prod_id_pk = prod_id_fk and  prod_id_fk!=</selectpeoplebought>
-        <insertshoppingcart>insert into tbl_cartdetails(session_id,prod_id_fk,unit_price) values (?,?,?); </insertshoppingcart><!--changed-->
+        <insertshoppingcart>insert into tbl_cartdetails(session_id,prod_id_fk,unit_price,prod_price) values (?,?,?,?); </insertshoppingcart><!--changed-->
+        <updatecart>UPDATE `tbl_cartdetails` SET `qty`=?,`prod_price`=? WHERE `cart_id_pk`=?</updatecart>
     </productdetails>
     <subcategorypage>
         <subcatiddetails>select * from tbl_subcategory where subcat_random=</subcatiddetails>
@@ -105,13 +106,18 @@
             select password from tbl_register where reg_id=
         </checkoldpassword>
         <vieworder>
-            select distinct o.order_id_pk,o.order_no,o.order_date,o.order_worth,o.order_status,
-            d.prod_qty,d.prod_org_price,d.prod_tot_price,d.ord_details_id_pk,
-            p.prod_name ,p.prod_org_price,p.model_no
-            from tbl_order as o,tbl_orderdetails as d,tbl_product as p
-            where o.order_id_pk=d.ord_id_fk 
-            and p.prod_id_pk=d.prod_id_fk
-            and o.reg_id_fk=
+            SELECT
+            o.order_id_pk,o.order_no,o.order_date,o.order_worth,o.order_status, d.prod_qty,d.prod_org_price,d.prod_tot_price,d.ord_details_id_pk, p.prod_name ,p.prod_org_price,p.model_no
+            FROM 
+            tbl_order as o,
+            tbl_orderdetails as d,
+            tbl_product as p,
+            tbl_productkittype as pt
+            WHERE
+            o.order_id_pk=d.ord_id_fk
+            AND p.prod_id_pk=d.prod_id_fk
+            AND p.prod_id_pk=pt.prod_id_fk
+            AND o.reg_id_fk=
         </vieworder>
         <ordersummary>
             SELECT order_no, order_date, order_status, prod_qty, d.prod_org_price, prod_tot_price, ship_company, ship_tel, ship_fax, ship_streetaddress, ship_city, ship_state, ship_country, ship_zip, prod_name, name, email, mobile
@@ -122,6 +128,17 @@
             LEFT JOIN tbl_shippingaddress AS s ON s.reg_id_fk = o.reg_id_fk
             WHERE d.ord_details_id_pk =
         </ordersummary>
+        <viewwishlist>
+            SELECT w.prod_name,w.prod_thumbimage,p.sp,p.gp,p.dp,w.prod_id_fk, pr.prod_random FROM tbl_productkittype as p,tbl_wishlist as w,tbl_product as pr
+            WHERE p.prod_id_fk=w.prod_id_fk
+            AND pr.prod_id_pk=w.prod_id_fk
+            AND w.regid_fk=
+        </viewwishlist>
     </Dashboard>
+    <Service_center>
+        <service_state>SELECT * FROM `tbl_netdealer_state` WHERE `ndstate_status`=1</service_state>
+        <service_city>SELECT * FROM `tbl_netdealer_city` where ndstate_id_fk=</service_city>
+        <service_addres>SELECT * FROM `tbl_netdealer_city` WHERE `ndcity_id_pk`=</service_addres>
+    </Service_center>
     <!--code by Blessy ends here-->
 </root>

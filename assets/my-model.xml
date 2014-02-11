@@ -135,5 +135,10 @@
             AND w.regid_fk=
         </viewwishlist>
     </Dashboard>
+    <Service_center>
+        <service_state>SELECT * FROM `tbl_netdealer_state` WHERE `ndstate_status`=1</service_state>
+        <service_city>SELECT * FROM `tbl_netdealer_city` where ndstate_id_fk=</service_city>
+        <service_addres>SELECT * FROM `tbl_netdealer_city` WHERE `ndcity_id_pk`=</service_addres>
+    </Service_center>
     <!--code by Blessy ends here-->
 </root>

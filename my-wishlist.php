@@ -28,8 +28,8 @@
                 <th colspan="3" width=""><span class="nobr">Packages</span></th>
                 <th rowspan="2" class="a-center">Action</th>
             </tr>
-   <tr>
-                <!--<td>aa</td>-->
+            <tr>
+                         <!--<td>aa</td>-->
                 <td rowspan="2">Gold:</td>
                 <td rowspan="2">Silver:</td>
                 <td rowspan="2">Diamond:</td>
@@ -43,23 +43,23 @@
                     <td>
                         <h2 class="product-name">
                             <p><?php echo $wishlist['prod_name']; ?></p>
-                       
+
                         </h2>
 
                     </td>
                     <td class="a-right"><?php echo $wishlist['sp']; ?></td>
 
-    <!--                        <span class="cart-price">
+        <!--                        <span class="cart-price">
 
-        <span class="price"><span class="WebRupee"> Rs.</span><?php //echo $wishlist['prod_org_price'];   ?></span>            
-    </span>-->
-                     <td class="a-right"><?php echo $wishlist['gp']; ?></td>    
+            <span class="price"><span class="WebRupee"> Rs.</span><?php //echo $wishlist['prod_org_price'];    ?></span>            
+        </span>-->
+                    <td class="a-right"><?php echo $wishlist['gp']; ?></td>    
 
-                     <td class="a-right"><?php echo $wishlist['dp']; ?></td>
+                    <td class="a-right"><?php echo $wishlist['dp']; ?></td>
                     <td class="a-center">
-                        <a href="product-details.php?id=<?php echo $wishlist['prod_random'];?>">view</a>||<a>remove</a>
+                        <a href="product-details.php?id=<?php echo $wishlist['prod_random']; ?>">view</a>||<a>remove</a>
                     </td>
-                               </tr>
+                </tr>
             <?php } ?>
         </tbody>
     </table>

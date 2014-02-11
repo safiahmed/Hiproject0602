@@ -2,14 +2,16 @@
 
 class Users {
 
-    private
-            $database, $connection, $mysqli, $xml,
-            $host = "localhost", $name = "magnum_hiprojects", $user = "root", $pass = "";
-
 //    private
-//            $database, $connection, $mysqli, $xml_select, $xml_insert,
-//            $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
+//            $database, $connection, $xml,
+//            $host = "localhost", $name = "magnum_hiprojects", $user = "root", $pass = "";
+    public
+            $mysqli, $xml_select, $xml_insert;
 
+    private
+            $database, $connection,
+            $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
+//changed
     public function __construct() {
 //        include_once 'auth.php';
         $this->mysqli = mysqli_connect("$this->host", "$this->user", "$this->pass", "$this->name");
@@ -508,7 +510,8 @@ class Users {
             while ($row = $query->fetch_assoc()) {
                 $result[] = $row;
             }
-            print_r($result);
+            //print_r($result);
+            return $result;
         }
         return 0;
     }
@@ -575,7 +578,7 @@ class Users {
     function addshoppingcart_details($val1, $val2, $val3) {
         $register = $this->xml_insert->productdetails->insertshoppingcart;
         if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("sss", $val2, $val1, $val3);
+            $stmt->bind_param("ssss", $val2, $val1, $val3, $val3);
             if (!mysqli_execute($stmt)) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
@@ -802,7 +805,7 @@ class Users {
     function view_my_orders() {
         $order = $this->xml_select->Dashboard->vieworder;
         $id = $_SESSION['reg_id'];
-        echo $squery = $order . $id;
+        $squery = $order . $id;
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -825,61 +828,127 @@ class Users {
         }
     }
 
+    function view_my_wishlist() {
+        $wishlist = $this->xml_select->Dashboard->viewwishlist;
+
+        $id = $_SESSION['reg_id'];
+        $squery = $wishlist . $id;
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
+                $result[] = $row;
+            }
+            return $result;
+        }
+    }
+
     /*     * **************************************************************************** */
     /*     * **********************Blessy  Code ends here******************************* */
     /*     * **************************************************************************** */
 
     function index_productcategory_sortname($cat_id_index) {
-        $register = $this->xml_select->categorypage->selectproductbyname;
-        // print_r($register);
-        if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("s", $cat_id_index);
-            if (!$stmt->execute()) {
-                die('stmt error: ' . mysqli_stmt_error($stmt));
-            }
+        $query = $this->xml_select->categorypage->selectproductbyname;
+        $values = "$cat_id_index";
+        $squery = $query . "'" . $values . "'" . "order by prod_name ASC";
+        // print_r($squery);
 
-            $res = $stmt->get_result();
-            while ($row = $res->fetch_assoc()) {
-                $result[] = $row;
-            }
-        }
-        $stmt->close();
-        return $result;
-    }
-
-    function index_productcategory_sortprice($cat_id_index) {
-        $register = $this->xml_select->categorypage->selectproductbyprice;
-        //print_r($register);
-        if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("s", $cat_id_index);
-            if (!$stmt->execute()) {
-                die('stmt error: ' . mysqli_stmt_error($stmt));
-            }
-
-            $res = $stmt->get_result();
-            while ($row = $res->fetch_assoc()) {
-                $result[] = $row;
-            }
-        }
-        $stmt->close();
-        return $result;
-    }
-
-    function index_productcategory_price($cat_id_index, $min, $max) {
-        $register = $this->xml_select->categorypage->selectproductbyrange;
-        print_r($register);
-        if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("sss", $cat_id_index, $min, $max);
-            if (!$stmt->execute()) {
-                die('stmt error: ' . mysqli_stmt_error($stmt));
-            }
-
-            $res = $stmt->get_result();
-            while ($row = $res->fetch_assoc()) {
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
                 $result[] = $row;
             }
             return $result;
-            $stmt->close();
+        }
+        // echo 0;
+    }
+
+    function index_productcategory_sortprice($cat_id_index) {
+        $query = $this->xml_select->categorypage->selectproductbyprice;
+        //print_r($register);
+        $values = "$cat_id_index";
+        $squery = $query . "'" . $values . "'" . "order by prod_org_price ASC";
+        // print_r($squery);
+        //exit();
+
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
+                $result[] = $row;
+            }
+            return $result;
+        }
+    }
+
+    function index_productcategory_price($cat_id_index, $min, $max) {
+        $query = $this->xml_select->categorypage->selectproductbyrange;
+        //print_r($register);
+        $values = "$cat_id_index";
+        $values1 = "$min";
+        $values2 = "$max";
+        $squery = $query . "'" . $values . "'" . "and  prod_org_price between" . " " . $values1 . " " . "and" . " " . $values2;
+        // print_r($squery);
+        //exit();
+
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
+                $result[] = $row;
+            }
+            return $result;
+        }
+    }
+
+    function update_total_price($tp, $cid, $qty) {
+        $query = $this->xml_insert->productdetails->updatecart;
+        if ($stmt = $this->mysqli->prepare($query)) {
+            $stmt->bind_param("iii", $qty, $tp, $cid);
+            if (!mysqli_execute($stmt)) {
+                die('stmt error: ' . mysqli_stmt_error($stmt));
+            }
+            return TRUE;
+        }
+        $stmt->close();
+    }
+
+}
+
+class Service extends Users {
+
+    function service_state() {
+        $query = $this->xml_select->Service_center->service_state;
+        if ($result = $this->mysqli->query($query)) {
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $result1[] = $row;
+                }
+                return $result1;
+            }
+        }
+    }
+
+    function service_city($state) {
+        $query = $this->xml_select->Service_center->service_city;
+        $squery = $query . '"' . $state . '"';
+        if ($result = $this->mysqli->query($squery)) {
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $result1[] = $row;
+                }
+                return $result1;
+            }
+        }
+    }
+
+    function service_address($city) {
+        $query = $this->xml_select->Service_center->service_address;
+        $squery = $query . '"' . $city . '"';
+        if ($result = $this->mysqli->query($squery)) {
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $result1[] = $row;
+                }
+                return $result1;
+            }
         }
     }
 

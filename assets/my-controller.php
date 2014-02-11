@@ -3,11 +3,13 @@
 class Users {
 
     private
-            $database, $connection, $mysqli, $xml,
+            $database, $connection, $xml,
             $host = "localhost", $name = "magnum_hiprojects", $user = "root", $pass = "";
+    public
+            $mysqli, $xml_select, $xml_insert;
 
 //    private
-//            $database, $connection, $mysqli, $xml_select, $xml_insert,
+//            $database, $connection,
 //            $host = "75.126.26.119", $name = "magnum_hiprojects", $user = "hiprojects", $pass = "Kcce71^0";
 //changed
     public function __construct() {
@@ -906,6 +908,48 @@ class Users {
             return TRUE;
         }
         $stmt->close();
+    }
+
+}
+
+class Service extends Users {
+
+    function service_state() {
+        $query = $this->xml_select->Service_center->service_state;
+        if ($result = $this->mysqli->query($query)) {
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $result1[] = $row;
+                }
+                return $result1;
+            }
+        }
+    }
+
+    function service_city($state) {
+        $query = $this->xml_select->Service_center->service_city;
+        $squery = $query . '"' . $state . '"';
+        if ($result = $this->mysqli->query($squery)) {
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $result1[] = $row;
+                }
+                return $result1;
+            }
+        }
+    }
+
+    function service_address($city) {
+        $query = $this->xml_select->Service_center->service_address;
+        $squery = $query . '"' . $city . '"';
+        if ($result = $this->mysqli->query($squery)) {
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $result1[] = $row;
+                }
+                return $result1;
+            }
+        }
     }
 
 }

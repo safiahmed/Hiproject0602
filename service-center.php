@@ -1,6 +1,7 @@
 <?php
-include './assets/my-controller.php';
-$service = new 
+include 'assets/my-controller.php';
+$service = new Service();
+$states1 = $service->service_state();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -131,14 +132,15 @@ $service = new
                     });
                 </script>
                 <script>
-                    $(function() {
-                        $("#selectable").selectable();
-                    });
+                    
                     $(document).ready(function() {
                         $('#state').change(function() {
                             var state = $(this).val();
                             $('#city').load('city.php', {state: state});
                         });
+                    });
+                    $(function() {
+                        $("#selectable").selectable();
                     });
                 </script>
 
@@ -226,21 +228,19 @@ $service = new
                             </div>
                             <div class="project_kit">
                                 <div id="for-state">
-                                    State  :   <select id="state"><option>---select---</option>
-                                        <option>Karnataka</option>
-
-
+                                    State  :   
+                                    <select id="state">
+                                        <option selected>---Select State---</option>
                                         <?php
-//$query="SELECT DISTINCT state FROM address";
-//$result=mysql_query($query);
-// while($row = mysql_fetch_array($result))
-//{
-// echo "<option value='".$row['state']."'>".$row['state']."</option>";
-//}
-// echo $selectedvalue;
+                                        foreach ($states1 as $row) {
+                                            ?>
+                                            <option value="<?php echo $row['ndstate_id_pk']; ?>"><?php echo $row['ndstate_name'] ?></option>
+                                            <?php
+                                        }
                                         ?>
 
-                                    </select>	</div>
+                                    </select>	
+                                </div>
                                 <div id="city"></div>
                                 <div id="address"></div>		
                             </div>
