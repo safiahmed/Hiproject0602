@@ -191,7 +191,18 @@ var_dump($_SESSION);
                                 });
 
                                 //pwd check/updates ends here//
-                                //blessy code ends here//
+          $("body").on('click','.remove-wishlist',function() { //removing product from cart
+              var wish_id_pk = $(this).attr('id');
+            var delrow = $(this).parent().closest('tr');
+            
+            $.post("assets/controller-links.php", {remove_wishlist: wish_id_pk}, function(data) {
+                if (data == 1) {
+                    delrow.remove();
+                    return false;
+                }
+            });
+        }); 
+       //blessy code ends here//
 
                             });
                         </script>

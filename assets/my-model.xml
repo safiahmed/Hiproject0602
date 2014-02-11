@@ -129,11 +129,14 @@
             WHERE d.ord_details_id_pk =
         </ordersummary>
         <viewwishlist>
-            SELECT w.prod_name,w.prod_thumbimage,p.sp,p.gp,p.dp,w.prod_id_fk, pr.prod_random FROM tbl_productkittype as p,tbl_wishlist as w,tbl_product as pr
+            SELECT w.wish_id_pk,w.prod_name,w.prod_thumbimage,p.sp,p.gp,p.dp,w.prod_id_fk, pr.prod_random FROM tbl_productkittype as p,tbl_wishlist as w,tbl_product as pr
             WHERE p.prod_id_fk=w.prod_id_fk
             AND pr.prod_id_pk=w.prod_id_fk
             AND w.regid_fk=
         </viewwishlist>
+        <deletewishlist>
+            DELETE FROM tbl_wishlist WHERE wish_id_pk=
+        </deletewishlist>
     </Dashboard>
     <Service_center>
         <service_state>SELECT * FROM `tbl_netdealer_state` WHERE `ndstate_status`=1</service_state>
