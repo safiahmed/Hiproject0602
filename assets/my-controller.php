@@ -449,7 +449,7 @@ class Users {
     function shippingaddress_details($uid) {
         $query = $this->xml_select->proceedpayment->shippingaddressdetails;
         $values = "$uid";
-        $squery = $query . "'" . $values . "'"."ORDER BY shipadd_id_pk DESC LIMIT 0,1";
+        $squery = $query . "'" . $values . "'" . "ORDER BY shipadd_id_pk DESC LIMIT 0,1";
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -509,7 +509,7 @@ class Users {
                 $result[] = $row;
             }
             //print_r($result);
-               return $result;
+            return $result;
         }
         return 0;
     }
@@ -576,7 +576,7 @@ class Users {
     function addshoppingcart_details($val1, $val2, $val3) {
         $register = $this->xml_insert->productdetails->insertshoppingcart;
         if ($stmt = $this->mysqli->prepare($register)) {
-            $stmt->bind_param("sss", $val2, $val1, $val3);
+            $stmt->bind_param("ssss", $val2, $val1, $val3, $val3);
             if (!mysqli_execute($stmt)) {
                 die('stmt error: ' . mysqli_stmt_error($stmt));
             }
@@ -816,7 +816,7 @@ class Users {
     function view_ordersummary($orderid) {//is to track order details
         $summary = $this->xml_select->Dashboard->ordersummary;
         $value = $orderid;
-        $squery = $summary.$value;
+        $squery = $summary . $value;
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -829,15 +829,13 @@ class Users {
     /*     * **************************************************************************** */
     /*     * **********************Blessy  Code ends here******************************* */
     /*     * **************************************************************************** */
-    
-    
-    
+
     function index_productcategory_sortname($cat_id_index) {
         $query = $this->xml_select->categorypage->selectproductbyname;
         $values = "$cat_id_index";
-        $squery = $query . "'" . $values . "'"."order by prod_name ASC";
-       // print_r($squery);
-       
+        $squery = $query . "'" . $values . "'" . "order by prod_name ASC";
+        // print_r($squery);
+
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -845,17 +843,17 @@ class Users {
             }
             return $result;
         }
-       // echo 0;
+        // echo 0;
     }
-     
+
     function index_productcategory_sortprice($cat_id_index) {
         $query = $this->xml_select->categorypage->selectproductbyprice;
         //print_r($register);
         $values = "$cat_id_index";
-        $squery = $query . "'" . $values . "'"."order by prod_org_price ASC";
-      // print_r($squery);
-       //exit();
-       
+        $squery = $query . "'" . $values . "'" . "order by prod_org_price ASC";
+        // print_r($squery);
+        //exit();
+
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -863,20 +861,18 @@ class Users {
             }
             return $result;
         }
- }
- 
- 
-      
-    function index_productcategory_price($cat_id_index,$min,$max) {
-       $query = $this->xml_select->categorypage->selectproductbyrange;
+    }
+
+    function index_productcategory_price($cat_id_index, $min, $max) {
+        $query = $this->xml_select->categorypage->selectproductbyrange;
         //print_r($register);
         $values = "$cat_id_index";
-        $values1="$min";
-        $values2="$max";
-        $squery = $query . "'" . $values . "'"."and  prod_org_price between"." ".$values1." "."and"." ". $values2;
-      // print_r($squery);
-       //exit();
-       
+        $values1 = "$min";
+        $values2 = "$max";
+        $squery = $query . "'" . $values . "'" . "and  prod_org_price between" . " " . $values1 . " " . "and" . " " . $values2;
+        // print_r($squery);
+        //exit();
+
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
@@ -884,6 +880,18 @@ class Users {
             }
             return $result;
         }
-        
- }
+    }
+
+    function update_total_price($tp, $cid, $qty) {
+        $query = $this->xml_insert->productdetails->updatecart;
+        if ($stmt = $this->mysqli->prepare($query)) {
+            $stmt->bind_param("iii", $qty, $tp, $cid);
+            if (!mysqli_execute($stmt)) {
+                die('stmt error: ' . mysqli_stmt_error($stmt));
+            }
+            return TRUE;
+        }
+        $stmt->close();
+    }
+
 }

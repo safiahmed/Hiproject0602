@@ -357,6 +357,10 @@ if (isset($_POST['oldpassword'])) {// checking whether pwd exist in db-pwd reset
     $user->checkoldpassword($oldpassword);
 }
 
-if(isset($_POST['ajax_price'])){
-    echo $price = $_POST['ajax_price'];
+if(isset($_POST['total_price'])&& isset($_POST['cart_id_pk'])&& isset($_POST['qty'])){
+    $tp = $_POST['total_price'];
+    $cid = $_POST['cart_id_pk'];
+    $qty = $_POST['qty'];
+    $user = new Users;
+    $user->update_total_price($tp,$cid,$qty);
 }
