@@ -891,3 +891,7 @@ class Users {
     }
 
 }
+
+class Service extends Users{
+    
+}
