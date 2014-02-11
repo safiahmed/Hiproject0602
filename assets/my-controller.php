@@ -848,12 +848,8 @@ class Users {
 
     function index_productcategory_sortprice($cat_id_index) {
         $query = $this->xml_select->categorypage->selectproductbyprice;
-        //print_r($register);
         $values = "$cat_id_index";
         $squery = $query . "'" . $values . "'" . "order by prod_org_price ASC";
-        // print_r($squery);
-        //exit();
-
         $query = $this->mysqli->query($squery);
         if ($query->num_rows > 0) {
             while ($row = $query->fetch_assoc()) {
