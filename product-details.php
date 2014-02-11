@@ -741,9 +741,5 @@ if (isset($_SESSION['ids'])) {
 
 
                                             </script>
-
-
                                             </body>
                                             </html>
-                                            <!-->>>>>>> branch 'master' of https://github.com/safiahmed/HiProjects.git-->
-

@@ -5,14 +5,31 @@ $data = array();
 //$pro_details=array();
 //$pro_details = $product->index_subcategory_name($cat_id_index);
 //foreach ($pro_details as $prod) {
-    //$cat_id = $prod['cat_id_pk'];
-    //print_r($cat_id);
+//$cat_id = $prod['cat_id_pk'];
+//print_r($cat_id);
 //}
 $cat_details = $product->index_subcategory_subname($cat_id_index);
 //print_r($cat_details);
 $category_details = $product->index_category_name($data);
 ?>
+<style>
+    #amount1{width: 35px;float: left;}
+    #amount2{width: 35px;margin-left: 3%;}
+    #slider-range{width: 91%;float: left;margin-right: 12px;}
+    #go{width: 1%;float: left;}
+    #go img{cursor: pointer;}
+</style>
+<script>
 
+    $(document).ready(function() {
+        $("#go").on('click', function() {
+            var val1 = $("#amount1").val();
+            var val2 = $("#amount2").val();
+            window.location.href = "category-view.php?price=" + val1 + "," + val2
+        });
+
+    });
+</script>
 <div class="col-left">
 
     <div class="block-layered-nav">
@@ -43,11 +60,16 @@ $category_details = $product->index_category_name($data);
                     <div class="imagin">
                         <p>
                             <label for="amount">Range:</label>
-                            <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
+                            <input type="text" id="amount1" style="border:0; color:#f6931f; font-weight:bold;" disabled="disabled" />
+                            <input type="text" id="amount2" style="border:0; color:#f6931f; font-weight:bold;" disabled="disabled" />
                         </p>
-                        <div id="slider-range"></div>
+                        <div>
+                            <div id="slider-range"></div>
+                            <div id="go">
+                                <img src="images/pricerange.jpg" class="go" />
+                            </div>
+                        </div>
                     </div>
-
                 </dd>
 
                 <dt class="odd">Category</dt>
@@ -57,7 +79,7 @@ $category_details = $product->index_category_name($data);
 
                         <?php foreach ($category_details as $prod) { ?>
                             <li>
-                                <a href="category-view.php?id=<?php echo $prod['cat_random']; ?>" target="_parent"><?php echo $prod['cat_name']; ?></a>
+                                <a href="category-view.php?id=<?php echo $prod['cat_id_pk']; ?>" target="_parent"><?php echo $prod['cat_name']; ?></a>
                             </li> 
 
                         <?php } ?>		
