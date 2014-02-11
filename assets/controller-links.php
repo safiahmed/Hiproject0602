@@ -364,3 +364,10 @@ if(isset($_POST['total_price'])&& isset($_POST['cart_id_pk'])&& isset($_POST['qt
     $user = new Users;
     $user->update_total_price($tp,$cid,$qty);
 }
+////remove wishlist row/////////
+
+if(isset($_POST['remove_wishlist'])){
+ $wishid=$_POST['remove_wishlist'];
+    $user= new Users;
+   $result= $user->remove_wishlist($wishid); 
+}

@@ -840,6 +840,17 @@ class Users {
         }
     }
 
+    function remove_wishlist($wishid) {
+       
+        $wishlist1 = $this->xml_insert->Dashboard->deletewishlist;
+        $squery = $wishlist1 . $wishid;
+        if($this->mysqli->query($squery))
+        {
+            echo 1;
+        }
+        
+    }
+
     /*     * **************************************************************************** */
     /*     * **********************Blessy  Code ends here******************************* */
     /*     * **************************************************************************** */
