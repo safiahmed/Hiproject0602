@@ -826,6 +826,20 @@ class Users {
         }
     }
 
+    function view_my_wishlist() {
+        $wishlist = $this->xml_select->Dashboard->viewwishlist;
+
+        $id = $_SESSION['reg_id'];
+        $squery = $wishlist . $id;
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
+                $result[] = $row;
+            }
+            return $result;
+        }
+    }
+
     /*     * **************************************************************************** */
     /*     * **********************Blessy  Code ends here******************************* */
     /*     * **************************************************************************** */

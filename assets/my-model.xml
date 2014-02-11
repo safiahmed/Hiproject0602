@@ -106,18 +106,18 @@
             select password from tbl_register where reg_id=
         </checkoldpassword>
         <vieworder>
-            select
+            SELECT
             o.order_id_pk,o.order_no,o.order_date,o.order_worth,o.order_status, d.prod_qty,d.prod_org_price,d.prod_tot_price,d.ord_details_id_pk, p.prod_name ,p.prod_org_price,p.model_no
-            from 
+            FROM 
             tbl_order as o,
             tbl_orderdetails as d,
             tbl_product as p,
             tbl_productkittype as pt
-            where
+            WHERE
             o.order_id_pk=d.ord_id_fk
-            and p.prod_id_pk=d.prod_id_fk
-            and p.prod_id_pk=pt.prod_id_fk
-            and o.reg_id_fk=
+            AND p.prod_id_pk=d.prod_id_fk
+            AND p.prod_id_pk=pt.prod_id_fk
+            AND o.reg_id_fk=
         </vieworder>
         <ordersummary>
             SELECT order_no, order_date, order_status, prod_qty, d.prod_org_price, prod_tot_price, ship_company, ship_tel, ship_fax, ship_streetaddress, ship_city, ship_state, ship_country, ship_zip, prod_name, name, email, mobile
@@ -128,6 +128,12 @@
             LEFT JOIN tbl_shippingaddress AS s ON s.reg_id_fk = o.reg_id_fk
             WHERE d.ord_details_id_pk =
         </ordersummary>
+        <viewwishlist>
+            SELECT w.prod_name,w.prod_thumbimage,p.sp,p.gp,p.dp,w.prod_id_fk, pr.prod_random FROM tbl_productkittype as p,tbl_wishlist as w,tbl_product as pr
+            WHERE p.prod_id_fk=w.prod_id_fk
+            AND pr.prod_id_pk=w.prod_id_fk
+            AND w.regid_fk=
+        </viewwishlist>
     </Dashboard>
     <!--code by Blessy ends here-->
 </root>

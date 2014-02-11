@@ -218,6 +218,8 @@ var_dump($_SESSION);
                             $dash = new Users();
                             $personalinfo = $dash->view_personalinfo();
                             $memberinfo = $dash->view_memberinfo();
+                            $wishlist = new Users();
+                            $viewwishlist = $wishlist->view_my_wishlist();
                             ?>
 
                             <div id="share-wrapper">
