@@ -56,8 +56,8 @@ echo $_SESSION['cart_session_id'];
                 }
             });
         });
-        
-        $(".country_delivery").on("change",function(){//shipping charges
+
+        $(".country_delivery").on("change", function() {//shipping charges
             country_delivery();
         });
     });
@@ -72,8 +72,13 @@ echo $_SESSION['cart_session_id'];
     function country_delivery() {
         var c_val = $(".country_delivery").val();
         var total = $(".sub_total_price").text();
-        var p_val = parseInt(c_val) +  parseInt(total);
-        $("#samount").text(c_val);
+        if (c_val == 1) {
+            var p_val = parseInt(c_val) * parseInt(total);
+            $("#samount").text("0");
+        } else {
+            var p_val = parseInt(c_val) + parseInt(total);
+            $("#samount").text(c_val);
+        }
         $("#pamount").text(p_val);
     }
 </script>
@@ -147,7 +152,7 @@ echo $_SESSION['cart_session_id'];
                                                 <span class="price">
                                                     <span class="WebRupee"> Rs. </span>
                                                     <span class="prod_val"><?php echo $prod['prod_price']; ?>
-                                                        <!--<input class="abcd" type="hidden" value="<?php // echo $prod['unit_price'];  ?>" />-->
+                                                        <!--<input class="abcd" type="hidden" value="<?php // echo $prod['unit_price'];    ?>" />-->
                                                     </span>
                                                 </span>
                                             </span>
@@ -167,14 +172,14 @@ echo $_SESSION['cart_session_id'];
                                 <span class="fnt14">Shipping Charges: 
                                     <span class="total-text">
                                         <span class="WebRupee"> Rs. </span><span id="samount"></span>
-                                        </span>
                                     </span>
+                                </span>
                                 </span><br>Payable Amount: 
                                 <span class="total-text">
                                     <span class="price">
                                         <span class="WebRupee"> Rs. </span><span id="pamount"></span>
-                                        </span>
                                     </span>
+                                </span>
                                 </span>
                             </div>
                             <table style="margin-top:6px;padding-left: 8px;" width="300" height="50" >

@@ -296,9 +296,10 @@ if (isset($_SESSION['ids'])) {
                                             </div>
 
                                             <div class="price-box">
-                                                <button type="button" class="product-sprite cursor" id="AddToCart"></button>
+                                                                            <button type="button" class="product-sprite cursor" id="AddToCart"></button>
+                                                                            <a href="javascript:void(0);"  class="save-prd txt-up f-bold mt10 d-block fs10 c666 txt-center"><small class="d-inline common-sprite v-align-mid"></small> Save for later</a>
 
-                                            </div>
+                                                                        </div>
 
                                         </div>
 
