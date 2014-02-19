@@ -6,6 +6,7 @@ $data = array();
 //$pro_details=array();
 
 $product_details = $product->product_details($prod_random);
+$productid=$product_details['prod_id_pk'];
 $productname = $product_details['prod_name'];
 $image1 = $product_details['prod_image1'];
 $image2 = $product_details['prod_image2'];

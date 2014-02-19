@@ -21,8 +21,8 @@ if (isset($_SESSION['ids'])) {
             <link rel="stylesheet" href="css/shaili.css" /> 
             <link rel="stylesheet" href="css/bootstrap.css" />
             <script type="text/javascript" src="Js/jquery-1.10.2.min.js"></script>
-            <link href=' http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'/>
-            <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css" rel="stylesheet" type="text/css"/>
+            <!--<link href=' http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'/>-->
+            <!--<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css" rel="stylesheet" type="text/css"/>-->
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
             <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
             <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
@@ -30,14 +30,15 @@ if (isset($_SESSION['ids'])) {
             <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
             <link rel="stylesheet" href="/resources/demos/style.css"/>
             <link rel="stylesheet" type="text/css" href="http://cdn.webrupee.com/font"/>
-            <script type="text/javascript" src="http://baijs.nl/tinyscrollbar/js/jquery.tinyscrollbar.js"></script>	
-            <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+            <!--<script type="text/javascript" src="http://baijs.nl/tinyscrollbar/js/jquery.tinyscrollbar.js"></script>-->	
+            <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>-->
             <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
             <script type="text/javascript" src="js/picbox.js"></script>
             <link rel="stylesheet" href="css/picbox.css" type="text/css" media="screen" />
             <link rel="stylesheet" href="css/header_fotter.css" />
             <script type="text/javascript">
                 $(document).ready(function() {
+                    changeText();
                     var pageTitle = document.title; //HTML page title
                     var pageUrl = location.href; //Location of the page	
                     //user hovers on the share button	
@@ -54,6 +55,25 @@ if (isset($_SESSION['ids'])) {
                         }
                     });
                     //user clicks on a share button
+               $('.addwishlist').click(function(){
+               var pid=$(this).attr('id');
+               var name=$('.product-name').children('h1').text();
+               var image=$('#zoom_03').attr('src');
+               var action="assets/controller-links.php";
+               $.post(action,{pro_id:pid,pro_name:name,pro_image:image},function(data){
+             //$('.price-box3').children('a').text('Added to Wishlist');
+             changeText();
+               });
+    });
+    function changeText(){
+       var pid=$('.addwishlist').attr('id');
+        var action="assets/controller-links.php";
+         $.post(action,{prod_id:pid},function(data){
+             if(data==1){
+                       $('.price-box3').children('a').text('Added to Wishlist');          
+         }
+         });
+    }
                     $('.button-wrap').click(function(event) {
                         var shareName = $(this).attr('class').split(' ')[0]; //get the first class name of clicked element
 
@@ -201,7 +221,7 @@ if (isset($_SESSION['ids'])) {
 
                     <div class="product-view">
                         <!-- zoom effect-->
-                        <img id="zoom_03" width="300px" src='<?php echo $image1; ?>'  data-zoom-image="<?php echo $image1; ?>"  />
+                        <img id="zoom_03"  width="300px" src='<?php echo $image1; ?>'  data-zoom-image="<?php echo $image1; ?>"  />
                         <div id="gallery_01" style="margin-top: -200px;" >
                             <ul>
 
@@ -217,60 +237,7 @@ if (isset($_SESSION['ids'])) {
                             </ul>
 
                         </div>
-
-                        <script>
-                $("#zoom_03").elevateZoom({gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true});
-
-                $("#zoom_03").bind("click", function(e) {
-                    var ez = $('#zoom_03').data('elevateZoom');
-                    $.fancybox(ez.getGalleryList());
-                    return false;
-                });
-                $(window).load(function() {
-                    $('[data-zlname = reverse-effect]').mateHover({
-                        position: 'y-reverse',
-                        overlayStyle: 'rolling',
-                        overlayBg: '#fff',
-                        overlayOpacity: 0.7,
-                        overlayEasing: 'easeOutCirc',
-                        rollingPosition: 'top',
-                        popupEasing: 'easeOutBack',
-                        popup2Easing: 'easeOutBack'
-                    });
-                });
-
-                $(window).load(function() {
-                    $('.flexslider').flexslider({
-                        animation: "slide",
-                        start: function(slider) {
-                            $('body').removeClass('loading');
-                        }
-                    });
-                });
-
-                //    fancybox
-                jQuery(".fancybox").fancybox();
-
-                $(function() {
-                    var $container = $('#gallery');
-                    $container.isotope({
-                        itemSelector: '.item',
-                        animationOptions: {
-                            duration: 750,
-                            easing: 'linear',
-                            queue: false
-                        }
-                    });
-
-                    // filter items when filter link is clicked
-                    $('#filters a').click(function() {
-                        var selector = $(this).attr('data-filter');
-                        $container.isotope({filter: selector});
-                        return false;
-                    });
-                });
-                        </script>
-                        <!--end-->	
+	
                     </div>
                     <div  class="product-shop">
 
@@ -282,11 +249,14 @@ if (isset($_SESSION['ids'])) {
                                     <div class="box_white">
                                         <div class="btns-sec-js">
 
-                                            <div class="price-box">Kit No: <span style="color:#E72E1E;"><?php echo $modelno; ?></span></div>
+                                            <div class="price-box1">Kit No: <span style="color:#E72E1E;"><?php echo $modelno; ?></span></div>
 
-                                            <div class="price-box"><a href="#projects_kit">View Kit price</a></div>
+                                            <div class="price-box2"><a href="#projects_kit">View Kit price</a></div>
 
-                                            <div class="price-box"><img src="images/icon-add-to-wishlist2.png"/><a href="mywishlistnew.php"> Add Your Wishlist</a></div>
+                                            <div class="price-box3">
+                                    <img src="images/icon-add-to-wishlist2.png"/>
+                                    <a href="#" class="addwishlist" id="<?php echo $productid; ?>"> Add Your Wishlist</a>
+                                            </div>
 
                                             <div class="ratings">
                                                 <div class="rating-box">
@@ -296,31 +266,17 @@ if (isset($_SESSION['ids'])) {
                                             </div>
 
                                             <div class="price-box">
-                                                                            <button type="button" class="product-sprite cursor" id="AddToCart"></button>
-                                                                            <a href="javascript:void(0);"  class="save-prd txt-up f-bold mt10 d-block fs10 c666 txt-center"><small class="d-inline common-sprite v-align-mid"></small> Save for later</a>
-
-                                                                        </div>
-
-                                        </div>
-
-
-
-                                        <!-- end of code -->
+      <button type="button" class="product-sprite cursor" id="AddToCart"></button>
+       <a href="javascript:void(0);"  class="save-prd txt-up f-bold mt10 d-block fs10 c666 txt-center"><small class="d-inline common-sprite v-align-mid"></small> Save for later</a>
+     </div>
+ </div>
+    <!-- end of code -->
                                     </div>
 
                                     </div>
-
-
-
-
-                                    </div>
-
-                                    <div class="project_kit1">
-
-
-
-
-                                        <span class="field-content" >
+        </div>
+                       <div class="project_kit1">
+             <span class="field-content" >
                                             <script src='js/jquery.elevatezoom.js'></script>
                                             <script src='js/jquery.elevateZoom-3.0.8.min.js'></script>
                                             <!-- end-->
@@ -378,7 +334,9 @@ if (isset($_SESSION['ids'])) {
                                                     <div class="tab-pane" id="Download_Abstract">
 
                                                         <h3>Download Abstract </h3>
-                                                        <p><a class="prod-attach" target="_blank" title="<?php echo $productname; ?>" href=" <?php echo $download; ?>"><span class="attach-img"><img src="images/doc.png" alt="Download" style="margin-right: 5px;"></span><span class="attach-title"><?php echo $productname; ?></span></a></p>
+                                                        <p><a class="prod-attach" target="_blank" title="<?php echo $productname; ?>" href=" <?php echo $download; ?>">
+                                                                <span class="attach-img"><img src="images/doc.png" alt="Download" style="margin-right: 5px;"></span>
+                                                                <span class="attach-title"><?php echo $productname; ?></span></a></p>
                                                     </div>
 
                                                 </div>
@@ -743,6 +701,59 @@ if (isset($_SESSION['ids'])) {
 
                                             </script>
 
+                        <script>
+                $("#zoom_03").elevateZoom({gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true});
+
+                $("#zoom_03").bind("click", function(e) {
+                    var ez = $('#zoom_03').data('elevateZoom');
+                    $.fancybox(ez.getGalleryList());
+                    return false;
+                });
+                $(window).load(function() {
+                    $('[data-zlname = reverse-effect]').mateHover({
+                        position: 'y-reverse',
+                        overlayStyle: 'rolling',
+                        overlayBg: '#fff',
+                        overlayOpacity: 0.7,
+                        overlayEasing: 'easeOutCirc',
+                        rollingPosition: 'top',
+                        popupEasing: 'easeOutBack',
+                        popup2Easing: 'easeOutBack'
+                    });
+                });
+
+                $(window).load(function() {
+                    $('.flexslider').flexslider({
+                        animation: "slide",
+                        start: function(slider) {
+                            $('body').removeClass('loading');
+                        }
+                    });
+                });
+
+                //    fancybox
+                jQuery(".fancybox").fancybox();
+
+                $(function() {
+                    var $container = $('#gallery');
+                    $container.isotope({
+                        itemSelector: '.item',
+                        animationOptions: {
+                            duration: 750,
+                            easing: 'linear',
+                            queue: false
+                        }
+                    });
+
+                    // filter items when filter link is clicked
+                    $('#filters a').click(function() {
+                        var selector = $(this).attr('data-filter');
+                        $container.isotope({filter: selector});
+                        return false;
+                    });
+                            });
+                        </script>
+                        <!--end-->
 
                                             </body>
                                             </html>

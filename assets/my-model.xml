@@ -83,7 +83,7 @@
         
     <Dashboard>
         <selectpersonalinfo>
-            select reg_id,name,email,mobile from tbl_register where reg_id=?
+            select reg_id,name,email,mobile,status from tbl_register where reg_id=?
         </selectpersonalinfo>
         <updatepersonalinfo>
             update tbl_register set name=?,email=?,mobile=? where reg_id=?
@@ -128,6 +128,9 @@
             LEFT JOIN tbl_shippingaddress AS s ON s.reg_id_fk = o.reg_id_fk
             WHERE d.ord_details_id_pk =
         </ordersummary>
+       <savewishlist>
+            INSERT INTO tbl_wishlist(prod_id_fk,prod_name,prod_thumbimage,regid_fk)VALUES(?,?,?,?);
+        </savewishlist>
         <viewwishlist>
             SELECT w.wish_id_pk,w.prod_name,w.prod_thumbimage,p.sp,p.gp,p.dp,w.prod_id_fk, pr.prod_random FROM tbl_productkittype as p,tbl_wishlist as w,tbl_product as pr
             WHERE p.prod_id_fk=w.prod_id_fk
@@ -137,11 +140,17 @@
         <deletewishlist>
             DELETE FROM tbl_wishlist WHERE wish_id_pk=
         </deletewishlist>
+        <check_wishlist>
+            SELECT prod_id_fk FROM tbl_wishlist  WHERE prod_id_fk= 
+        </check_wishlist>
     </Dashboard>
     <Service_center>
         <service_state>SELECT * FROM `tbl_netdealer_state` WHERE `ndstate_status`=1</service_state>
         <service_city>SELECT * FROM `tbl_netdealer_city` where ndstate_id_fk=</service_city>
         <service_addres>SELECT * FROM `tbl_netdealer_city` WHERE `ndcity_id_pk`=</service_addres>
     </Service_center>
+    <feedback>
+        <insertfeedback>insert into tbl_feedback(feed_name,feed_email,feed_message) values (?,?,?);</insertfeedback>
+    </feedback>
     <!--code by Blessy ends here-->
 </root>

@@ -8,9 +8,8 @@
                     <div class="col_allw300">
                         <h3>The Company</h3>
                         <ul class="footer_list">
-                            <li class="datalist"><a href="about-us.php">About Us</a> </li>            
-                            <li class="datalist"><a href="blog.php">Blog's </a></li>
-                            <li class="datalist"><a href="terms-and-conditions.php">Terms & Condition's</a></li>
+                            <li class="datalist"><a href="about-us.php">About Us</a> </li>  
+                            <li class="datalist"><a href="terms-and-conditions.php">Terms & Conditions</a></li>
                             <li class="datalist"><a href="privacy-policy.php">Privacy Policy</a></li>
                             <li class="datalist"><a href="contact-us.php">Contact Us</a></li>
 

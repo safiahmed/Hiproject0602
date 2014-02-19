@@ -28,8 +28,8 @@ echo $_SESSION['cart_session_id'];
             $.post("assets/controller-links.php", {removecart_val: cart_id_pk}, function(data) {
                 if (data == 1) {
                     delrow.remove();
+                    sub_total = add();
                     country_delivery();
-                    var sub_total = add();
                     return false;
                 }
             });
@@ -85,6 +85,7 @@ echo $_SESSION['cart_session_id'];
 
 <a href="#close" title="Close" class="close1">X</a>
 <div class="main-container1 col1-layout1">
+    <div id="addcart_load"></div>
     <div class="main1">
         <div class="col-main1">
             <div class="cart1">

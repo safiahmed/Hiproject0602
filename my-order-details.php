@@ -31,6 +31,8 @@
     span{margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline;}
     .order-row tbody .order-details-row:hover{list-style: none;}
     .order-row tbody tr{cursor: pointer;}
+    .hi{display: none;}
+
 </style>
 <?php
 include './assets/my-controller.php';
@@ -44,9 +46,9 @@ $o_size = sizeof($order);
         <thead>
             <tr>
                 <th>Order no</th>
-                <th>Date</th>
+                <th style="width: 75px;">Date</th>
                 <th>Product Name</th>
-                <th>Status</th>
+                <th colspan="2">Status</th>
             </tr>
         </thead>
         <tbody>
@@ -56,19 +58,29 @@ $o_size = sizeof($order);
                         <input type="hidden" id="<?php echo $data['ord_details_id_pk']; ?>"  value="<?php echo $data['ord_details_id_pk']; ?>"/></td>
                     <td><?php echo $data['order_date']; ?></td>
                     <td><?php echo $data['prod_name']; ?></td>
-                    <td><color style="color:green;"><?php
-                if ($data['order_status'] == 1) {
-                    echo 'Delivered';
-                } else {
-                    echo 'Pending';
-                }
-                ?></color></td>
-        </tr>
-    <?php }
-    ?>
-    </tbody>
+                    <td><img src="" class="img_track" alt="track" /></td>
+                    <td>
+                        <a href="javascript:void(0);"  onclick = "document.getElementById('light').style.display = 'block';
+                                document.getElementById('fade').style.display = 'block'" >
+                            <img src="" alt="add"/>
+                        </a>
+                    </td>
+        <!--                    <td><color style="color:green;"><?php
+//                if ($data['order_status'] == 1) {
+//                    echo 'Delivered';
+//                } else {
+//                    echo 'Pending';
+//                }
+                    ?></color></td>-->
+                </tr>
+                <tr class="hi"><td colspan="5" style="background-color: white;">
+                        <div class="my_order_details" id="12<?php echo $data['order_no']; ?>"></div>
+                    </td></tr>
+            <?php }
+            ?>
+        </tbody>
     </table>
-<?php
+    <?php
 } else {
     echo "Orders Empty";
 }
@@ -76,3 +88,47 @@ $o_size = sizeof($order);
 <hr>
 
 <div id="order-row"></div>
+<!--add review css starts-->
+<style>
+/*    .black_overlay{	display: none; margin: 0 auto;	position: fixed;top: 0%;left: 0%;width: 100%;height: 100%;background-color: black;
+                    z-index:1001;-moz-opacity: 0.8;opacity:.80;filter: alpha(opacity=80); overflow: auto;}*/
+    .modalDialog1 {display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0,0,0,0.8);
+        z-index: 99999;
+        opacity:0;
+
+        -moz-transition: opacity 400ms ease-in;
+        transition: opacity 400ms ease-in;
+        pointer-events: none;
+        overflow:auto;
+    }
+    .modalDialog1:target {
+        opacity:1;
+        pointer-events: auto;
+    }
+
+    .modalDialog1 > div {
+        width: 923px;
+        position: relative;
+        margin: 2% auto;
+        padding: 5px 20px 13px 20px;
+        border-radius: 10px;
+        background: #fff;
+        background: -moz-linear-gradient(#fff, #999);
+        background: -webkit-linear-gradient(#fff, #999);
+        background: -o-linear-gradient(#fff, #999);
+
+    }
+    .white_content {display: none;position: absolute;top: 25%;left: 25%;width: 50%;height: 50%;padding: 16px;
+                    border: 16px solid rgb(232, 229, 224);background-color: white;z-index:1002;overflow: auto;}
+    </style>
+
+    <div id="light" class="white_content">This is the lightbox content.
+    <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display = 'none';
+                        document.getElementById('fade').style.display = 'none'">Close</a></div>
+<div id="fade" class="modalDialog1"></div>

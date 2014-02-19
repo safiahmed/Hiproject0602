@@ -82,7 +82,7 @@ if (isset($_POST['register'])) {
 
             $_SESSION['email'] = $email;
             $_SESSION['reg_id'] = $reg1;
-            header("Location: ../member-information.php");
+            header("Location: ../account-information.php");
         }
     }
 }
@@ -95,21 +95,21 @@ if (isset($_POST['ab_val'])) {
 }
 
 if (isset($_POST['register2'])) {
-    $username1 = $_POST['name1'];
-    $email1 = $_POST['email1'];
-    $mobile1 = $_POST['tel1'];
+    $username1 = $_POST['fname'];
+    $email1 = $_POST['femail'];
+    $mobile1 = $_POST['fphone'];
 
-    $username2 = $_POST['name2'];
-    $email2 = $_POST['email2'];
-    $mobile2 = $_POST['tel2'];
+    $username2 = $_POST['sname'];
+    $email2 = $_POST['semail'];
+    $mobile2 = $_POST['sphone'];
 
-    $username3 = $_POST['name3'];
-    $email3 = $_POST['email3'];
-    $mobile3 = $_POST['tel3'];
+    $username3 = $_POST['tname'];
+    $email3 = $_POST['temail'];
+    $mobile3 = $_POST['tphone'];
 
-    $username4 = $_POST['name4'];
-    $email4 = $_POST['email4'];
-    $mobile4 = $_POST['tel4'];
+    $username4 = $_POST['frname'];
+    $email4 = $_POST['fremail'];
+    $mobile4 = $_POST['frphone'];
 
     $email = $_POST['email'];
     $reg = $_POST['reg'];
@@ -247,7 +247,7 @@ if (isset($_POST['p_val']) && isset($_POST['s_val']) && isset($_POST['price'])) 
     $val2 = $_POST['s_val'];
     $val3 = $_POST['price'];
     $user = new Users;
-    $user->addshoppingcart_details($val1, $val2, $val3,$val3);
+    $user->addshoppingcart_details($val1, $val2, $val3, $val3);
     $addtocart = $user->addingcart_details($val2);
     include '../addtocart1.php';
 }
@@ -296,7 +296,7 @@ if (isset($_POST['newshipmentdata'])) {
     $reg = $data[9]['value'];
     $user = new Users;
     $user->insert_shipping_values($name, $tel, $mobile, $address, $city, $state, $country, $pincode, $reg);
-    $successdata = $user->addingcart_details($sessval);
+    $addtocart = $user->addingcart_details($sessval);
 //    print_r($successdata);
     include '../showcartdetails.php';
 }
@@ -307,7 +307,7 @@ if (isset($_POST['emaillogin']) && isset($_POST['passwordlogin'])) {
     $email = $_POST['emaillogin'];
     $password = $_POST['passwordlogin'];
     $logindata = array('email' => $email,
-                       'password' => $password);
+        'password' => $password);
     $user = new Users;
     $user->check_login($logindata);
 }
@@ -357,17 +357,38 @@ if (isset($_POST['oldpassword'])) {// checking whether pwd exist in db-pwd reset
     $user->checkoldpassword($oldpassword);
 }
 
-if(isset($_POST['total_price'])&& isset($_POST['cart_id_pk'])&& isset($_POST['qty'])){
+if (isset($_POST['total_price']) && isset($_POST['cart_id_pk']) && isset($_POST['qty'])) {
     $tp = $_POST['total_price'];
     $cid = $_POST['cart_id_pk'];
     $qty = $_POST['qty'];
     $user = new Users;
-    $user->update_total_price($tp,$cid,$qty);
+    $user->update_total_price($tp, $cid, $qty);
 }
-////remove wishlist row/////////
+if (isset($_POST['feedback'])) {
+    $name = $_POST['mrova-name'];
+    $email = $_POST['mrova-email'];
+    $mobile = $_POST['mrova-message'];
+    $user = new Feedback();
+    $user->insert_feedback_values($name, $email, $mobile);
+    header("Location: ../index.php");
+}
 
-if(isset($_POST['remove_wishlist'])){
- $wishid=$_POST['remove_wishlist'];
-    $user= new Users;
-   $result= $user->remove_wishlist($wishid); 
+////remove wishlist row/////////
+//edited by blessy
+if (isset($_POST['remove_wishlist'])) {
+    $wishid = $_POST['remove_wishlist'];
+    $user = new Mywishlist();
+    $result = $user->remove_wishlist($wishid);
+}
+if (isset($_POST['pro_id']) && isset($_POST['pro_name']) && isset($_POST['pro_image'])) {
+    $id = $_POST['pro_id'];
+    $pname = $_POST['pro_name'];
+    $pimage = $_POST['pro_image'];
+    $user = new Mywishlist();
+    $result = $user->save_wishlist($id, $pname, $pimage);
+}
+if (isset($_POST['prod_id'])) {
+    $id = $_POST['prod_id'];
+    $user = new Mywishlist();
+    $result = $user->check_wishlist($id);
 }

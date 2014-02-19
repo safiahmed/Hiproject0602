@@ -132,7 +132,7 @@ $states1 = $service->service_state();
                     });
                 </script>
                 <script>
-                    
+
                     $(document).ready(function() {
                         $('#state').change(function() {
                             var state = $(this).val();
@@ -238,7 +238,6 @@ $states1 = $service->service_state();
                                             <?php
                                         }
                                         ?>
-
                                     </select>	
                                 </div>
                                 <div id="city"></div>

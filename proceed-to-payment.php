@@ -146,7 +146,7 @@ if (isset($_SESSION['reg_id'])) {
                                     $('#paymentlogin1').submit();
                                 }
                                 else {
-                                    alert('Account Does not Exist!! Please register and Continue. Thank You.');
+                                  $("#error_login").html('Account Does not Exist!! Please register and Continue. Thank You.');
                                 }
                             });
                         });
@@ -270,6 +270,7 @@ if (isset($_SESSION['reg_id'])) {
                                             ?>
                                             <div class="border-class" style="border:1px solid #ddd; margin: 15px;background:#ddd">
                                                 <font color="black">Please Login</font>
+                                                <div id="error_login" style="color: red; font-weight: bold;"></div>
                                                 <form id="paymentlogin1" action="assets/controller-links.php" method="post">
                                                     <table id="login-tab">
                                                         <tr>
@@ -281,7 +282,7 @@ if (isset($_SESSION['reg_id'])) {
                                                             <td><img src="img/login_facebook.png" class="for_facebook" ></td>
                                                         </tr>
 
-                                                                                                                    <!--<tr><td></td><td></td><td><a href="#"><img src="img/login_facebook.png" class="for_facebook" ></a></td></tr>-->
+                                                                                                                        <!--<tr><td></td><td></td><td><a href="#"><img src="img/login_facebook.png" class="for_facebook" ></a></td></tr>-->
                                                     </table>
                                                 </form>
                                             </div>
@@ -304,8 +305,7 @@ if (isset($_SESSION['reg_id'])) {
                                         }
                                         ?> </br></br></br></br>
                                         <div id="shipping-tab2" >
-                                            <?php
-                                            if (isset($_SESSION['reg_id']) && $shippindaddress != 0) { ?>
+                                            <?php if (isset($_SESSION['reg_id']) && $shippindaddress != 0) { ?>
                                                 <h3 style="float:left;padding-top: 10px;">Address:</h3>
                                                 <div id="recent">
 
@@ -362,64 +362,64 @@ if (isset($_SESSION['reg_id'])) {
                                                                 </select></td></tr>
                                                         <input type="hidden" name="sessioncart" value="<?php echo $_SESSION['cart_session_id']; ?>"/>
                                                         <input type="hidden" name="regid" value="<?php echo $_SESSION['reg_id']; ?>"/>
-                                                               <tr><td></td><td></td><td>
-                                                                    <!--<input type="submit"  name="shipcontinue" value="" class="shipaddress_submit"/></td></tr>-->
-                                                                    <img src="images/continue.png" class="shipaddress_submit" />
-                                                                    </table>
-                                                                    </div>
-                                                                    </form>
-                                                                <?php } ?>
+                                                        <tr><td></td><td></td><td>
+                                                             <!--<input type="submit"  name="shipcontinue" value="" class="shipaddress_submit"/></td></tr>-->
+                                                                <img src="images/continue.png" class="shipaddress_submit" />
+                                                                </table>
                                                                 </div>
-                                                                </div>
+                                                                </form>
+                                                            <?php } ?>
+                                                            </div>
+                                                            </div>
 
 
 
 
 
-                                                                </div>
-                                                                <div class="cart" style="margin-left:79px;" id="ordercartview">
+                                                            </div>
+                                                            <div class="cart" style="margin-left:79px;" id="ordercartview">
 
-                                                                </div>
+                                                            </div>
 
-                                                                </div>
-                                                                <?php include('footer.php'); ?>	
-                                                                </div>
+                                                            </div>
+                                                            <?php include('footer.php'); ?>	
+                                                            </div>
 
 
 
+                                                            <span>
+                                                                <a href="#" title="Scroll to Top" class="scrollup" style="display: inline;"></a>
                                                                 <span>
-                                                                    <a href="#" title="Scroll to Top" class="scrollup" style="display: inline;"></a>
-                                                                    <span>
 
-                                                                        <script>
-                                                                            $("#zoom_03").elevateZoom({gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true});
+                                                                    <script>
+                    $("#zoom_03").elevateZoom({gallery: 'gallery_01', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true});
 
-                                                                            $("#zoom_03").bind("click", function(e) {
-                                                                                var ez = $('#zoom_03').data('elevateZoom');
-                                                                                $.fancybox(ez.getGalleryList());
-                                                                                return false;
-                                                                            });
+                    $("#zoom_03").bind("click", function(e) {
+                        var ez = $('#zoom_03').data('elevateZoom');
+                        $.fancybox(ez.getGalleryList());
+                        return false;
+                    });
 
-                                                                        </script>
-                                                                        <!-- external javascript
-                                                                        ================================================== -->
-                                                                        <!-- Placed at the end of the document so the pages load faster -->
+                                                                    </script>
+                                                                    <!-- external javascript
+                                                                    ================================================== -->
+                                                                    <!-- Placed at the end of the document so the pages load faster -->
 
-                                                                        <!-- jQuery -->
+                                                                    <!-- jQuery -->
 
-                                                                        <!-- jQuery UI -->
+                                                                    <!-- jQuery UI -->
 
-                                                                        <!-- transition / effect library -->
+                                                                    <!-- transition / effect library -->
 
-                                                                        <script src="js/bootstrap-tab.js"></script>
-                                                                        <!-- library for advanced tooltip -->
-                                                                        <script src="js/bootstrap-butt on.js"></script>
-                                                                        <!-- accordion library (optional, not used in demo) -->
-                                                                        <script src="js/jquery.cookie.js"></script>
-                                                                        <!-- calander plugin -->
+                                                                    <script src="js/bootstrap-tab.js"></script>
+                                                                    <!-- library for advanced tooltip -->
+                                                                    <script src="js/bootstrap-butt on.js"></script>
+                                                                    <!-- accordion library (optional, not used in demo) -->
+                                                                    <script src="js/jquery.cookie.js"></script>
+                                                                    <!-- calander plugin -->
 
 
 
 
-                                                                        </body>
-                                                                        </html>
+                                                                    </body>
+                                                                    </html>

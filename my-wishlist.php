@@ -1,16 +1,10 @@
 <?php include './assets/auth.php'; ?>
 <script type="text/javascript" src="Js/jquery-1.10.2.min.js"></script>
-<script>
-    $(document).ready(function() {
-
-
-    });
-</script>
 <h3 style="color:#939391;padding-left:5px;padding-bottom:3px;">My Orders</h3>
 <div class="inner_account_content123456789">
     <?php
     include './assets/my-controller.php';
-    $wishlist = new Users();
+    $wishlist = new Mywishlist();
     $viewwishlist = $wishlist->view_my_wishlist();
     $value = sizeof($viewwishlist);
     ?>

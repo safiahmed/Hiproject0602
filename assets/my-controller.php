@@ -1,6 +1,6 @@
 <?php
 
-class Users {
+class Connect {
 
     private
             $database, $connection, $xml,
@@ -24,6 +24,9 @@ class Users {
         }
     }
 
+}
+
+class Users extends Connect {
     /*     * *************************************************************************************** */
     /*     * **********************Index Controlloer functions starts******************************* */
     /*     * *************************************************************************************** */
@@ -286,8 +289,6 @@ class Users {
 
     function review_productkit_details($prod_id) {
         $query = $this->xml_select->productdetails->productkittype;
-        //print_r($query);
-
         $values = "$prod_id";
         $squery = $query . "'" . $values . "'";
         $query = $this->mysqli->query($squery);
@@ -302,8 +303,6 @@ class Users {
 
     function review_productkittypename_details($prod_id) {
         $query = $this->xml_select->productdetails->selectProductKitContent;
-        //print_r($query);
-
         $values = "$prod_id";
         $squery = $query . "'" . $values . "'";
         $query = $this->mysqli->query($squery);
@@ -318,8 +317,6 @@ class Users {
 
     function review_productkittypenamesp_details($prod_id) {
         $query = $this->xml_select->productdetails->selectProductKitContentsp;
-        //print_r($query);
-
         $values = "$prod_id";
         $squery = $query . "'" . $values . "'";
         $query = $this->mysqli->query($squery);
@@ -334,8 +331,6 @@ class Users {
 
     function review_productkittypenamegp_details($prod_id) {
         $query = $this->xml_select->productdetails->selectProductKitContentgp;
-        //print_r($query);
-
         $values = "$prod_id";
         $squery = $query . "'" . $values . "'";
         $query = $this->mysqli->query($squery);
@@ -350,8 +345,6 @@ class Users {
 
     function review_productkittypenamedp_details($prod_id) {
         $query = $this->xml_select->productdetails->selectProductKitContentdp;
-        //print_r($query);
-
         $values = "$prod_id";
         $squery = $query . "'" . $values . "'";
         $query = $this->mysqli->query($squery);
@@ -371,8 +364,6 @@ class Users {
 
     function index_subcategorylink_name($cat_id_index) {
         $query = $this->xml_select->subcategorypage->subcatiddetails;
-        //print_r($query);
-        //exit();
         $result = array();
         $values = "$cat_id_index";
         $squery = $query . "'" . $values . "'";
@@ -682,72 +673,18 @@ class Users {
         }
         $_SESSION['reg_id'] = $result['regid'];
         $_SESSION['email'] = $result['emailid'];
-        if ($result['memstatus'] == 1) {
-            header('Location:../member-information.php');
-        } else {
-            header('Location:../account-information.php');
-        }
+        header('Location:../account-information.php');
+//        if ($result['memstatus'] == 1) {
+//            header('Location:../member-information.php');
+//        } else {
+//            header('Location:../account-information.php');
+//        }
     }
 
     //end of the function
-    function view_personalinfo() { // view of personal info in dashboard
-        $info = $this->xml_select->Dashboard->selectpersonalinfo;
-//        var_dump($_SESSION);
-        $rid = $_SESSION['reg_id'];
-        $result = array();
-        if ($stmt = $this->mysqli->prepare($info)) {
-            $stmt->bind_param("i", $rid);
-            if (!$stmt->execute()) {
-                die('stmt error: ' . mysqli_stmt_error($stmt));
-            }
-            mysqli_stmt_bind_result($stmt, $id, $name, $email, $mobile);
-            while (mysqli_stmt_fetch($stmt)) {
-                $result = array(
-                    'id' => $id,
-                    'name' => $name,
-                    'email' => $email,
-                    'mobile' => $mobile
-                );
-            }
-            $stmt->close();
-            return $result;
-        }
-    }
 
-    // end of the function
 
-    function view_memberinfo() { // view of members in dashboard
-        $memberinfo = $this->xml_select->Dashboard->selectgroupmember;
-        $id = $_SESSION['reg_id']; //session_id
-        $result = array();
-        if ($stmt = $this->mysqli->prepare($memberinfo)) {
-            $stmt->bind_param("i", $id);
-            if (!$stmt->execute()) {
-                die('stmt error' . mysqli_error($stmt));
-            }
-        }
-        mysqli_stmt_bind_result($stmt, $first_name, $first_email, $first_mobile, $second_name, $second_email, $second_phone, $third_name, $third_email, $third_phone, $four_name, $four_email, $four_phone);
-        while (mysqli_stmt_fetch($stmt)) {
-            $result = array(
-                'fname' => $first_name,
-                'femail' => $first_email,
-                'fmobile' => $first_mobile,
-                'sname' => $second_name,
-                'semail' => $second_email,
-                'sphone' => $second_phone,
-                'tname' => $third_name,
-                'temail' => $third_email,
-                'tphone' => $third_phone,
-                'frname' => $four_name,
-                'fremail' => $four_email,
-                'frphone' => $four_phone
-            );
-        }
-        $stmt->close();
-        return $result;
-    }
 
-    // end of  the function
     function update_member_info($memberinfo) { // update member info in db
         $updateinfo = $this->xml_insert->Dashboard->updategroupmember;
         $id = $_SESSION['reg_id'];
@@ -828,20 +765,6 @@ class Users {
         }
     }
 
-    function view_my_wishlist() {
-        $wishlist = $this->xml_select->Dashboard->viewwishlist;
-
-        $id = $_SESSION['reg_id'];
-        $squery = $wishlist . $id;
-        $query = $this->mysqli->query($squery);
-        if ($query->num_rows > 0) {
-            while ($row = $query->fetch_assoc()) {
-                $result[] = $row;
-            }
-            return $result;
-        }
-    }
-
     /*     * **************************************************************************** */
     /*     * **********************Blessy  Code ends here******************************* */
     /*     * **************************************************************************** */
@@ -912,9 +835,10 @@ class Users {
 
 }
 
-class Service extends Users {
+//this class is to fetch address based on state & city
+class Service extends Connect {
 
-    function service_state() {
+    function service_state() {//fetch states list
         $query = $this->xml_select->Service_center->service_state;
         if ($result = $this->mysqli->query($query)) {
             if ($result->num_rows > 0) {
@@ -926,7 +850,7 @@ class Service extends Users {
         }
     }
 
-    function service_city($state) {
+    function service_city($state) {//fetch city list
         $query = $this->xml_select->Service_center->service_city;
         $squery = $query . '"' . $state . '"';
         if ($result = $this->mysqli->query($squery)) {
@@ -939,7 +863,7 @@ class Service extends Users {
         }
     }
 
-    function service_address($city) {
+    function service_address($city) {//fetch address based on city
         $query = $this->xml_select->Service_center->service_address;
         $squery = $query . '"' . $city . '"';
         if ($result = $this->mysqli->query($squery)) {
@@ -953,3 +877,134 @@ class Service extends Users {
     }
 
 }
+
+class Account_information extends Connect {
+
+    function view_personalinfo() { // view of personal info in dashboard
+        $info = $this->xml_select->Dashboard->selectpersonalinfo;
+//        var_dump($_SESSION);
+        $rid = $_SESSION['reg_id'];
+        $result = array();
+        if ($stmt = $this->mysqli->prepare($info)) {
+            $stmt->bind_param("i", $rid);
+            if (!$stmt->execute()) {
+                die('stmt error: ' . mysqli_stmt_error($stmt));
+            }
+            mysqli_stmt_bind_result($stmt, $id, $name, $email, $mobile, $status);
+            while (mysqli_stmt_fetch($stmt)) {
+                $result = array(
+                    'id' => $id,
+                    'name' => $name,
+                    'email' => $email,
+                    'mobile' => $mobile,
+                    'status' => $status
+                );
+            }
+            $stmt->close();
+            return $result;
+        }
+    }
+
+    // end of the function
+    function view_memberinfo() { // view of members in dashboard
+        $memberinfo = $this->xml_select->Dashboard->selectgroupmember;
+        $id = $_SESSION['reg_id']; //session_id
+        $result = array();
+        if ($stmt = $this->mysqli->prepare($memberinfo)) {
+            $stmt->bind_param("i", $id);
+            if (!$stmt->execute()) {
+                die('stmt error' . mysqli_error($stmt));
+            }
+        }
+        mysqli_stmt_bind_result($stmt, $first_name, $first_email, $first_mobile, $second_name, $second_email, $second_phone, $third_name, $third_email, $third_phone, $four_name, $four_email, $four_phone);
+        while (mysqli_stmt_fetch($stmt)) {
+            $result = array(
+                'fname' => $first_name,
+                'femail' => $first_email,
+                'fmobile' => $first_mobile,
+                'sname' => $second_name,
+                'semail' => $second_email,
+                'sphone' => $second_phone,
+                'tname' => $third_name,
+                'temail' => $third_email,
+                'tphone' => $third_phone,
+                'frname' => $four_name,
+                'fremail' => $four_email,
+                'frphone' => $four_phone
+            );
+        }
+        $stmt->close();
+        return $result;
+    }
+
+    // end of  the function
+}
+
+//this class is belongs to add/remove/view wishlist
+class Mywishlist extends Connect {
+
+    function save_wishlist($prodid, $pname, $pimage) {
+        $wishlist = $this->xml_insert->Dashboard->savewishlist;
+        $id = $_SESSION['reg_id'];
+        if ($stmt = $this->mysqli->prepare($wishlist)) {
+            $stmt->bind_param('issi', $prodid, $pname, $pimage, $id);
+            if (!$stmt->execute()) {
+                die('stmt error' . mysqli_error($stmt));
+            }
+            echo 1;
+        }
+    }
+
+    function view_my_wishlist() {
+        $wishlist = $this->xml_select->Dashboard->viewwishlist;
+
+        $id = $_SESSION['reg_id'];
+        $squery = $wishlist . $id;
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            while ($row = $query->fetch_assoc()) {
+                $result[] = $row;
+            }
+            return $result;
+        }
+    }
+
+    function remove_wishlist($wishid) {
+
+        $wishlist1 = $this->xml_insert->Dashboard->deletewishlist;
+        $squery = $wishlist1 . $wishid;
+        if ($this->mysqli->query($squery)) {
+            echo 1;
+        }
+    }
+
+    function check_wishlist($id) {
+        $check = $this->xml_insert->Dashboard->check_wishlist;
+        $squery = $check . $id;
+        $query = $this->mysqli->query($squery);
+        if ($query->num_rows > 0) {
+            echo 1;
+        }
+    }
+
+}
+
+class Feedback extends Connect {
+
+    function insert_feedback_values($name, $email, $message) {
+        $register = $this->xml_insert->feedback->insertfeedback;
+        //print_r($register);
+        //exit();
+        if ($stmt = $this->mysqli->prepare($register)) {
+            $stmt->bind_param("sss", $name, $email, $message);
+            if (!mysqli_execute($stmt)) {
+                die('stmt error: ' . mysqli_stmt_error($stmt));
+            }
+            return $this->mysqli->insert_id;
+        }
+        $stmt->close();
+        header("Location: ../index.php");
+    }
+
+}
+
