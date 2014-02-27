@@ -160,16 +160,16 @@ body {
 }
 
 .hanechitra3{
-    width: 235px;
+    width: 255px;
     float: right;
     margin-top: -23px;
 
 }
 .hanechitra4
 {
-    width: 260px;
-    float:right;
-    margin: -68px -208px 0px 0px;
+    width: 202px;
+    float: right;
+    margin: -19px 0px 0px 0px;
 }
 #upperlogo
 {
@@ -350,7 +350,7 @@ li#home_leftline {
 }
 .middle_boxnew{
     width: 200px;
-    height: 305px;
+    height: 323px;
     float: left;
     margin: -14px 0px 0px 3px;
     padding: 15px;

@@ -1,0 +1,57 @@
+root { 
+    display: block;
+}
+
+
+.black_overlay{
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index:1001;
+    -moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);
+    overflow: auto;
+}
+
+.white_content {
+    display: none;
+    position: fixed;
+    top: 14%;
+    left: 12%;
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+    max-height: 440px;
+    padding: 16px;
+    border: 16px solid #ddd;
+    background-color: white;
+    z-index:1002;
+}
+
+.white_content_login {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 40%;
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+    max-height: 440px;
+    padding: 16px;
+    border: 16px solid #ddd;
+    background-color: white;
+    z-index:1002;
+}
+
+/*.white_content{display: none; position: fixed;z-index: 1002;width: 900px; margin: 0 auto; max-height: 440px;}*/
+
+.cart_total{height: 130px; border-top: 5px solid #ddd;}
+#cart_total_left{float: left; width: 56%;}
+#cart_total_right{float: left;width: 43%;}
+.table_cart_total{width: 174px;font-size: 14px;font-weight: bold;}
+.cart1{max-height: 253px;overflow-y: scroll; height: auto;}
